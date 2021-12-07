@@ -1,0 +1,4 @@
+rootProject.name = 'commons'
+include 'modules:data-service'
+findProject(':modules:data-service')?.name = 'data-service'
+
