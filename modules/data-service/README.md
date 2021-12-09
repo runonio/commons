@@ -1,10 +1,14 @@
 # data-service
-runon 개발에 사용되는 공통모듈 모음 프로젝트
 
-# 개발환경
+## gradle
+implementation 'io.runon.commons:data-service:0.0.1'
+- etc
+  - https://mvnrepository.com/artifact/io.runon.commons/data-service/0.0.1
+
+## 개발환경
 - open jdk 17
 
-# communication
+## communication
 ### blog, homepage
 - [www.seomse.com](https://www.seomse.com/)
 - [runon.io](https://runon.io)
@@ -21,7 +25,7 @@ runon 개발에 사용되는 공통모듈 모음 프로젝트
 ### email
 - comseomse@gmail.com
 
-# main developer
+## main developer
 - macle
     -  [github.com/macle86](https://github.com/macle86)
     -  [macle.dev](https://macle.dev)
