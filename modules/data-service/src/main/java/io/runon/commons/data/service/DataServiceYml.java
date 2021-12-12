@@ -18,7 +18,7 @@ public class DataServiceYml {
     public static Map<String, Object> getYmlMap(String key){
         try {
 
-            String path =  Config.getConfig("cryptocurrency.yml.path", "config/data-service.yml");
+            String path =  Config.getConfig("data.service.yml.path", "config/data-service.yml");
 
             File file = new File(path);
             if(!file.isFile()){
