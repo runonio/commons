@@ -90,13 +90,10 @@ public class ServiceRedis {
 
     }
 
-    public void hsetAsync(String key, Map<String, String> map){
+    public  RedisFuture<Long> hsetAsync(String key, Map<String, String> map){
         synchronized (lock){
             connect();
-            Set<String> dataKeys = map.keySet();
-            for(String dataKey: dataKeys){
-                asyncHash.hset(key,dataKey,map.get(dataKey));
-            }
+            return asyncHash.hset(key,map);
         }
 
     }
