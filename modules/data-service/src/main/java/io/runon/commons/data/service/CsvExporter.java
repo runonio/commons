@@ -59,8 +59,8 @@ public class CsvExporter {
                         .schemaFor(clazz).withHeader().withColumnSeparator(separator).withLineSeparator("\n");
             }
             ObjectWriter writer = mapper.writer(csvSchema);
-            OutputStream outputStream = new FileOutputStream(csvFile , true);
             for (Object data : dataList) {
+                OutputStream outputStream = new FileOutputStream(csvFile , true);
                 writer.writeValue(outputStream,data);
             }
         } catch (IOException e) {
