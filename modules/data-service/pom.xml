@@ -4,7 +4,7 @@
 
     <groupId>io.runon.commons</groupId>
     <artifactId>data-service</artifactId>
-    <version>0.0.7</version>
+    <version>0.0.8</version>
     <packaging>jar</packaging>
 
 
@@ -25,6 +25,12 @@
             <name>macle</name>
             <email>ysys86a@gmail.com</email>
             <id>macle86</id>
+            <organization>seomse</organization>
+        </developer>
+        <developer>
+            <name>ccsweets</name>
+            <email>tramp0102@gmail.com</email>
+            <id>tramp0102</id>
             <organization>seomse</organization>
         </developer>
     </developers>
@@ -75,6 +81,18 @@
             <groupId>io.netty</groupId>
             <artifactId>netty-common</artifactId>
             <version>4.1.78.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.8.9</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-csv</artifactId>
+            <version>2.8.9</version>
         </dependency>
 
 
