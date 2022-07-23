@@ -12,7 +12,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,8 +27,8 @@ public class CsvExporter {
      * @param dataList
      * @return
      */
-    public static Boolean appendToFile(Class<?> clazz, File csvFile, List<?> dataList) {
-        return appendToFile(clazz, csvFile, dataList, ',');
+    public static void appendToFile(Class<?> clazz, File csvFile, List<?> dataList) {
+        appendToFile(clazz, csvFile, dataList, ',');
     }
 
     /**
@@ -40,25 +39,21 @@ public class CsvExporter {
      * @param separator
      * @return
      */
-    public static Boolean appendToFile(Class<?> clazz, File csvFile, List<?> dataList, char separator) {
+    public static void appendToFile(Class<?> clazz, File csvFile, List<?> dataList, char separator) {
         CsvMapper mapper = new CsvMapper();
         mapper.configure(JsonGenerator.Feature.IGNORE_UNKNOWN, true);
         try {
-            boolean fileExists = false;
             if (!csvFile.exists()) {
                 csvFile.createNewFile();
             } else {
-                fileExists = true;
+                writeToFile(clazz, csvFile, dataList);
+                return;
             }
-            CsvSchema csvSchema;
-            if(fileExists){
-                csvSchema = mapper
-                        .schemaFor(clazz).withHeader().withColumnSeparator(separator).withLineSeparator("\n").withoutHeader();
-            } else {
-                csvSchema = mapper
-                        .schemaFor(clazz).withHeader().withColumnSeparator(separator).withLineSeparator("\n");
-            }
+
+            CsvSchema csvSchema = mapper
+                    .schemaFor(clazz).withHeader().withColumnSeparator(separator).withLineSeparator("\n").withoutHeader();
             ObjectWriter writer = mapper.writer(csvSchema);
+
             for (Object data : dataList) {
                 OutputStream outputStream = new FileOutputStream(csvFile , true);
                 writer.writeValue(outputStream,data);
@@ -66,7 +61,10 @@ public class CsvExporter {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return true;
+    }
+
+    public static void writeToFile(Class<?> clazz, File csvFile, List<?> dataList) {
+        writeToFile(clazz, csvFile, dataList, ',');
     }
 
     /**
@@ -75,11 +73,11 @@ public class CsvExporter {
      * @param csvFile
      * @param dataList
      */
-    public static void writeToFile(Class<?> clazz, File csvFile, List<?> dataList) {
+    public static void writeToFile(Class<?> clazz, File csvFile, List<?> dataList, char separator) {
         try {
             CsvMapper csvMapper = new CsvMapper();
             CsvSchema csvSchema = csvMapper
-                    .schemaFor(clazz).withHeader().withColumnSeparator(',').withLineSeparator("\n");
+                    .schemaFor(clazz).withHeader().withColumnSeparator(separator).withLineSeparator("\n");
             ObjectWriter writer = csvMapper.writerFor(clazz).with(csvSchema);
             SequenceWriter sequenceWriter = writer.writeValues(csvFile);
             sequenceWriter.writeAll(dataList);
