@@ -44,8 +44,6 @@ public class CsvExporter {
         mapper.configure(JsonGenerator.Feature.IGNORE_UNKNOWN, true);
         try {
             if (!csvFile.exists()) {
-                csvFile.createNewFile();
-            } else {
                 writeToFile(clazz, csvFile, dataList);
                 return;
             }
@@ -62,7 +60,12 @@ public class CsvExporter {
             e.printStackTrace();
         }
     }
-
+    /**
+     * csv 파일을 새로 쓴다. (파일 내용 교체)
+     * @param clazz
+     * @param csvFile
+     * @param dataList
+     */
     public static void writeToFile(Class<?> clazz, File csvFile, List<?> dataList) {
         writeToFile(clazz, csvFile, dataList, ',');
     }
@@ -72,12 +75,13 @@ public class CsvExporter {
      * @param clazz
      * @param csvFile
      * @param dataList
+     * @param separator
      */
     public static void writeToFile(Class<?> clazz, File csvFile, List<?> dataList, char separator) {
         try {
             CsvMapper csvMapper = new CsvMapper();
             CsvSchema csvSchema = csvMapper
-                    .schemaFor(clazz).withHeader().withColumnSeparator(separator).withLineSeparator("\n");
+                    .schemaFor(clazz).withHeader().withColumnSeparator(separator).withLineSeparator("\n").withoutHeader();
             ObjectWriter writer = csvMapper.writerFor(clazz).with(csvSchema);
             SequenceWriter sequenceWriter = writer.writeValues(csvFile);
             sequenceWriter.writeAll(dataList);

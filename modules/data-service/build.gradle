@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'io.runon.commons'
-version '0.1.0'
+version '0.1.1'
 
 repositories {
     mavenCentral()
@@ -24,7 +24,7 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.8.9'
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.8.9'
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
-
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
 
 
 }
