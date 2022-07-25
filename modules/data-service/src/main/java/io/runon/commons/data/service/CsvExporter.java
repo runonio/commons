@@ -67,7 +67,11 @@ public class CsvExporter {
      * @param dataList
      */
     public static void writeToFile(Class<?> clazz, File csvFile, List<?> dataList) {
-        writeToFile(clazz, csvFile, dataList, ',');
+        writeToFile(clazz, csvFile, dataList, ',', true);
+    }
+
+    public static void writeToFile(Class<?> clazz, File csvFile, List<?> dataList, boolean withHeader) {
+        writeToFile(clazz, csvFile, dataList, ',', withHeader);
     }
 
     /**
@@ -77,11 +81,14 @@ public class CsvExporter {
      * @param dataList
      * @param separator
      */
-    public static void writeToFile(Class<?> clazz, File csvFile, List<?> dataList, char separator) {
+    public static void writeToFile(Class<?> clazz, File csvFile, List<?> dataList, char separator, boolean withHeader) {
         try {
             CsvMapper csvMapper = new CsvMapper();
             CsvSchema csvSchema = csvMapper
-                    .schemaFor(clazz).withHeader().withColumnSeparator(separator).withLineSeparator("\n").withoutHeader();
+                    .schemaFor(clazz).withHeader().withColumnSeparator(separator).withLineSeparator("\n");
+            if(!withHeader){
+                csvSchema.withoutHeader();
+            }
             ObjectWriter writer = csvMapper.writerFor(clazz).with(csvSchema);
             SequenceWriter sequenceWriter = writer.writeValues(csvFile);
             sequenceWriter.writeAll(dataList);
