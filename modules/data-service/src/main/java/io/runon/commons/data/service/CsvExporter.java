@@ -28,7 +28,18 @@ public class CsvExporter {
      * @return
      */
     public static void appendToFile(Class<?> clazz, File csvFile, List<?> dataList) {
-        appendToFile(clazz, csvFile, dataList, ',');
+        appendToFile(clazz, csvFile, dataList, ',', true);
+    }
+
+    /**
+     * csv파일에 데이터를 추가 한다.
+     * @param clazz
+     * @param csvFile
+     * @param dataList
+     * @return
+     */
+    public static void appendToFile(Class<?> clazz, File csvFile, List<?> dataList, boolean withHeader) {
+        appendToFile(clazz, csvFile, dataList, ',', withHeader);
     }
 
     /**
@@ -39,7 +50,7 @@ public class CsvExporter {
      * @param separator
      * @return
      */
-    public static void appendToFile(Class<?> clazz, File csvFile, List<?> dataList, char separator) {
+    public static void appendToFile(Class<?> clazz, File csvFile, List<?> dataList, char separator, boolean withHeader) {
         CsvMapper mapper = new CsvMapper();
         mapper.configure(JsonGenerator.Feature.IGNORE_UNKNOWN, true);
         try {
