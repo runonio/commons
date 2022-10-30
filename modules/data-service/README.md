@@ -1,9 +1,9 @@
 # data-service
 
 ## gradle
-implementation 'io.runon.commons:data-service:0.1.4'
+implementation 'io.runon.commons:data-service:0.1.5'
 - etc
-  - https://mvnrepository.com/artifact/io.runon.commons/data-service/0.1.4
+  - https://mvnrepository.com/artifact/io.runon.commons/data-service/0.1.5
 
 ## 개발환경
 - open jdk 17
