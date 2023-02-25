@@ -1,9 +1,9 @@
 # collect
 데이터 수집 공통모듈
 ## gradle
-implementation 'io.runon.commons:collect:0.0.1'
+implementation 'io.runon.commons:collect:0.0.2'
 - etc
-  - https://mvnrepository.com/artifact/io.runon.commons/data-service/0.0.1
+  - https://mvnrepository.com/artifact/io.runon.commons/data-service/0.0.2
 
 ## 개발환경
 - open jdk 17
