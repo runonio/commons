@@ -3,13 +3,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.runon.commons</groupId>
-    <artifactId>data-service</artifactId>
-    <version>0.1.5</version>
+    <artifactId>collect</artifactId>
+    <version>0.0.1</version>
     <packaging>jar</packaging>
 
 
-    <name>data-service</name>
-    <description>data-service</description>
+    <name>commons-collect</name>
+    <description>commons-collect</description>
     <url>https://github.com/runonio/commons</url>
 
     <licenses>
@@ -25,12 +25,6 @@
             <name>macle</name>
             <email>ysys86a@gmail.com</email>
             <id>macle86</id>
-            <organization>runon</organization>
-        </developer>
-        <developer>
-            <name>ccsweets</name>
-            <email>tramp0102@gmail.com</email>
-            <id>tramp0102</id>
             <organization>runon</organization>
         </developer>
     </developers>
@@ -61,40 +55,15 @@
 
         <dependency>
             <groupId>com.seomse.commons</groupId>
-            <artifactId>commons</artifactId>
-            <version>1.4.0</version>
+            <artifactId>jdbc</artifactId>
+            <version>1.0.8</version>
         </dependency>
 
         <dependency>
-            <groupId>io.lettuce</groupId>
-            <artifactId>lettuce-core</artifactId>
-            <version>6.2.1.RELEASE</version>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10.1</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.yaml</groupId>
-            <artifactId>snakeyaml</artifactId>
-            <version>1.33</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-common</artifactId>
-            <version>4.1.84.Final</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.13.4.2</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fasterxml.jackson.dataformat</groupId>
-            <artifactId>jackson-dataformat-csv</artifactId>
-            <version>2.13.4</version>
-        </dependency>
-
 
         <dependency>
             <groupId>org.projectlombok</groupId>

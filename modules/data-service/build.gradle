@@ -13,12 +13,12 @@ dependencies {
     
     
     
-    implementation group: 'io.lettuce', name: 'lettuce-core', version: '6.2.1.RELEASE'
+    implementation group: 'io.lettuce', name: 'lettuce-core', version: '6.2.3.RELEASE'
     //lettuce-core 의존성 패치용 io.lettuce에서 netty 버전을 높인게 나오면 의존성 제거
-    implementation group: 'io.netty', name: 'netty-common', version: '4.1.84.Final'
+//    implementation group: 'io.netty', name: 'netty-common', version: '4.1.84.Final'
 
     implementation group: 'org.yaml', name: 'snakeyaml', version: '1.33'
-    implementation 'com.seomse.commons:commons:1.4.0'
+    implementation 'com.seomse.commons:commons:1.4.2'
 
     //csv output
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.4.2'
