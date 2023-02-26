@@ -1,9 +1,8 @@
 package io.runon.commons.keyword;
 
-import com.seomse.jdbc.annotation.Column;
-import com.seomse.jdbc.annotation.DateTime;
-import com.seomse.jdbc.annotation.PrimaryKey;
-import com.seomse.jdbc.annotation.Table;
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.GsonBuilder;
+import com.seomse.jdbc.annotation.*;
 import lombok.Data;
 
 /**
@@ -12,7 +11,7 @@ import lombok.Data;
 @Data
 @Table(name="keyword")
 public class Keyword {
-    @PrimaryKey(seq = 1)
+    @PrimaryKey(seq = 1)@Sequence(name ="seq_keyword")
     @Column(name = "keyword_no")
     Long number;
 
@@ -28,4 +27,23 @@ public class Keyword {
     @DateTime
     @Column(name = "updated_at")
     Long time;
+
+    public boolean equals(String keyword, String dataValue){
+        if(!keyword.equals(this.keyword)){
+            return false;
+        }
+
+        if(this.dataValue == null && dataValue == null){
+            return true;
+        }
+
+        //noinspection PointlessNullCheck
+        return this.dataValue != null && dataValue != null && this.dataValue.equals(dataValue);
+
+    }
+
+    @Override
+    public String toString(){
+        return new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).setPrettyPrinting().create().toJson(this);
+    }
 }

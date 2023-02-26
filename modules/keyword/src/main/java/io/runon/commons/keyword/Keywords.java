@@ -1,10 +1,10 @@
 package io.runon.commons.keyword;
 
-import com.seomse.jdbc.Database;
 import com.seomse.jdbc.JdbcQuery;
 import com.seomse.jdbc.objects.JdbcObjects;
 
 import java.security.MessageDigest;
+import java.util.List;
 
 /**
  * @author macle
@@ -43,14 +43,19 @@ public class Keywords {
 
     public static Keyword save(String keywordText, String dataValue){
         String checkSum = checksum(keywordText, dataValue);
-        Keyword keyword = JdbcObjects.getObj(Keyword.class, "checksum='" + checkSum + "'");
+        List<Keyword> keywordList = JdbcObjects.getObjList(Keyword.class, "checksum='" + checkSum + "'");
 
-        if(keyword != null){
-            return keyword;
+
+        if(keywordList.size() > 0){
+            for(Keyword keyword : keywordList){
+                if(keyword.equals(keywordText, dataValue)){
+                    return keyword;
+                }
+            }
+
         }
 
-        keyword = new Keyword();
-        keyword.number = Database.nextLong("seq_keyword");
+        Keyword keyword = new Keyword();
         keyword.keyword = keywordText;
         keyword.dataValue = dataValue;
         keyword.checksum = checkSum;
@@ -64,8 +69,10 @@ public class Keywords {
 
 
     public static void main(String[] args) {
-        String text = checksum("증시", null);
-        System.out.println(text);
-        System.out.println("4d7a3f10a328d0077dc2ed1f2c174d24".length());
+//        String text = checksum("증시", null);
+//        System.out.println(text);
+//        System.out.println("4d7a3f10a328d0077dc2ed1f2c174d24".length());
+
+        System.out.println(save("증시", null));
     }
 }
