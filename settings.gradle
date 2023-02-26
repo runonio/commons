@@ -3,4 +3,6 @@ include 'modules:data-service'
 findProject(':modules:data-service')?.name = 'data-service'
 include 'modules:collect'
 findProject(':modules:collect')?.name = 'collect'
+include 'modules:keyword'
+findProject(':modules:keyword')?.name = 'keyword'
 

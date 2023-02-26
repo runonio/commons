@@ -1,9 +1,13 @@
-# collect
-데이터 수집 공통모듈
+# keyword
+키워드 모듈
+
+- 키워드 관련 중복처리 및 조건처리
+- 인덱스 생성
+
 ## gradle
-implementation 'io.runon.commons:collect:0.0.3'
+implementation 'io.runon.commons:keyword:0.0.1'
 - etc
-  - https://mvnrepository.com/artifact/io.runon.commons/collect/0.0.3
+  - https://mvnrepository.com/artifact/io.runon.commons/data-service/0.0.1
 
 ## 개발환경
 - open jdk 17
