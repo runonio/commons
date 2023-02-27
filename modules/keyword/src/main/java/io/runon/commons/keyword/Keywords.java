@@ -65,14 +65,4 @@ public class Keywords {
         return keyword;
     }
 
-
-
-
-    public static void main(String[] args) {
-//        String text = checksum("증시", null);
-//        System.out.println(text);
-//        System.out.println("4d7a3f10a328d0077dc2ed1f2c174d24".length());
-
-        System.out.println(save("증시", null));
-    }
 }
