@@ -47,6 +47,62 @@ public class CollectTimes {
         return false;
     }
 
+
+
+
+    public static boolean isKorHardWorkTime(long time){
+
+        Instant i = Instant.ofEpochMilli(time);
+        ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(i,  ZoneId.of("Asia/Seoul"));
+
+//        MONDAY, //월
+//        TUESDAY, //화
+//        WEDNESDAY, //수
+//        THURSDAY, //목
+//        FRIDAY, //금
+//        SATURDAY, //토
+//        SUNDAY; //일
+
+        //토일이면 업무하지 않음
+        DayOfWeek dayOfWeek = zonedDateTime.getDayOfWeek();
+        if(dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY ){
+            return false;
+        }
+
+        int hour = zonedDateTime.getHour();
+
+        //8시 ~ 18시 는 업무시간 // 오후 6시부터 시작
+        //noinspection RedundantIfStatement
+        if(hour >= 8  && hour < 20){
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public static boolean isWorkTime(long time, ZoneId zoneId, int beginHour, int endHour){
+        Instant i = Instant.ofEpochMilli(time);
+        ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(i,  zoneId);
+        DayOfWeek dayOfWeek = zonedDateTime.getDayOfWeek();
+        if(dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY ){
+            return false;
+        }
+
+
+        int hour = zonedDateTime.getHour();
+
+        //8시 ~ 18시 는 업무시간 // 오후 6시부터 시작
+        //noinspection RedundantIfStatement
+        if(hour >= beginHour  && hour < endHour){
+
+            return true;
+        }
+
+        return false;
+    }
+
+
     public static boolean isUsaWorkTime(long time){
         Instant i = Instant.ofEpochMilli(time);
         ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(i,  ZoneId.of("America/New_York"));

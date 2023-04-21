@@ -4,7 +4,7 @@
 
     <groupId>io.runon.commons</groupId>
     <artifactId>collect</artifactId>
-    <version>0.0.4</version>
+    <version>0.0.5</version>
     <packaging>jar</packaging>
 
 
@@ -56,7 +56,7 @@
         <dependency>
             <groupId>com.seomse.commons</groupId>
             <artifactId>jdbc</artifactId>
-            <version>1.0.8</version>
+            <version>1.0.9</version>
         </dependency>
 
         <dependency>

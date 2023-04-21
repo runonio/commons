@@ -12,7 +12,7 @@ public class CollectGroupKeywordMapping {
     public static void main(String[] args) {
         Config.getConfig("");
 
-        String collectId ="naver_news_search_crawling";
+        String collectId ="daum_cafe_search_crawling";
 
         String groupId = "insurance";
 
