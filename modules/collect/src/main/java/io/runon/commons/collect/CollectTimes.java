@@ -17,43 +17,16 @@ public class CollectTimes {
 
 
     public static boolean isKorWorkTime(long time){
-
-        Instant i = Instant.ofEpochMilli(time);
-        ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(i,  ZoneId.of("Asia/Seoul"));
-
-//        MONDAY, //월
-//        TUESDAY, //화
-//        WEDNESDAY, //수
-//        THURSDAY, //목
-//        FRIDAY, //금
-//        SATURDAY, //토
-//        SUNDAY; //일
-
-        //토일이면 업무하지 않음
-        DayOfWeek dayOfWeek = zonedDateTime.getDayOfWeek();
-        if(dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY ){
-            return false;
-        }
-
-        int hour = zonedDateTime.getHour();
-
-        //9시 ~ 18시 는 업무시간 // 오후 6시부터 시작
-        //noinspection RedundantIfStatement
-        if(hour >= 9  && hour < 18){
-
-            return true;
-        }
-
-        return false;
+        return isWorkTime(time, ZoneId.of("Asia/Seoul"), 9, 18);
     }
-
-
 
 
     public static boolean isKorHardWorkTime(long time){
+        return isWorkTime(time, ZoneId.of("Asia/Seoul"), 8, 20);
+    }
 
-        Instant i = Instant.ofEpochMilli(time);
-        ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(i,  ZoneId.of("Asia/Seoul"));
+    public static boolean isWorkTime(long time, ZoneId zoneId, int beginHour, int endHour){
+
 
 //        MONDAY, //월
 //        TUESDAY, //화
@@ -63,25 +36,6 @@ public class CollectTimes {
 //        SATURDAY, //토
 //        SUNDAY; //일
 
-        //토일이면 업무하지 않음
-        DayOfWeek dayOfWeek = zonedDateTime.getDayOfWeek();
-        if(dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY ){
-            return false;
-        }
-
-        int hour = zonedDateTime.getHour();
-
-        //8시 ~ 18시 는 업무시간 // 오후 6시부터 시작
-        //noinspection RedundantIfStatement
-        if(hour >= 8  && hour < 20){
-
-            return true;
-        }
-
-        return false;
-    }
-
-    public static boolean isWorkTime(long time, ZoneId zoneId, int beginHour, int endHour){
         Instant i = Instant.ofEpochMilli(time);
         ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(i,  zoneId);
         DayOfWeek dayOfWeek = zonedDateTime.getDayOfWeek();
@@ -104,22 +58,8 @@ public class CollectTimes {
 
 
     public static boolean isUsaWorkTime(long time){
-        Instant i = Instant.ofEpochMilli(time);
-        ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(i,  ZoneId.of("America/New_York"));
 
-        DayOfWeek dayOfWeek = zonedDateTime.getDayOfWeek();
-        if(dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY ){
-            return false;
-        }
-
-        int hour = zonedDateTime.getHour();
-
-        //8시 ~ 20시 는 업무시간 으로 본다. 미국 크롤링 사이트는 차단이 심하기 때문에 업무시간을 더 잘피하기 위해 더 범위 있는 값을 설정한다.
-        //noinspection RedundantIfStatement
-        if(hour >= 8  && hour < 20){
-            return true;
-        }
-        return false;
+        return isWorkTime(time, ZoneId.of("America/New_York"), 8, 20);
     }
 
 
