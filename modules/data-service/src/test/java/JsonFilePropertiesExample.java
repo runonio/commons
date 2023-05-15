@@ -12,8 +12,8 @@ public class JsonFilePropertiesExample {
     }
     public static void view(){
         JsonFileProperties jsonFileProperties = JsonFilePropertiesManager.getInstance().getJsonFileProperties("config/collect_time");
-        System.out.println(jsonFileProperties.getLong("A"));
-        System.out.println(jsonFileProperties.getLong("B"));
+        System.out.println(jsonFileProperties.getLong("A", 0));
+        System.out.println(jsonFileProperties.getLong("B", 0));
     }
 
     public static void main(String[] args) {

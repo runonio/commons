@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'io.runon.commons'
-version '0.1.6'
+version '0.1.61'
 
 repositories {
     mavenCentral()

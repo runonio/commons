@@ -111,20 +111,30 @@ public class JsonFileProperties {
         }
     }
 
-    public int getInt(String key){
+    public int getInt(String key, int defaultValue){
         synchronized (lock) {
+            if(!jsonObject.has(key)){
+                return defaultValue;
+            }
             return jsonObject.get(key).getAsInt();
         }
     }
 
-    public long getLong(String key){
+    public long getLong(String key, long defaultValue){
         synchronized (lock) {
+            if(!jsonObject.has(key)){
+                return defaultValue;
+            }
+
             return jsonObject.get(key).getAsLong();
         }
     }
 
-    public double getDouble(String key){
+    public double getDouble(String key, double  defaultValue){
         synchronized (lock) {
+            if(!jsonObject.has(key)){
+                return defaultValue;
+            }
             return jsonObject.get(key).getAsDouble();
         }
     }
