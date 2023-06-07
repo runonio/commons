@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'io.runon.commons'
-version '0.1.61'
+version '0.1.62'
 
 repositories {
     mavenCentral()
@@ -20,14 +20,14 @@ dependencies {
     implementation group: 'org.yaml', name: 'snakeyaml', version: '2.0'
     implementation 'com.seomse.commons:commons:1.4.3'
 
-    implementation group: 'io.netty', name: 'netty-common', version: '4.1.92.Final'
+    implementation group: 'io.netty', name: 'netty-common', version: '4.1.93.Final'
     //csv output
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.0'
-    implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-csv', version: '2.15.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+    implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-csv', version: '2.15.2'
 
     implementation 'com.google.code.gson:gson:2.10.1'
 
-    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.28'
 
 
 

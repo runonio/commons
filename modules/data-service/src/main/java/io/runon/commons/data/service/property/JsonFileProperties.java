@@ -2,6 +2,7 @@ package io.runon.commons.data.service.property;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.seomse.commons.utils.ExceptionUtil;
 import com.seomse.commons.utils.FileUtil;
@@ -44,6 +45,23 @@ public class JsonFileProperties {
         this.jsonObject = jsonObj;
     }
 
+    public void set(String key, JsonObject value){
+        synchronized (lock) {
+
+            jsonObject.add(key, value);
+            String jsonValue = gson.toJson(jsonObject);
+            FileUtil.fileOutput(jsonValue, filePath, false);
+        }
+    }
+
+    public void set(String key, JsonArray value){
+        synchronized (lock) {
+            jsonObject.add(key, value);
+            String jsonValue = gson.toJson(jsonObject);
+            FileUtil.fileOutput(jsonValue, filePath, false);
+        }
+    }
+
     public void set(String key, String value){
         synchronized (lock) {
 
@@ -55,6 +73,15 @@ public class JsonFileProperties {
     }
 
     public void set(String key, Number value){
+        synchronized (lock) {
+            jsonObject.addProperty(key, value);
+
+            String jsonValue = gson.toJson(jsonObject);
+            FileUtil.fileOutput(jsonValue, filePath, false);
+        }
+    }
+
+    public void set(String key, BigDecimal value){
         synchronized (lock) {
             jsonObject.addProperty(key, value);
 
@@ -111,6 +138,12 @@ public class JsonFileProperties {
         }
     }
 
+    public Number getNumber(String key){
+        synchronized (lock) {
+            return jsonObject.get(key).getAsNumber();
+        }
+    }
+
     public int getInt(String key, int defaultValue){
         synchronized (lock) {
             if(!jsonObject.has(key)){
@@ -142,6 +175,12 @@ public class JsonFileProperties {
     public JsonObject getJsonObject(String key){
         synchronized (lock) {
             return jsonObject.get(key).getAsJsonObject();
+        }
+    }
+
+    public JsonArray getJsonArray(String key){
+        synchronized (lock) {
+            return jsonObject.get(key).getAsJsonArray();
         }
     }
 
