@@ -4,7 +4,7 @@
 
     <groupId>io.runon.commons</groupId>
     <artifactId>data-service</artifactId>
-    <version>0.1.62</version>
+    <version>0.1.63</version>
     <packaging>jar</packaging>
 
 
@@ -62,7 +62,7 @@
         <dependency>
             <groupId>com.seomse.commons</groupId>
             <artifactId>commons</artifactId>
-            <version>1.4.3</version>
+            <version>1.4.4</version>
         </dependency>
 
         <dependency>
