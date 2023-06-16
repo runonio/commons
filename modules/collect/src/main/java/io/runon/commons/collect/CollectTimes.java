@@ -13,6 +13,7 @@ import java.util.Random;
  * 크롤링에서 각가별 업무시간은 피해서 크롤링할 필요가 있을경우
  * @author macle
  */
+@SuppressWarnings("ManualMinMaxCalculation")
 public class CollectTimes {
 
 
@@ -79,14 +80,26 @@ public class CollectTimes {
     public static long getSleepRandomTime(String site, long time){
         Random random = new Random();
         long randomSleepTime = random.nextLong(time);
-        return  AccessTimeManager.getInstance().getSleepTime(site, randomSleepTime);
+
+        long lastSleepTime = AccessTimeManager.getInstance().getSleepTime(site, randomSleepTime);
+
+        if(lastSleepTime < randomSleepTime){
+            return randomSleepTime;
+        }
+        return lastSleepTime;
     }
 
 
-    public static long getSleepRandomTime(String site, long minTime, long randomTime){
+    public static long getSleepRandomTime(String site, long minTime, long randomTime) {
         Random random = new Random();
         long sleepTime = random.nextLong(randomTime) + minTime;
-        return  AccessTimeManager.getInstance().getSleepTime(site, sleepTime);
+
+        long lastSleepTime = AccessTimeManager.getInstance().getSleepTime(site, sleepTime);
+
+        if (lastSleepTime < sleepTime) {
+            return sleepTime;
+        }
+        return lastSleepTime;
     }
 
 

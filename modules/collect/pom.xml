@@ -4,7 +4,7 @@
 
     <groupId>io.runon.commons</groupId>
     <artifactId>collect</artifactId>
-    <version>0.0.5</version>
+    <version>0.0.6</version>
     <packaging>jar</packaging>
 
 

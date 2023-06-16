@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'io.runon.commons'
-version '0.0.5'
+version '0.0.6'
 
 repositories {
     mavenCentral()
@@ -13,6 +13,7 @@ dependencies {
 
     implementation 'com.seomse.commons:jdbc:1.1.0'
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.6.0'
+    //noinspection VulnerableLibrariesLocal
     implementation 'com.seomse.commons:crawling:0.9.0'
     implementation 'com.google.code.gson:gson:2.10.1'
 
