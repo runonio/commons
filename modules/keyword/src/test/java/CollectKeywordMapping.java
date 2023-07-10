@@ -19,6 +19,5 @@ public class CollectKeywordMapping {
             map.setKeywordNo(Long.parseLong(no));
             JdbcObjects.insertIfNoData(map);
         }
-
     }
 }

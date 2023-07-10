@@ -12,9 +12,9 @@ public class CollectGroupKeywordMapping {
     public static void main(String[] args) {
         Config.getConfig("");
 
-        String collectId ="naver_news_search_crawling";
+        String collectId ="dcinside_search_crawling";
 
-        String groupId = "insurance";
+        String groupId = "stock";
 
         List<String> list = JdbcQuery.getStringList("select keyword_no from collect_group_keyword_map where collect_group_id='" + groupId +"'");
 
