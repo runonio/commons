@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+}
+
+group 'io.runon.commons'
+version '0.0.1'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.seomse.commons:commons:1.5.0'
+    implementation 'com.seomse.commons:crypto:0.1.0'
+
+
+
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.28'
+    annotationProcessor 'org.projectlombok:lombok:1.18.28'
+}
+
+test {
+    useJUnitPlatform()
+}

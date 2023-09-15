@@ -5,4 +5,6 @@ include 'modules:collect'
 findProject(':modules:collect')?.name = 'collect'
 include 'modules:keyword'
 findProject(':modules:keyword')?.name = 'keyword'
+include 'modules:license'
+findProject(':modules:license')?.name = 'license'
 
