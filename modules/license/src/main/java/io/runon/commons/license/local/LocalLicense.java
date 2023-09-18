@@ -6,8 +6,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.seomse.commons.utils.ExceptionUtil;
 import com.seomse.commons.utils.FileUtil;
+import com.seomse.crypto.HashConfusionCrypto;
 import com.seomse.crypto.HashConfusionString;
-import com.seomse.crypto.StringCrypto;
+
 import io.runon.commons.license.LicenseUtils;
 import lombok.extern.slf4j.Slf4j;
 
@@ -143,7 +144,7 @@ public class LocalLicense {
     public void out(String passwd){
 
         String licenceStr = newLicenceStr();
-        String enc = StringCrypto.enc(passwd, licenceStr);
+        String enc = HashConfusionCrypto.encStr(passwd, licenceStr);
         FileUtil.fileOutput(enc, licenseFilePath, false);
     }
 

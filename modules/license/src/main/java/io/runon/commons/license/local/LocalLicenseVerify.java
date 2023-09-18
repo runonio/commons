@@ -7,7 +7,8 @@ import com.google.gson.JsonObject;
 import com.seomse.commons.utils.ExceptionUtil;
 import com.seomse.commons.utils.FileUtil;
 import com.seomse.commons.utils.time.YmdUtil;
-import com.seomse.crypto.StringCrypto;
+
+import com.seomse.crypto.HashConfusionCrypto;
 import io.runon.commons.license.LicenseUtils;
 import io.runon.commons.license.LicenseVerify;
 import lombok.extern.slf4j.Slf4j;
@@ -33,7 +34,7 @@ public class LocalLicenseVerify {
 
     public static LicenseVerify verify(String encMessage, String key, Map<String,String > addDataMap){
         try {
-            String jsonText = StringCrypto.dec(key, encMessage);
+            String jsonText = HashConfusionCrypto.decStr(key, encMessage);
             return verify(jsonText, addDataMap);
         }catch (Exception e){
             return LicenseVerify.DECRYPTION_ERROR;
