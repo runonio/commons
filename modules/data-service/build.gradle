@@ -3,30 +3,35 @@ plugins {
 }
 
 group 'io.runon.commons'
-version '0.1.63'
+version '0.1.7'
 
 repositories {
     mavenCentral()
 }
 
+
 dependencies {
-    
-    
-    
-    implementation group: 'io.lettuce', name: 'lettuce-core', version: '6.2.4.RELEASE'
-    //lettuce-core 의존성 패치용 io.lettuce에서 netty 버전을 높인게 나오면 의존성 제거
-//    implementation group: 'io.netty', name: 'netty-common', version: '4.1.84.Final'
 
-    implementation group: 'org.yaml', name: 'snakeyaml', version: '2.0'
-    implementation 'com.seomse.commons:commons:1.4.4'
 
-    implementation group: 'io.netty', name: 'netty-common', version: '4.1.93.Final'
+    
+    implementation group: 'io.lettuce', name: 'lettuce-core', version: '6.2.6.RELEASE'
+
+
+    implementation group: 'org.yaml', name: 'snakeyaml', version: '2.2'
+    implementation 'com.seomse.commons:commons:1.5.0'
+
+//    implementation group: 'io.netty', name: 'netty-common', version: '4.1.93.Final'
     //csv output
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
     implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-csv', version: '2.15.2'
 
-    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'com.seomse.commons:crypto:0.1.1'
 
+
+    implementation group: 'com.sun.mail', name: 'javax.mail', version: '1.6.2'
+
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation group: 'org.json', name: 'json', version: '20230618'
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.28'
 
 

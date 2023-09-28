@@ -11,7 +11,6 @@ import io.lettuce.core.pubsub.api.async.RedisPubSubAsyncCommands;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
-import java.util.Set;
 
 /**
  * @author macle
@@ -70,6 +69,15 @@ public class ServiceRedis {
             return syncHash.hgetall(key);
         }
     }
+
+    public Boolean hset(String key, String field, String value){
+        synchronized (lock){
+            connect();
+            return syncHash.hset(key,field,value);
+
+        }
+    }
+
     public Map<String, String> hgetallAsync(String key){
         synchronized (lock){
             connect();
@@ -135,6 +143,14 @@ public class ServiceRedis {
             return syncString.get(key);
         }
     }
+    public void set(String key, String value){
+        synchronized (lock){
+            connect();
+            syncString.set(key, value);
+
+        }
+    }
+
 
 
     private void connect(){
