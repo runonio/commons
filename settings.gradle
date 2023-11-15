@@ -7,4 +7,6 @@ include 'modules:keyword'
 findProject(':modules:keyword')?.name = 'keyword'
 include 'modules:license'
 findProject(':modules:license')?.name = 'license'
+include 'modules:charmap-service'
+findProject(':modules:charmap-service')?.name = 'charmap-service'
 
