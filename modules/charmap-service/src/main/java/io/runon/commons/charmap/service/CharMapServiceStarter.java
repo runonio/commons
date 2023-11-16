@@ -26,7 +26,7 @@ public class CharMapServiceStarter {
         String filePath = Config.getConfig("application.crypto.charmap.path","config/charmaps");
 
         if(!FileUtil.isFile(filePath)){
-            charMapDataManagement.addRandomCharMap(1,5);
+            charMapDataManagement.addRandomCharMap(0,4);
         }
 
         new SpringApplicationBuilder()

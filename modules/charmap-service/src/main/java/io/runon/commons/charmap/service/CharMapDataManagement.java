@@ -27,6 +27,7 @@ public class CharMapDataManagement {
         return Singleton.instance;
     }
 
+
     private long lastSeq = 1;
 
     private String lastData;

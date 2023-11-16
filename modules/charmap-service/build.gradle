@@ -15,6 +15,8 @@ dependencies {
     implementation 'com.seomse.commons:crypto:0.1.5'
     implementation 'com.seomse.commons:commons:1.5.0'
 
+    //1.8 버전에서 돌아야 하기때문에 2.7 버전대를 활용함
+    //noinspection VulnerableLibrariesLocal
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.7.17'
 
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.28'
