@@ -12,7 +12,7 @@ dependencies {
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
     
-    implementation 'com.seomse.commons:crypto:0.1.5'
+    implementation 'com.seomse.commons:crypto:0.1.6'
     implementation 'com.seomse.commons:commons:1.5.0'
 
     //1.8 버전에서 돌아야 하기때문에 2.7 버전대를 활용함
