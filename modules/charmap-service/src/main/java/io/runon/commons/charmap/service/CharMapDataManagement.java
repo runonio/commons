@@ -27,7 +27,6 @@ public class CharMapDataManagement {
         return Singleton.instance;
     }
 
-
     private long lastSeq = 1;
 
     private String lastData;
@@ -94,7 +93,6 @@ public class CharMapDataManagement {
             lastData = str;
         }
 
-
     }
 
 
@@ -110,7 +108,6 @@ public class CharMapDataManagement {
             lastData = str;
         }
     }
-
 
     public String outStr(){
         CharMapManager charMapManager = CharMapManager.getInstance();
@@ -134,8 +131,6 @@ public class CharMapDataManagement {
         }
         return sb.substring(1);
     }
-
-
 
     public long getLastSeq() {
         return lastSeq;
@@ -171,7 +166,6 @@ public class CharMapDataManagement {
         charMapDataManagement.addRandomCharMap();
         CharMapManager charMapManager = CharMapManager.getInstance();
         System.out.println(charMapManager);
-
 
     }
 }
