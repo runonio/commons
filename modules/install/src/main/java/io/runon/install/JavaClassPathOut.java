@@ -3,6 +3,8 @@ package io.runon.install;
 import io.runon.install.utils.FileUtils;
 
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * java -cp @classpath.txt mainclass
@@ -78,5 +80,14 @@ public class JavaClassPathOut {
 
     public static void main(String[] args) {
 
+        JavaClassPathOut javaClassPathOut = new JavaClassPathOut();
+
+        String os = System.getProperty("os.name").toLowerCase();
+        if(os.contains("win")){
+            javaClassPathOut.setDirSeparator("\\");
+        }
+        Path currentPath = Paths.get("");
+        String path = currentPath.toAbsolutePath().toString();
+        javaClassPathOut.out(path);
     }
 }
