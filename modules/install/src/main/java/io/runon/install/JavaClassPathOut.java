@@ -78,10 +78,9 @@ public class JavaClassPathOut {
         FileUtils.fileOutput(sb.toString(), outPath, false);
     }
 
-    public static void main(String[] args) {
 
+    public static void out(){
         JavaClassPathOut javaClassPathOut = new JavaClassPathOut();
-
         String os = System.getProperty("os.name").toLowerCase();
         if(os.contains("win")){
             javaClassPathOut.setDirSeparator("\\");
@@ -89,5 +88,9 @@ public class JavaClassPathOut {
         Path currentPath = Paths.get("");
         String path = currentPath.toAbsolutePath().toString();
         javaClassPathOut.out(path);
+    }
+
+    public static void main(String[] args) {
+        out();
     }
 }
