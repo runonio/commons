@@ -34,8 +34,9 @@ public class CharMapServiceStarter {
                 .properties(props)
                 .run(springbootArgs);
 
-
     }
+
+
 
     public static void main(String[] args) {
 

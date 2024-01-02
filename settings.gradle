@@ -9,4 +9,6 @@ include 'modules:license'
 findProject(':modules:license')?.name = 'license'
 include 'modules:charmap-service'
 findProject(':modules:charmap-service')?.name = 'charmap-service'
+include 'modules:install'
+findProject(':modules:install')?.name = 'install'
 
