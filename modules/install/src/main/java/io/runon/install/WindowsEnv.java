@@ -53,8 +53,10 @@ public class WindowsEnv {
                     sb.setLength(0);
                 }
             }
-
         }
+
+        ConfigRelativePath configRelativePath = new ConfigRelativePath(path);
+        configRelativePath.change();
 
     }
 }
