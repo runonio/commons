@@ -10,7 +10,7 @@ import java.nio.file.Paths;
  * 윈도우 설치환경 자동세팅
  * @author macle
  */
-public class WindowsEnv {
+public class WindowsConfigure {
     public static void main(String[] args) {
         JavaClassPathOut.out();
 
