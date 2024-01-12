@@ -43,5 +43,50 @@ public class UnixConfigure {
         ConfigRelativePath configRelativePath = new ConfigRelativePath(path);
         configRelativePath.change();
 
+
+
+        String userName = System.getProperty("user.name");
+
+        String homeDir =  "/home/" +userName;
+        if(userName != null && !userName.equals("")){
+            File dirFile = new File(path);
+            File [] files = dirFile.listFiles();
+
+            if(files != null){
+                for(File file : files){
+                    if(!file.isFile()){
+                        continue;
+                    }
+
+                    if(file.getName().endsWith(".desktop")){
+                        String text = FileUtils.getFileContents(file, "UTF-8");
+
+                        StringBuilder sb = new StringBuilder();
+                        String [] lines = text.split("\n");
+
+                        for(String line: lines){
+
+                            sb.append("\n");
+                            if(line.startsWith("Exec=")){
+                                sb.append("Exec=").append(path).append("/").append(line.substring("Exec=".length()));
+                            }else{
+                                sb.append(line);
+                            }
+                        }
+
+                        if(sb.length() > 0){
+                            FileUtils.fileOutput(sb.substring(1), file.getAbsolutePath(),"UTF-8",false);
+                            sb.setLength(0);
+
+                            FileUtils.copy(file.getAbsolutePath(),homeDir + "/.config/autostart/" +file.getName() );
+                        }
+
+                    }
+                }
+            }
+        }
+
+
+
     }
 }

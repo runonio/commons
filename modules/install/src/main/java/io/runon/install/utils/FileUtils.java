@@ -3,6 +3,7 @@ package io.runon.install.utils;
 import io.runon.install.exception.IORuntimeException;
 
 import java.io.*;
+import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 
 /**
@@ -52,8 +53,39 @@ public class FileUtils {
             out.getFD().sync();
         }catch(IOException e){
             throw new IORuntimeException(e);
-            //io, nio 패키지를 같이쓰면 잘 써지고도 에러나는 경우가 있으므로 예외처리
-//            log.(ExceptionUtil.getStackTrace(e));
+
+        }
+    }
+
+    public static boolean copy(String inFilePath, String outFilePath) {
+        try {
+
+            File outFile = new File(outFilePath);
+            File parentFile = outFile.getParentFile();
+
+            if(!parentFile.isDirectory()) {
+                //noinspection ResultOfMethodCallIgnored
+                parentFile.mkdirs();
+            }
+
+            FileInputStream fis = new FileInputStream(inFilePath);
+            FileOutputStream fos = new FileOutputStream(outFile);
+
+            FileChannel fcin =  fis.getChannel();
+            FileChannel fcout = fos.getChannel();
+
+            long size = fcin.size();
+            fcin.transferTo(0, size, fcout);
+
+            fcin.close();
+            fcout.close();
+
+            fis.close();
+            fos.close();
+            return true;
+        } catch (IOException e) {
+
+            throw new IORuntimeException(e);
         }
     }
 }
