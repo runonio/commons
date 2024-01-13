@@ -6,7 +6,7 @@ implementation 'io.runon.commons:runon-commons-install:0.0.1'
   - https://mvnrepository.com/artifact/io.runon.commons/runon-commons-install/0.0.1
   - 
 ## 개발환경
-- open jdk 17
+- open jdk 1.8
 
 ## communication
 ### blog, homepage
