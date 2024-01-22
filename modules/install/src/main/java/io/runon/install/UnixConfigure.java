@@ -43,8 +43,6 @@ public class UnixConfigure {
         ConfigRelativePath configRelativePath = new ConfigRelativePath(path);
         configRelativePath.change();
 
-
-
         String userName = System.getProperty("user.name");
 
         String homeDir =  "/home/" +userName;
@@ -86,6 +84,7 @@ public class UnixConfigure {
             }
         }
 
+        new LogbackHomeDir(path).change();
 
 
     }

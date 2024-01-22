@@ -8,8 +8,6 @@ import java.util.Properties;
 import java.util.Set;
 
 /**
- * java -cp @classpath.txt mainclass
- * 에서의 classpath.txt 부분의 내용을 작성해서 내린다
  * 다른 라이브러리를 최대한 참조하지 않기위해 직접 구현한 구현체 위주로 사용해야한다.
  * @author macle
  */

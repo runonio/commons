@@ -58,5 +58,7 @@ public class WindowsConfigure {
         ConfigRelativePath configRelativePath = new ConfigRelativePath(path);
         configRelativePath.change();
 
+        new LogbackHomeDir(path).change();
+
     }
 }
