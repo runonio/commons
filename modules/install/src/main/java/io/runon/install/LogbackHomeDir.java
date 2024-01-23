@@ -41,9 +41,7 @@ public class LogbackHomeDir {
             filePath = homeDir + dirSeparator + filePath;
         }
 
-
         File logBackFile = new File(filePath);
-        System.out.println(filePath);
         if(!logBackFile.isFile()){
             return;
         }
