@@ -86,6 +86,7 @@ public class UnixConfigure {
 
         new LogbackHomeDir(path).change();
 
+        JavaClassPathOut.out();
 
     }
 }

@@ -18,17 +18,14 @@ public class LogbackHomeDir {
         this.homeDir = homeDir;
     }
 
-
     public void setLogBackFilePath(String logBackFilePath) {
         this.logBackFilePath = logBackFilePath;
     }
 
     public void change(){
 
-
         String dirSeparator ="/";
         String os = System.getProperty("os.name").toLowerCase();
-
 
         String filePath = logBackFilePath;
 
@@ -47,7 +44,6 @@ public class LogbackHomeDir {
         }
 
         String logbackText = FileUtils.getFileContents(logBackFile, "UTF-8");
-
 
         StringBuilder sb = new StringBuilder();
 
@@ -75,16 +71,15 @@ public class LogbackHomeDir {
                     sb.append(line);
                     continue;
                 }
+
                 String logHome = line.substring(index+value.length(), end);
 
-                
-                
                 if(!logHome.startsWith(homeDir)){
-                    //이미 설정된 경로 체크
-                    if(logHome.charAt(1) == ':'){
+                    //이미 설정된 경로 체크 //절대 경로 이면
+                    if(os.contains("win") && logHome.charAt(1) == ':'){
                         sb.append(line);
                         continue;
-                    }else if(logHome.startsWith("/")){
+                    }else if(!os.contains("win") && logHome.startsWith("/")){
                         
                         sb.append(line);
                         continue;
@@ -110,11 +105,6 @@ public class LogbackHomeDir {
             sb.setLength(0);
         }
 
-    }
-
-    public static void main(String[] args) {
-        new LogbackHomeDir("D:\\collect\\finesfss").change();
-        System.out.println("test");
     }
 
 }

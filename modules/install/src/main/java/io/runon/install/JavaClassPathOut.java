@@ -25,12 +25,19 @@ public class JavaClassPathOut {
     private String outFileName = "classpath_all";
 
 
+    private String cpSeparator =":";
+
     public JavaClassPathOut(){
+
 
     }
 
     public void setDirSeparator(String dirSeparator) {
         this.dirSeparator = dirSeparator;
+    }
+
+    public void setCpSeparator(String cpSeparator) {
+        this.cpSeparator = cpSeparator;
     }
 
     public void setDependenciesDirName(String dependenciesDirName) {
@@ -50,13 +57,13 @@ public class JavaClassPathOut {
         String classesPath = dirPath + dirSeparator +classesDirName;
         String dependenciesPah = dirPath  + dirSeparator + dependenciesDirName;
         String outPath = dirPath + dirSeparator + outFileName;
-        out(classesPath, dependenciesPah, outPath);
+        out(classesPath, dependenciesPah, outPath, cpSeparator);
     }
 
-    public static void out(String classesPath, String dependenciesPah, String outPath) {
+    public static void out(String classesPath, String dependenciesPah, String outPath, String cpSeparator) {
         StringBuilder sb = new StringBuilder();
         if (classesPath != null) {
-            sb.append(classesPath).append(";");
+            sb.append(classesPath).append(cpSeparator);
         }
 
         File[] files = new File(dependenciesPah).listFiles();
@@ -72,7 +79,7 @@ public class JavaClassPathOut {
                     continue;
                 }
 
-                sb.append(file.getAbsolutePath()).append(";");
+                sb.append(file.getAbsolutePath()).append(cpSeparator);
             }
         }
         FileUtils.fileOutput(sb.toString(), outPath, false);
@@ -84,6 +91,7 @@ public class JavaClassPathOut {
         String os = System.getProperty("os.name").toLowerCase();
         if(os.contains("win")){
             javaClassPathOut.setDirSeparator("\\");
+            javaClassPathOut.setCpSeparator(";");
         }
         Path currentPath = Paths.get("");
         String path = currentPath.toAbsolutePath().toString();
