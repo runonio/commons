@@ -23,7 +23,7 @@ public class CharMapServiceStarter {
 
         CharMapDataManagement charMapDataManagement = CharMapDataManagement.getInstance();
 
-        String filePath = Config.getConfig("application.crypto.charmap.path","config/charmaps");
+        String filePath = Config.getConfig("application.crypto.charmap.path",ConfigSet.CONFIG_DIR_PATH+"/charmaps");
 
         if(!FileUtil.isFile(filePath)){
             charMapDataManagement.addRandomCharMap(0,4);
