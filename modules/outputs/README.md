@@ -1,12 +1,14 @@
-# collect
-데이터 수집 공통모듈
+# outputs
+산출물 프로젝트
+
+
 ## gradle
-implementation 'io.runon.commons:collect:0.0.7'
+implementation 'io.runon.commons:outputs:0.0.1'
 - etc
-  - https://mvnrepository.com/artifact/io.runon.commons/collect/0.0.7
-  - 
+  - https://mvnrepository.com/artifact/io.runon.commons/outputs/0.0.1
+
 ## 개발환경
-- open jdk 17
+- open jdk 1.8
 
 ## communication
 ### blog, homepage

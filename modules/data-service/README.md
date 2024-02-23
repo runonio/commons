@@ -6,7 +6,7 @@ implementation 'io.runon.commons:data-service:0.1.7'
   - https://mvnrepository.com/artifact/io.runon.commons/data-service/0.1.7
 
 ## 개발환경
-- open jdk 17
+- open jdk 1.8
 
 ## communication
 ### blog, homepage

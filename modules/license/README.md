@@ -8,7 +8,7 @@ implementation 'io.runon.commons:license:0.0.2'
   - https://mvnrepository.com/artifact/io.runon.commons/license/0.0.2
 
 ## 개발환경
-- open jdk 17
+- open jdk 1.8
 
 ## communication
 ### blog, homepage

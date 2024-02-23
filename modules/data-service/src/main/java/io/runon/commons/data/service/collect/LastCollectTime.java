@@ -62,8 +62,22 @@ public class LastCollectTime {
             Map<String,String> map = new HashMap<>();
 
             for(LastCollectTime lastCollectTime : lastCollectTimes) {
-                long time = Objects.requireNonNullElseGet(lastCollectTime.time, System::currentTimeMillis);
-                long checkTime = Objects.requireNonNullElse(lastCollectTime.checkTime, Times.MINUTE_5);
+
+                long time ;
+                if(lastCollectTime.time == null){
+                    time = System.currentTimeMillis();
+                }else{
+                    time = lastCollectTime.time;
+                }
+
+                long checkTime ;
+                if(lastCollectTime.checkTime == null){
+                    checkTime = Times.MINUTE_3;
+                }else{
+                    checkTime = lastCollectTime.checkTime;
+                }
+
+
                 Instant i = Instant.ofEpochMilli(time);
                 ZonedDateTime nowSeoul = ZonedDateTime.ofInstant(i, ZoneId.of("Asia/Seoul"));
 //                commands.hset("collect_last_time", lastCollectTime.key,
