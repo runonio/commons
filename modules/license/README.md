@@ -10,7 +10,7 @@ implementation 'io.runon.commons:license:0.0.2'
 ## 개발환경
 - open jdk 1.8
 
-## communication
+# communication
 ### blog, homepage
 - [github.com/runonio](https://github.com/runonio)
 - [runon.io](https://runon.io)
