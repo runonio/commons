@@ -11,7 +11,7 @@ repositories {
 dependencies {
 
     implementation 'com.seomse.commons:crypto:0.1.6'
-    implementation 'com.seomse.commons:commons:1.5.0'
+    implementation 'com.seomse.commons:commons:1.5.3'
 
     //1.8 버전에서 돌아야 하기때문에 2.7 버전대를 활용함
     //noinspection VulnerableLibrariesLocal

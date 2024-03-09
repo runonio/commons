@@ -25,7 +25,13 @@
             <name>macle</name>
             <email>ysys86a@gmail.com</email>
             <id>macle86</id>
+            <url>https://github.com/macle86</url>
             <organization>runon</organization>
+            <organizationUrl>https://runon.io</organizationUrl>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
         </developer>
         <developer>
             <name>ccsweets</name>
@@ -62,14 +68,14 @@
         <dependency>
             <groupId>com.seomse.commons</groupId>
             <artifactId>commons</artifactId>
-            <version>1.5.0</version>
+            <version>1.5.3</version>
         </dependency>
 
 
         <dependency>
             <groupId>com.seomse.commons</groupId>
             <artifactId>crypto</artifactId>
-            <version>0.1.1</version>
+            <version>0.1.6</version>
         </dependency>
 
         <dependency>
@@ -112,7 +118,7 @@
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20230618</version>
+            <version>20240303</version>
         </dependency>
 
 

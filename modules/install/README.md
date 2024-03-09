@@ -4,26 +4,19 @@
 implementation 'io.runon.commons:runon-commons-install:0.0.3'
 - etc
   - https://mvnrepository.com/artifact/io.runon.commons/runon-commons-install/0.0.3
-  
+
 ## 개발환경
 - open jdk 1.8
 
 ## communication
 ### blog, homepage
-- [www.seomse.com](https://www.seomse.com/)
 - [runon.io](https://runon.io)
-- [github.com/seomse](https://github.com/seomse)
 - [github.com/runonio](https://github.com/runonio)
-
-### 카카오톡 오픈톡
-- https://open.kakao.com/o/g6vzOKqb
-    - 참여코드: runon
-
-### 슬랙 slack
-- https://seomse.slack.com/
+- [www.seomse.com](https://www.seomse.com/)
+- [github.com/seomse](https://github.com/seomse)
 
 ### email
-- ysys86a@gmail.com
+- iorunon@gmail.com
 
 ## main developer
 - macle

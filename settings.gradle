@@ -1,4 +1,4 @@
-rootProject.name = 'commons'
+rootProject.name = 'commons-jdk8'
 include 'modules:data-service'
 findProject(':modules:data-service')?.name = 'data-service'
 include 'modules:keyword'

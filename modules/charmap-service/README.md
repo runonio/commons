@@ -1,5 +1,4 @@
 # charmap-service
-
 charmap 서비스 모듈
 
 ## gradle
@@ -12,20 +11,13 @@ implementation 'io.runon.commons:charmap-service:0.0.1'
 
 ## communication
 ### blog, homepage
-- [www.seomse.com](https://www.seomse.com/)
 - [runon.io](https://runon.io)
-- [github.com/seomse](https://github.com/seomse)
 - [github.com/runonio](https://github.com/runonio)
-
-### 카카오톡 오픈톡
-- https://open.kakao.com/o/g6vzOKqb
-    - 참여코드: runon
-
-### 슬랙 slack
-- https://seomse.slack.com/
+- [www.seomse.com](https://www.seomse.com/)
+- [github.com/seomse](https://github.com/seomse)
 
 ### email
-- comseomse@gmail.com
+- iorunon@gmail.com
 
 ## main developer
 - macle

@@ -18,7 +18,7 @@ dependencies {
 
 
     implementation group: 'org.yaml', name: 'snakeyaml', version: '2.2'
-    implementation 'com.seomse.commons:commons:1.5.0'
+    implementation 'com.seomse.commons:commons:1.5.3'
 
 //    implementation group: 'io.netty', name: 'netty-common', version: '4.1.93.Final'
     //csv output
@@ -31,8 +31,8 @@ dependencies {
     implementation group: 'com.sun.mail', name: 'javax.mail', version: '1.6.2'
 
     implementation 'com.google.code.gson:gson:2.10.1'
-    implementation group: 'org.json', name: 'json', version: '20230618'
-    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.28'
+    implementation group: 'org.json', name: 'json', version: '20240303'
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.30'
 
 
 
