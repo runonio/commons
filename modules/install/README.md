@@ -10,15 +10,16 @@ implementation 'io.runon.commons:runon-commons-install:0.0.3'
 
 ## communication
 ### blog, homepage
-- [runon.io](https://runon.io)
 - [github.com/runonio](https://github.com/runonio)
-- [www.seomse.com](https://www.seomse.com/)
+- [runon.io](https://runon.io)
 - [github.com/seomse](https://github.com/seomse)
+- [www.seomse.com](https://www.seomse.com/)
+
 
 ### email
 - iorunon@gmail.com
 
 ## main developer
 - macle
-  -  [github.com/macle86](https://github.com/macle86)
-  -  [macle.dev](https://macle.dev)
+  - github(source code): [github.com/macle86](https://github.com/macle86)
+  - email: ysys86a@gmail.com
