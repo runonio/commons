@@ -99,7 +99,6 @@ public class LogbackHomeDir {
             }
         }
 
-        //noinspection SizeReplaceableByIsEmpty
         if(isChange && sb.length() > 0){
             FileUtils.fileOutput(sb.substring(1), logBackFile.getAbsolutePath(),"UTF-8",false);
             sb.setLength(0);
