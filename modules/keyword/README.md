@@ -5,9 +5,9 @@
 - 인덱스 생성
 
 ## gradle
-implementation 'io.runon.commons:keyword:0.0.2'
+implementation 'io.runon.commons:keyword:0.0.3'
 - etc
-  - https://mvnrepository.com/artifact/io.runon.commons/keyword/0.0.2
+  - https://mvnrepository.com/artifact/io.runon.commons/keyword/0.0.3
 
 ## 개발환경
 - open jdk 1.8

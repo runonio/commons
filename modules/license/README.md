@@ -3,9 +3,9 @@
 
 
 ## gradle
-implementation 'io.runon.commons:license:0.0.2'
+implementation 'io.runon.commons:license:0.0.3'
 - etc
-  - https://mvnrepository.com/artifact/io.runon.commons/license/0.0.2
+  - https://mvnrepository.com/artifact/io.runon.commons/license/0.0.3
 
 ## 개발환경
 - open jdk 1.8
