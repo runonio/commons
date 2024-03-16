@@ -65,7 +65,7 @@ public class UnixConfigure {
                         for(String line: lines){
 
                             sb.append("\n");
-                            if(line.startsWith("Exec=")){
+                            if(line.startsWith("Exec=") && !line.startsWith("Exec="+path)){
                                 sb.append("Exec=").append(path).append("/").append(line.substring("Exec=".length()));
                             }else{
                                 sb.append(line);
