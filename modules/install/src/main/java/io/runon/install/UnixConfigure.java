@@ -73,10 +73,10 @@ public class UnixConfigure {
                         }
 
                         if(sb.length() > 0){
-                            FileUtils.fileOutput(sb.substring(1), file.getAbsolutePath(),"UTF-8",false);
+                            FileUtils.fileOutput(sb.substring(1), homeDir + "/.config/autostart/" +file.getName() ,"UTF-8",false);
                             sb.setLength(0);
 
-                            FileUtils.copy(file.getAbsolutePath(),homeDir + "/.config/autostart/" +file.getName() );
+//                            FileUtils.copy(file.getAbsolutePath(),homeDir + "/.config/autostart/" +file.getName() );
                         }
 
                     }
