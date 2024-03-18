@@ -10,83 +10,108 @@ import java.nio.file.Paths;
  * unix 계열 자동설정
  * @author macle
  */
+@SuppressWarnings({"CallToPrintStackTrace", "ResultOfMethodCallIgnored", "StringEqualsEmptyString"})
 public class UnixConfigure {
     public static void main(String[] args) {
 
         Path currentPath = Paths.get("");
         String path = currentPath.toAbsolutePath().toString();
 
-        File envFile = new File(path+"/env.sh");
-        if(envFile.isFile()){
-            String shText = FileUtils.getFileContents(envFile, "UTF-8");
-            StringBuilder sb = new StringBuilder();
+        try {
+            File envFile = new File(path + "/env.sh");
+            if (envFile.isFile()) {
+                String shText = FileUtils.getFileContents(envFile, "UTF-8");
+                StringBuilder sb = new StringBuilder();
 
-            String [] lines = shText.split("\n");
-            for(String line: lines){
+                String[] lines = shText.split("\n");
+                for (String line : lines) {
 
-                sb.append("\n");
-                if(line.startsWith("export APP_HOME")){
-                    sb.append("export APP_HOME=\"").append(path).append("\"");
-                }else{
-                    sb.append(line);
+                    sb.append("\n");
+                    if (line.startsWith("export APP_HOME")) {
+                        sb.append("export APP_HOME=\"").append(path).append("\"");
+                    } else {
+                        sb.append(line);
+                    }
                 }
-            }
 
-            if(sb.length() > 0){
-                FileUtils.fileOutput(sb.substring(1), envFile.getAbsolutePath(),"UTF-8",false);
-                sb.setLength(0);
-            }
+                if (sb.length() > 0) {
+                    FileUtils.fileOutput(sb.substring(1), envFile.getAbsolutePath(), "UTF-8", false);
+                    sb.setLength(0);
+                }
 
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        try {
+            ConfigRelativePath configRelativePath = new ConfigRelativePath(path);
+            configRelativePath.change();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        try {
+            new LogbackHomeDir(path).change();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        try {
+            JavaClassPathOut.out();
+        }catch (Exception e){
+            e.printStackTrace();
         }
 
 
-        ConfigRelativePath configRelativePath = new ConfigRelativePath(path);
-        configRelativePath.change();
+        String homeDir =   System.getProperty("user.home");
+        System.out.println("home dir: " + homeDir);
 
-        String userName = System.getProperty("user.name");
+        try {
+            if (homeDir != null && !homeDir.equals("")) {
+                File dirFile = new File(path);
+                File[] files = dirFile.listFiles();
 
-        String homeDir =  "/home/" +userName;
-        if(userName != null && !userName.equals("")){
-            File dirFile = new File(path);
-            File [] files = dirFile.listFiles();
+                if (files != null) {
+                    for (File file : files) {
+                        if (!file.isFile()) {
+                            continue;
+                        }
 
-            if(files != null){
-                for(File file : files){
-                    if(!file.isFile()){
-                        continue;
-                    }
+                        if (file.getName().endsWith(".desktop")) {
+                            String text = FileUtils.getFileContents(file, "UTF-8");
 
-                    if(file.getName().endsWith(".desktop")){
-                        String text = FileUtils.getFileContents(file, "UTF-8");
+                            StringBuilder sb = new StringBuilder();
+                            String[] lines = text.split("\n");
 
-                        StringBuilder sb = new StringBuilder();
-                        String [] lines = text.split("\n");
+                            for (String line : lines) {
 
-                        for(String line: lines){
-
-                            sb.append("\n");
-                            if(line.startsWith("Exec=") && !line.startsWith("Exec="+path)){
-                                sb.append("Exec=").append(path).append("/").append(line.substring("Exec=".length()));
-                            }else{
-                                sb.append(line);
+                                sb.append("\n");
+                                if (line.startsWith("Exec=") && !line.startsWith("Exec=" + path)) {
+                                    sb.append("Exec=").append(path).append("/").append(line.substring("Exec=".length()));
+                                } else {
+                                    sb.append(line);
+                                }
                             }
+
+                            if (sb.length() > 0) {
+                                try {
+                                    new File(homeDir + "/.config/autostart/").mkdirs();
+                                } catch (Exception ignore) {
+                                }
+
+                                FileUtils.fileOutput(sb.substring(1), homeDir + "/.config/autostart/" + file.getName(), "UTF-8", false);
+                                sb.setLength(0);
+
+                            }
+
                         }
-
-                        if(sb.length() > 0){
-                            FileUtils.fileOutput(sb.substring(1), homeDir + "/.config/autostart/" +file.getName() ,"UTF-8",false);
-                            sb.setLength(0);
-
-//                            FileUtils.copy(file.getAbsolutePath(),homeDir + "/.config/autostart/" +file.getName() );
-                        }
-
                     }
                 }
             }
+        }catch (Exception e){
+            e.printStackTrace();
         }
 
-        new LogbackHomeDir(path).change();
-
-        JavaClassPathOut.out();
 
     }
 }
