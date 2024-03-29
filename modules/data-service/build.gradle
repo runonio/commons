@@ -14,17 +14,16 @@ dependencies {
 
 
     
-    implementation group: 'io.lettuce', name: 'lettuce-core', version: '6.2.6.RELEASE'
+    implementation group: 'io.lettuce', name: 'lettuce-core', version: '6.3.2.RELEASE'
 
 
     implementation group: 'org.yaml', name: 'snakeyaml', version: '2.2'
-    implementation 'com.seomse.commons:commons:1.5.6'
+    implementation 'com.seomse.commons:commons:1.6.0'
 
 //    implementation group: 'io.netty', name: 'netty-common', version: '4.1.93.Final'
     //csv output
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
-    implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-csv', version: '2.15.2'
-
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.17.0'
+    implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-csv', version: '2.17.0'
 
     implementation group: 'com.sun.mail', name: 'javax.mail', version: '1.6.2'
 

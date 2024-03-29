@@ -9,7 +9,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.seomse.commons:commons:1.5.6'
+    implementation 'com.seomse.commons:commons:1.6.0'
     implementation 'com.seomse.commons:crawling:0.9.7'
     implementation group: 'org.jsoup', name: 'jsoup', version: '1.17.2'
 
