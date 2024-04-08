@@ -15,7 +15,7 @@ import java.nio.file.Paths;
 public class JavaClassPathOut {
 
 
-    private String dirSeparator ="/";
+    private final String dirSeparator;
 
     private String classesDirName  ="classes";
 
@@ -29,12 +29,9 @@ public class JavaClassPathOut {
 
     public JavaClassPathOut(){
 
-
+        dirSeparator= System.getProperty("file.separator");
     }
 
-    public void setDirSeparator(String dirSeparator) {
-        this.dirSeparator = dirSeparator;
-    }
 
     public void setCpSeparator(String cpSeparator) {
         this.cpSeparator = cpSeparator;
@@ -90,7 +87,6 @@ public class JavaClassPathOut {
         JavaClassPathOut javaClassPathOut = new JavaClassPathOut();
         String os = System.getProperty("os.name").toLowerCase();
         if(os.contains("win")){
-            javaClassPathOut.setDirSeparator("\\");
             javaClassPathOut.setCpSeparator(";");
         }
         Path currentPath = Paths.get("");

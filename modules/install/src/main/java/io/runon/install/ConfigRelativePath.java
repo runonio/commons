@@ -59,11 +59,7 @@ public class ConfigRelativePath {
 
         String configText = FileUtils.getFileContents( configFile ,"UTF-8");
 
-        String dirSeparator ="/";
-        String os = System.getProperty("os.name").toLowerCase();
-        if(os.contains("win")){
-            dirSeparator = "\\";
-        }
+        String dirSeparator = System.getProperty("file.separator");
 
         String homedirNext = this.homedirPath;
 
