@@ -11,4 +11,6 @@ include 'modules:install'
 findProject(':modules:install')?.name = 'install'
 include 'modules:outputs'
 findProject(':modules:outputs')?.name = 'outputs'
+include 'modules:ocr'
+findProject(':modules:ocr')?.name = 'ocr'
 
