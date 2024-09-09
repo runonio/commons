@@ -13,10 +13,7 @@ import org.apache.pdfbox.rendering.PDFRenderer;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.json.JSONObject;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
@@ -26,6 +23,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 /**
@@ -49,8 +47,62 @@ public class OcrController {
         }
     }
 
+    @RequestMapping(value = "/text/ocrjson" , method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
+    public String ocrJson(@RequestBody final String jsonValue){
+        FileOutputStream fos = null;
+        try {
+            JSONObject object = new JSONObject(jsonValue);
+
+            String fileName = object.getString("file_name");
+            String byteDataEncode = object.getString("file_bytes");
+
+            byte[] bytes = Base64.getDecoder().decode(byteDataEncode);
+
+            String ocrHome = Config.getConfig("ocr.home");
+            String tempDirPath = ocrHome + "/temp/";
+
+            String tempFileName = System.currentTimeMillis() + "_" + getTempNum();
+
+            String tempFullPath = tempDirPath + tempFileName;
+
+            fos = new FileOutputStream(tempFullPath);
+            fos.write(bytes);
+            try{fos.getFD().sync();}catch (Exception ignore){}
+            try{fos.close();}catch (Exception ignore){}
+
+            if(fileName != null && fileName.endsWith(".pdf")){
+                return getPdfOcr(ocrHome, new File(tempFullPath));
+            }
+
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+            OcrText ocrText = OcrPythonShell.analysis(ocrHome, tempFullPath, true);
+            JsonObject response = new JsonObject();
+
+            if(ocrText.getType() == OcrText.Type.SUCCESS){
+                response.addProperty("code", "1");
+                response.add("ocr_text", gson.fromJson(ocrText.getText(), JsonArray.class));
+            }else{
+                response.addProperty("code", "-2");
+                response.addProperty("error_message", ocrText.getText());
+            }
+
+            return gson.toJson(response);
+
+        }catch (Exception e){
+            JSONObject response = new JSONObject();
+            response.put("code", "-1");
+            response.put("message", ExceptionUtil.getStackTrace(e));
+            return response.toString();
+        }finally {
+            try{fos.close();}catch (Exception ignore){}
+        }
+    }
+
     @RequestMapping(value = "/text/ocr" , method = RequestMethod.POST, produces= MediaType.MULTIPART_FORM_DATA_VALUE)
     public String ocr(@RequestPart(value="file") MultipartFile file){
+        FileOutputStream outStream = null;
+        InputStream inputStream = null;
         try{
 
 
@@ -61,9 +113,8 @@ public class OcrController {
 
             String tempFullPath = tempDirPath + tempFileName;
 
-            FileOutputStream outStream = new FileOutputStream(tempDirPath + tempFileName);
-
-            InputStream inputStream = file.getInputStream();
+            outStream = new FileOutputStream(tempFullPath);
+            inputStream = file.getInputStream();
             byte[] buffer = new byte[8 * 1024];
             int bytesRead;
             while ((bytesRead = inputStream.read(buffer)) != -1) {
@@ -72,8 +123,6 @@ public class OcrController {
             try{outStream.getFD().sync();}catch (Exception ignore){}
             try{outStream.close();}catch (Exception ignore){}
             try{inputStream.close();}catch (Exception ignore){}
-
-
             String originalName = file.getOriginalFilename();
 
             if(originalName != null && originalName.endsWith(".pdf")){
@@ -101,6 +150,9 @@ public class OcrController {
             response.put("message", ExceptionUtil.getStackTrace(e));
             return response.toString();
 
+        }finally {
+            try{outStream.close();}catch (Exception ignore){}
+            try{inputStream.close();}catch (Exception ignore){}
         }
     }
 
