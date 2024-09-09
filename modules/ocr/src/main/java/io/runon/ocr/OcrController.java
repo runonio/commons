@@ -1,10 +1,16 @@
 package io.runon.ocr;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.seomse.commons.config.Config;
 import com.seomse.commons.utils.ExceptionUtil;
-import com.seomse.commons.utils.FileUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.json.JSONArray;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.rendering.ImageType;
+import org.apache.pdfbox.rendering.PDFRenderer;
+import org.apache.pdfbox.text.PDFTextStripper;
 import org.json.JSONObject;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,11 +19,14 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.*;
-import java.nio.file.Files;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * @author macle
@@ -44,6 +53,7 @@ public class OcrController {
     public String ocr(@RequestPart(value="file") MultipartFile file){
         try{
 
+
             String ocrHome = Config.getConfig("ocr.home");
             String tempDirPath = ocrHome +"/temp/";
 
@@ -64,97 +74,27 @@ public class OcrController {
             try{inputStream.close();}catch (Exception ignore){}
 
 
-            List<String> commandList =  new ArrayList<>();
-            commandList.add(ocrHome +"/bin/python");
-            commandList.add(ocrHome +"/ocr_out.py");
-            commandList.add(tempFullPath);
+            String originalName = file.getOriginalFilename();
 
-
-            AtomicBoolean isAnalysis = new AtomicBoolean(false);
-            ProcessBuilder builder = new ProcessBuilder(commandList);
-
-            final Process process = builder.start();
-
-            final String [] message = new String[1];
-
-            new Thread(() -> {
-                BufferedReader reader = null;
-                try {
-                    reader = new BufferedReader( new InputStreamReader( process.getInputStream() ) );
-                    String line = null;
-
-                    while ((line = reader.readLine()) != null) {
-
-                        if(line.startsWith("ocr json text:")){
-                            message[0] = line.substring("ocr json text:".length()).trim();
-                            break;
-                        }
-                    }
-
-                }catch(Exception e){
-                    log.error(ExceptionUtil.getStackTrace(e));
-                }finally{
-                    try{reader.close(); }catch(Exception e){}
-                    isAnalysis.set(true);
-                }
-
-
-
-            }).start();
-
-
-            final StringBuilder errorBuilder =new StringBuilder();
-            new Thread(() -> {
-                BufferedReader reader = null;
-                try {
-                    reader = new BufferedReader( new InputStreamReader( process.getErrorStream() ) );
-                    String line = null;
-
-                    while ((line = reader.readLine()) != null) {
-                        errorBuilder.append(line).append("\n");
-                    }
-
-                }catch(Exception e){
-                    log.error(ExceptionUtil.getStackTrace(e));
-                }finally{
-                    try{reader.close(); }catch(Exception e){}
-                }
-
-                isAnalysis.set(true);
-
-            }).start();
-
-            long watiSum = 0;
-
-            while (!isAnalysis.get()) {
-                watiSum += 500;
-                Thread.sleep(500);
-
-                if(watiSum > 5000 && errorBuilder.length() > 0){
-                    break;
-                }
+            if(originalName != null && originalName.endsWith(".pdf")){
+                return getPdfOcr(ocrHome, new File(tempFullPath));
             }
 
-            synchronized (process) {
-                process.wait();
-                process.destroy();
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+            OcrText ocrText = OcrPythonShell.analysis(ocrHome, tempFullPath, true);
+            JsonObject response = new JsonObject();
+
+            if(ocrText.getType() == OcrText.Type.SUCCESS){
+                response.addProperty("code", "1");
+                response.add("ocr_text", gson.fromJson(ocrText.getText(), JsonArray.class));
+            }else{
+                response.addProperty("code", "-2");
+                response.addProperty("error_message", ocrText.getText());
             }
 
-            try{new File(tempFullPath).delete();}catch (Exception ignore){}
+            return gson.toJson(response);
 
-            if(message[0] == null && errorBuilder.length() > 0){
-                JSONObject response = new JSONObject();
-                response.put("code", "-2");
-                response.put("message", errorBuilder.toString());
-                return response.toString();
-            }
-
-
-            JSONObject response = new JSONObject();
-
-            response.put("code", "1");
-            response.put("message", new JSONArray(message[0]));
-            return response.toString();
         }catch (Exception e){
             JSONObject response = new JSONObject();
             response.put("code", "-1");
@@ -162,6 +102,59 @@ public class OcrController {
             return response.toString();
 
         }
+    }
+
+
+    public String getPdfOcr(String ocrHome,File pdfFile) throws IOException {
+
+        PDDocument document = PDDocument.load(pdfFile);
+        PDFTextStripper stripper = new PDFTextStripper();
+
+        String tempDirPath = ocrHome +"/temp/";
+        List<String> pathList = new ArrayList<>();
+        String text;
+        try {
+            text = stripper.getText(document);
+            int pageCount = document.getNumberOfPages();//pdf의 페이지 수
+            PDFRenderer pdfRenderer = new PDFRenderer(document);
+
+            for(int i=0;i<pageCount;i++)
+            {
+                String tempFileName = System.currentTimeMillis() + "_" + getTempNum();
+                String tempFullPath = tempDirPath + tempFileName + ".jpg";
+                try {
+                    BufferedImage imageObj = pdfRenderer.renderImageWithDPI(i, 300, ImageType.RGB);//pdf파일의 페이지를돌면서 이미지 파일 변환
+                    File outputfile = new File(tempFullPath);//파일이름 변경(.pdf->.jpg)
+                    ImageIO.write(imageObj, "jpg", outputfile);//변환한 파일 업로드
+                    pathList.add(tempFullPath);
+                }catch (Exception e){
+                    throw new RuntimeException(e);
+                }
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }finally {
+            document.close();
+        }
+
+        OcrPythonMultiShell ocrPythonMultiShell = new OcrPythonMultiShell(ocrHome, pathList.toArray(new String[0]));
+        ocrPythonMultiShell.runToWait();
+
+
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        JsonObject response = new JsonObject();
+        if(ocrPythonMultiShell.getErrorMessage() == null){
+            response.addProperty("code", "1");
+        }else{
+            response.addProperty("code", "-2");
+            response.addProperty("error_mesage", ocrPythonMultiShell.getErrorMessage());
+        }
+
+        response.addProperty("pdf_text", text);
+        response.add("orc_text", ocrPythonMultiShell.getArray());
+        return gson.toJson(response);
     }
 
 }

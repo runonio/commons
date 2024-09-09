@@ -15,6 +15,9 @@ dependencies {
     implementation group: 'org.json', name: 'json', version: '20240303'
     implementation group: 'com.google.code.gson', name: 'gson', version: '2.10.1'
 
+    implementation group: 'org.apache.pdfbox', name: 'pdfbox', version: '2.0.32'
+
+
     //1.8 버전에서 돌아야 하기때문에 2.7 버전대를 활용함
     //noinspection VulnerableLibrariesLocal
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.7.17'
