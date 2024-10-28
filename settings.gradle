@@ -13,4 +13,9 @@ include 'modules:outputs'
 findProject(':modules:outputs')?.name = 'outputs'
 include 'modules:ocr'
 findProject(':modules:ocr')?.name = 'ocr'
+include 'modules:file-text'
+findProject(':modules:file-text')?.name = 'file-text'
 
+
+include ':seomse-commons'
+project(':seomse-commons').projectDir = new File(settingsDir,'../../seomse/seomse-commons/modules/commons')
