@@ -17,7 +17,7 @@ public class FileText {
     @SuppressWarnings({"ResultOfMethodCallIgnored", "IfCanBeSwitch"})
     public static String getTextSimple(String homeDir , String filePath, boolean isDelete){
 
-        if (FileUtil.isFile(filePath)) {
+        if (!FileUtil.isFile(filePath)) {
             throw new RuntimeException("file no search: " + filePath);
         }
 

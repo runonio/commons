@@ -24,6 +24,8 @@ dependencies {
     implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '3.16'
     implementation group: 'org.apache.poi', name: 'poi-scratchpad', version: '3.16'
 
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.7.17'
+
     implementation fileTree (dir: 'lib', include: ['/**/*.jar'])
 
     //1.8 버전에서 돌아야 하기때문에 2.7 버전대를 활용함

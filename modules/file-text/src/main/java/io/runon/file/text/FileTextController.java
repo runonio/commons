@@ -76,6 +76,8 @@ public class FileTextController {
             try{outStream.close();}catch (Exception ignore){}
             try{inputStream.close();}catch (Exception ignore){}
 
+
+
             String text = FileText.getTextSimple(homeDir, fileFullPath, true);
 
             JsonObject response = new JsonObject();
