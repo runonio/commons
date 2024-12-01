@@ -107,17 +107,11 @@ public class FileTextListController {
             try{fos.close();}catch (Exception ignore){}
 
 
-            String text = FileText.getTextSimple(homeDir, fileFullPath, true);
+            JsonArray pageArray  = FileText.getPageArray(homeDir, fileFullPath, true);
 
             JsonObject response = new JsonObject();
             response.addProperty("code", "1");
-
-            JsonArray array = new JsonArray();
-            JsonObject row = new JsonObject();
-            row.addProperty("text", text);
-            array.add(row);
-
-            response.add("outs", array);
+            response.add("outs", pageArray);
 
             return FileTextController.gson.toJson(response);
 

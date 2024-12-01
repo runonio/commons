@@ -11,15 +11,15 @@ import java.util.Base64;
  */
 public class Test {
     public static void main(String[] args) throws IOException {
-
-        File file = new File("D:\\업무\\test.jpg");
+        String filePath = "E:\\알바몬_(넥서스,위고).ppt";
+        File file = new File(filePath);
         byte[] bytes = Files.readAllBytes(file.toPath());
         String encodeByte = Base64.getEncoder().encodeToString(bytes);
 
         JsonObject obj = new JsonObject();
         obj.addProperty("file_name", file.getName());
         obj.addProperty("file_bytes", encodeByte);
-        String result = HttpApis.POST_JSON.getMessage("http://dev.runon.io:31335/text/filejson", new Gson().toJson(obj));
+        String result = HttpApis.POST_JSON.getMessage("http://dev.runon.io:31335/text/list/filejson", new Gson().toJson(obj));
 
         System.out.println(result);
     }
