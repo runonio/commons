@@ -6,7 +6,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Base64;
-
+/**
+ * @author macle
+ */
 public class Test {
     public static void main(String[] args) throws IOException {
 
@@ -17,7 +19,7 @@ public class Test {
         JsonObject obj = new JsonObject();
         obj.addProperty("file_name", file.getName());
         obj.addProperty("file_bytes", encodeByte);
-        String result = HttpApis.POST_JSON_APT.getMessage("http://dev.runon.io:31335/text/filejson", new Gson().toJson(obj));
+        String result = HttpApis.POST_JSON.getMessage("http://dev.runon.io:31335/text/filejson", new Gson().toJson(obj));
 
         System.out.println(result);
     }

@@ -1,5 +1,7 @@
 package io.runon.file.text;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.seomse.commons.utils.string.Change;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Row;
@@ -19,7 +21,6 @@ public class ExcelText {
 
 
     public String getSimpleText(String excelFilePath) throws IOException, InvalidFormatException {
-
 
         excelGet = new ExcelGet();
 
@@ -65,6 +66,60 @@ public class ExcelText {
 
         return sb.substring(1);
     }
+
+    public JsonArray getPageArray(String excelFilePath) throws IOException, InvalidFormatException {
+        excelGet = new ExcelGet();
+
+        JsonArray pageArray =new JsonArray();
+
+        File file = new File(excelFilePath);
+
+        Workbook workbook = WorkbookFactory.create(file);
+        excelGet.setWorkbook(file);
+
+        int sheetSheet = workbook.getNumberOfSheets();
+        for (int sheetIndex = 0; sheetIndex <sheetSheet ; sheetIndex++) {
+            JsonObject sheetObj = new JsonObject();
+
+            Sheet sheet = workbook.getSheetAt(sheetIndex);
+            int rowCount = excelGet.getRowCount(sheet);
+
+            StringBuilder sb = new StringBuilder();
+
+            for (int rowIndex = 0; rowIndex < rowCount ; rowIndex++) {
+                row = sheet.getRow(rowIndex);
+                sb.append("\n");
+
+                int columnCount = excelGet.getColumnCount(row);
+                StringBuilder rowBuilder = new StringBuilder();
+                for (int columnIndex = 0; columnIndex <columnCount ; columnIndex++) {
+
+                    String value = getCellValue(columnIndex);
+                    if(value == null){
+                        continue;
+                    }
+                    rowBuilder.append(" ").append(value);
+                }
+
+                if(rowBuilder.length() > 0){
+                    String rowText = rowBuilder.toString().trim();
+                    rowText = Change.spaceContinue(rowText).trim();
+                    sb.append(rowText);
+                }
+            }
+
+            if(sb.length() > 0){
+                sheetObj.addProperty("index", sheetIndex);
+                sheetObj.addProperty("name",sheet.getSheetName());
+                sheetObj.addProperty("text", sb.substring(1));
+
+                pageArray.add(sheetObj);
+            }
+        }
+
+        return pageArray;
+    }
+
 
     /**
      * cell value string 형태로 얻기

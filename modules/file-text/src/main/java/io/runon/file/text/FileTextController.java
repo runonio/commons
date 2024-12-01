@@ -48,7 +48,7 @@ public class FileTextController {
         }
     }
 
-    final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    public static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     @RequestMapping(value = "/text/file" , method = RequestMethod.POST, produces= MediaType.MULTIPART_FORM_DATA_VALUE)
     public String fileText(@RequestPart(value="file") MultipartFile file){

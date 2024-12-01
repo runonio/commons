@@ -1,15 +1,20 @@
 package io.runon.file.text;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.seomse.commons.utils.GsonUtils;
 import com.seomse.commons.utils.string.Strings;
 import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.rendering.ImageType;
 import org.apache.pdfbox.rendering.PDFRenderer;
 import org.apache.pdfbox.text.PDFTextStripper;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +37,8 @@ public class PdfText {
             try{document.close();}catch (Exception ignore){}
         }
     }
+
+
     public static String getPdfOcrSimple(String homeDir, File pdfFile, boolean isDelete) {
 
         PDDocument document = null;
@@ -49,6 +56,7 @@ public class PdfText {
             PDFRenderer pdfRenderer = new PDFRenderer(document);
 
             for(int i=0;i<pageCount;i++) {
+
                 String tempFileName = System.currentTimeMillis() + "_" + FileTextController.getTempNum();
                 String tempFullPath = tempDirPath + tempFileName + ".jpg";
                 try {
@@ -91,4 +99,46 @@ public class PdfText {
 
         return sb.toString();
     }
+
+
+    public static JsonArray getPageArray(File pdfFile, boolean isDelete){
+        PDDocument document = null;
+
+        JsonArray pageArray =new JsonArray();
+        try {
+
+            document = PDDocument.load(pdfFile);
+            PDFTextStripper stripper = new PDFTextStripper();
+
+            int pageCount = document.getNumberOfPages();//pdf의 페이지 수
+
+            for(int i=0;i<pageCount;i++) {
+
+                stripper.setStartPage(i);
+                stripper.setEndPage(i);
+                String text = stripper.getText(document).trim();
+                if(text.isEmpty()){
+                    continue;
+                }
+
+                JsonObject pageObj = new JsonObject();
+                pageObj.addProperty("index", i);
+                pageObj.addProperty("text", text);
+
+                pageArray.add(pageObj);
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }finally {
+            try{document.close();}catch (Exception ignore){}
+
+        }
+        try {
+            if(isDelete)
+                pdfFile.delete();
+        }catch (Exception ignore){}
+        return pageArray;
+    }
+
 }

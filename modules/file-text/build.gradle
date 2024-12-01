@@ -16,7 +16,8 @@ dependencies {
     implementation group: 'org.json', name: 'json', version: '20240303'
     implementation group: 'com.google.code.gson', name: 'gson', version: '2.10.1'
 
-    implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.13'
+    implementation 'ch.qos.logback:logback-classic:1.2.13'
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.36'
 
     implementation group: 'org.apache.pdfbox', name: 'pdfbox', version: '2.0.32'
 //    implementation 'com.seomse.commons:poi:0.1.2'
@@ -30,7 +31,6 @@ dependencies {
 
     //1.8 버전에서 돌아야 하기때문에 2.7 버전대를 활용함
     //noinspection VulnerableLibrariesLocal
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.7.17'
 
 
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.30'
