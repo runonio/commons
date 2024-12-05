@@ -1,10 +1,6 @@
 # charmap-service
 charmap 서비스 모듈
 
-## gradle
-implementation 'io.runon.commons:charmap-service:0.0.3'
-- etc
-  - https://mvnrepository.com/artifact/io.runon.commons/charmap-service/0.0.3
 
 ## 개발환경
 - open jdk 1.8

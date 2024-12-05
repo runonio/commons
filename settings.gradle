@@ -15,14 +15,14 @@ include 'install'
 findProject(':install').projectDir = new File(settingsDir,'modules/install')
 include 'outputs'
 findProject(':outputs').projectDir = new File(settingsDir,'modules/outputs')
+include 'file-text'
+findProject(':file-text').projectDir = new File(settingsDir,'modules/file-text')
 
+include 'collect'
+findProject(':collect').projectDir = new File(settingsDir,'modules/collect')
+include 'crawling'
+findProject(':crawling').projectDir = new File(settingsDir,'modules/crawling')
 
-include 'modules:file-text'
-findProject(':modules:file-text')?.name = 'file-text'
-include 'modules:collect'
-findProject(':modules:collect')?.name = 'collect'
-include 'modules:crawling'
-findProject(':modules:crawling')?.name = 'crawling'
-include 'modules:poi'
-findProject(':modules:poi')?.name = 'poi'
+include 'poi'
+findProject(':poi').projectDir = new File(settingsDir,'modules/poi')
 
