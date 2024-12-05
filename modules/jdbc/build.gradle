@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+}
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    implementation project(path: ':commons')
+
+    //json
+    implementation 'com.google.code.gson:gson:2.10.1'
+
+    //jdbc
+    //maria db
+    testImplementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '3.1.4'
+    //oracle
+    testImplementation group: 'com.oracle.database.jdbc', name: 'ojdbc8', version: '23.2.0.0'
+    //postgresql db
+    testImplementation group: 'org.postgresql', name: 'postgresql', version: '42.7.2'
+    //tibero는 jar를 구해서 사용해야함.
+    testImplementation fileTree (dir: 'dependencies', include: ['/**/*.jar'])
+
+    //connection pool
+    implementation 'com.zaxxer:HikariCP:4.0.3'
+
+
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+    //dev commons
+//    implementation project(path: ':commons')
+
+}

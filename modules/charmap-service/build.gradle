@@ -2,7 +2,6 @@ plugins {
     id 'java'
 }
 
-group = 'io.runon.commons'
 
 repositories {
     mavenCentral()
