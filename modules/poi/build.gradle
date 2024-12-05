@@ -1,16 +1,12 @@
 plugins {
     id 'java'
 }
-
-
 repositories {
     mavenCentral()
 }
 
 dependencies {
-
     implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '5.2.5'
-
 }
 
 test {
