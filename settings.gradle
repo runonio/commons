@@ -1,21 +1,28 @@
 rootProject.name = 'commons-jdk8'
-include 'modules:data-service'
-findProject(':modules:data-service')?.name = 'data-service'
-include 'modules:keyword'
-findProject(':modules:keyword')?.name = 'keyword'
-include 'modules:license'
-findProject(':modules:license')?.name = 'license'
-include 'modules:charmap-service'
-findProject(':modules:charmap-service')?.name = 'charmap-service'
-include 'modules:install'
-findProject(':modules:install')?.name = 'install'
-include 'modules:outputs'
-findProject(':modules:outputs')?.name = 'outputs'
-include 'modules:ocr'
-findProject(':modules:ocr')?.name = 'ocr'
+include 'data-service'
+findProject(':data-service').projectDir = new File(settingsDir,'modules/data-service')
+include 'keyword'
+findProject(':keyword').projectDir = new File(settingsDir,'modules/keyword')
+
+include 'commons'
+findProject(':commons').projectDir = new File(settingsDir,'modules/commons')
+include 'jdbc'
+findProject(':jdbc').projectDir = new File(settingsDir,'modules/jdbc')
+
+include 'charmap-service'
+findProject(':charmap-service').projectDir = new File(settingsDir,'modules/charmap-service')
+include 'install'
+findProject(':install').projectDir = new File(settingsDir,'modules/install')
+include 'outputs'
+findProject(':outputs').projectDir = new File(settingsDir,'modules/outputs')
+
+
 include 'modules:file-text'
 findProject(':modules:file-text')?.name = 'file-text'
+include 'modules:collect'
+findProject(':modules:collect')?.name = 'collect'
+include 'modules:crawling'
+findProject(':modules:crawling')?.name = 'crawling'
+include 'modules:poi'
+findProject(':modules:poi')?.name = 'poi'
 
-
-include ':seomse-commons'
-project(':seomse-commons').projectDir = new File(settingsDir,'../../seomse/seomse-commons/modules/commons')
