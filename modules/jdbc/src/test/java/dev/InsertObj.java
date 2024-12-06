@@ -1,9 +1,9 @@
 package dev;
 
-import com.seomse.jdbc.annotation.Column;
-import com.seomse.jdbc.annotation.FlagBoolean;
-import com.seomse.jdbc.annotation.PrimaryKey;
-import com.seomse.jdbc.annotation.Table;
+import io.runon.jdbc.annotation.Column;
+import io.runon.jdbc.annotation.FlagBoolean;
+import io.runon.jdbc.annotation.PrimaryKey;
+import io.runon.jdbc.annotation.Table;
 /**
  * 개발용 테스트 소스
  * @author macle

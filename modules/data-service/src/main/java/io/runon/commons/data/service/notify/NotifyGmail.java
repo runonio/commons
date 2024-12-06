@@ -1,7 +1,7 @@
 package io.runon.commons.data.service.notify;
 
-import com.seomse.commons.config.Config;
-import com.seomse.crypto.LoginCrypto;
+import io.runon.commons.config.Config;
+import io.runon.commons.crypto.LoginCrypto;
 import io.runon.commons.data.service.exception.MailSendFailException;
 import io.runon.commons.data.service.exception.SendMailInfoException;
 import io.runon.commons.data.service.redis.Redis;

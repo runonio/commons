@@ -1,6 +1,6 @@
 package io.runon.file.text;
 
-import com.seomse.commons.utils.ExceptionUtil;
+import io.runon.commons.utils.ExceptionUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedReader;

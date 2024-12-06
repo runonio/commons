@@ -1,7 +1,7 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
-import com.seomse.commons.config.Config;
+import io.runon.commons.config.Config;
 import io.runon.file.text.FileText;
 
 /**

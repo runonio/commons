@@ -2,7 +2,7 @@ package io.runon.commons.keyword;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.GsonBuilder;
-import com.seomse.jdbc.annotation.*;
+import io.runon.jdbc.annotation.*;
 import lombok.Data;
 
 /**

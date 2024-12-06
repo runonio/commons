@@ -1,8 +1,8 @@
 package io.runon.commons.charmap.service;
 
-import com.seomse.commons.config.Config;
-import com.seomse.commons.config.ConfigSet;
-import com.seomse.commons.utils.FileUtil;
+import io.runon.commons.config.Config;
+import io.runon.commons.config.ConfigSet;
+import io.runon.commons.utils.FileUtil;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 

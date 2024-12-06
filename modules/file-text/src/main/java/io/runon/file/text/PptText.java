@@ -2,8 +2,8 @@ package io.runon.file.text;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.seomse.commons.utils.FileUtil;
-import com.seomse.commons.utils.string.Strings;
+import io.runon.commons.utils.FileUtil;
+import io.runon.commons.utils.string.Strings;
 import org.apache.poi.hslf.extractor.PowerPointExtractor;
 import org.apache.poi.hslf.usermodel.*;
 import org.apache.poi.openxml4j.opc.OPCPackage;

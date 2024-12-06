@@ -1,6 +1,6 @@
 package io.runon.commons.outputs;
 
-import com.seomse.commons.utils.FileUtil;
+import io.runon.commons.utils.FileUtil;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,7 +1,7 @@
 package io.runon.commons.keyword;
 
-import com.seomse.jdbc.JdbcQuery;
-import com.seomse.jdbc.objects.JdbcObjects;
+import io.runon.jdbc.JdbcQuery;
+import io.runon.jdbc.objects.JdbcObjects;
 
 import java.security.MessageDigest;
 import java.util.List;

@@ -1,7 +1,7 @@
 package io.runon.commons.license;
 
-import com.seomse.commons.exception.SocketRuntimeException;
-import com.seomse.commons.utils.NetworkUtil;
+import io.runon.commons.exception.SocketRuntimeException;
+import io.runon.commons.utils.NetworkUtil;
 
 import java.io.BufferedReader;
 import java.io.IOException;

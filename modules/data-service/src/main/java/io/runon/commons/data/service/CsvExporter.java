@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SequenceWriter;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
-import com.seomse.commons.utils.ExceptionUtil;
+import io.runon.commons.utils.ExceptionUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;

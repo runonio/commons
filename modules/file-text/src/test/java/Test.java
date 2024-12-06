@@ -1,6 +1,6 @@
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.seomse.commons.http.HttpApis;
+import io.runon.commons.http.HttpApis;
 
 import java.io.File;
 import java.io.IOException;

@@ -2,9 +2,9 @@ package io.runon.file.text;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.seomse.commons.config.Config;
-import com.seomse.commons.utils.ExceptionUtil;
-import com.seomse.commons.utils.FileUtil;
+import io.runon.commons.config.Config;
+import io.runon.commons.utils.ExceptionUtil;
+import io.runon.commons.utils.FileUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.http.MediaType;

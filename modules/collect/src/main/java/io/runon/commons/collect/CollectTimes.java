@@ -1,6 +1,6 @@
 package io.runon.commons.collect;
 
-import com.seomse.crawling.AccessTimeManager;
+import io.runon.crawling.AccessTimeManager;
 
 import java.time.DayOfWeek;
 import java.time.Instant;

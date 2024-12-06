@@ -1,7 +1,7 @@
 package io.runon.file.text;
 
-import com.seomse.commons.config.Config;
-import com.seomse.commons.utils.ExceptionUtil;
+import io.runon.commons.config.Config;
+import io.runon.commons.utils.ExceptionUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;

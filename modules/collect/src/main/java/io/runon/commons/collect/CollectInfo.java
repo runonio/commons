@@ -1,11 +1,11 @@
 package io.runon.commons.collect;
 
-import com.seomse.jdbc.JdbcQuery;
-import com.seomse.jdbc.annotation.Column;
-import com.seomse.jdbc.annotation.DateTime;
-import com.seomse.jdbc.annotation.PrimaryKey;
-import com.seomse.jdbc.annotation.Table;
-import com.seomse.jdbc.objects.JdbcObjects;
+import io.runon.jdbc.JdbcQuery;
+import io.runon.jdbc.annotation.Column;
+import io.runon.jdbc.annotation.DateTime;
+import io.runon.jdbc.annotation.PrimaryKey;
+import io.runon.jdbc.annotation.Table;
+import io.runon.jdbc.objects.JdbcObjects;
 import lombok.Data;
 
 /**

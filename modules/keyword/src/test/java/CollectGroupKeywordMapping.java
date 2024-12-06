@@ -1,6 +1,6 @@
-import com.seomse.commons.config.Config;
-import com.seomse.jdbc.JdbcQuery;
-import com.seomse.jdbc.objects.JdbcObjects;
+import io.runon.commons.config.Config;
+import io.runon.jdbc.JdbcQuery;
+import io.runon.jdbc.objects.JdbcObjects;
 import io.runon.commons.keyword.CollectKeywordMap;
 
 import java.util.List;

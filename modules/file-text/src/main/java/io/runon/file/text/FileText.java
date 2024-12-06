@@ -3,9 +3,9 @@ package io.runon.file.text;
 import com.argo.hwp.HwpTextExtractor;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.seomse.commons.utils.FileUtil;
-import com.seomse.commons.utils.GsonUtils;
-import com.seomse.commons.utils.string.Strings;
+import io.runon.commons.utils.FileUtil;
+import io.runon.commons.utils.GsonUtils;
+import io.runon.commons.utils.string.Strings;
 
 import java.io.File;
 import java.io.StringWriter;

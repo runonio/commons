@@ -1,7 +1,7 @@
 package io.runon.commons.data.service;
 
-import com.seomse.commons.config.Config;
-import com.seomse.commons.exception.IORuntimeException;
+import io.runon.commons.config.Config;
+import io.runon.commons.exception.IORuntimeException;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;

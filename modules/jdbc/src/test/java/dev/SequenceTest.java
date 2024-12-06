@@ -1,7 +1,7 @@
 package dev;
 
-import com.seomse.jdbc.Database;
-import com.seomse.jdbc.connection.ApplicationConnectionPool;
+import io.runon.jdbc.Database;
+import io.runon.jdbc.connection.ApplicationConnectionPool;
 
 /**
  * 시퀀스 테스트

@@ -1,6 +1,6 @@
 package io.runon.commons.data.service.redis;
 
-import com.seomse.commons.utils.ExceptionUtil;
+import io.runon.commons.utils.ExceptionUtil;
 import io.runon.commons.data.service.DataServiceYml;
 import lombok.extern.slf4j.Slf4j;
 

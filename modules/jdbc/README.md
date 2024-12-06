@@ -30,15 +30,15 @@ back단 응용 프로 그램 에서의 사용이 편리 합니다.
 - data backup 을 지원 합니다 (row data 만 지원 스키마는 지원 하지 못함)
 - data 복원 (row data 만 지원 스키마는 지원 하지 못함)
 - 단 이때 backup 된 데이터는 db 종류에 상관 없이 복원 가능
-- scr > test > com.seomse.jdbc.example.admin.RowDataCopy 참조
-- scr > test > com.seomse.jdbc.example.admin.RowDataOut 참조
+- scr > test > admin.example.io.runon.jdbc.RowDataCopy 참조
+- scr > test > admin.example.io.runon.jdbc.RowDataOut 참조
 
 
 ### no (database naming object)
 - 아래와 같은 방식에서의 select insert update 지원
 - 변수명은 table column 명과 같음
 - 아래 코드를 자동으로 생성해주는 유틸성 클래스 제공
-- scr > test > com.seomse.jdbc.example.naming.NamingObjectMake 참조
+- scr > test > naming.example.io.runon.jdbc.NamingObjectMake 참조
 
 ```java
 @Table(name="T_STOCK_ITEM")
@@ -70,7 +70,7 @@ public class ItemNo {
 
 - 아래와 같은 방식에서의 select insert update 지원
 - 테이블명만 입력하면 @PrimaryKey(seq = 1) 와 같은 정보를 자동 으로 생성 하는 방식 지원
-- scr > test > com.seomse.jdbc.example.objects.ObjectMake 참조
+- scr > test > objects.example.io.runon.jdbc.ObjectMake 참조
 ```java
 @Table(name="B_STOCK_ITEM")
 public class StockItem {
@@ -88,7 +88,7 @@ public class StockItem {
 
 ### query
 - query(sql)를 활용한 다양한 유틸성 클래스 지원 
-- com.seomse.jdbc.JdbcQuery
+- io.runon.jdbc.JdbcQuery
 - public static List<Map<String, String>> getMapStringList(String sql);
 - public static String getResultOne(String sql)
 - 위와 같은 유틸성 method 지원

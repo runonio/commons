@@ -2,10 +2,10 @@ package io.runon.commons.charmap.service;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.seomse.commons.utils.ExceptionUtil;
-import com.seomse.crypto.CharMap;
-import com.seomse.crypto.CharMapManager;
-import com.seomse.crypto.StringCrypto;
+import io.runon.commons.utils.ExceptionUtil;
+import io.runon.commons.crypto.CharMap;
+import io.runon.commons.crypto.CharMapManager;
+import io.runon.commons.crypto.StringCrypto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;

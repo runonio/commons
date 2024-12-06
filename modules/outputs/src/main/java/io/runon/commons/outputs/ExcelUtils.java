@@ -1,6 +1,6 @@
 package io.runon.commons.outputs;
 
-import com.seomse.commons.exception.IORuntimeException;
+import io.runon.commons.exception.IORuntimeException;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;

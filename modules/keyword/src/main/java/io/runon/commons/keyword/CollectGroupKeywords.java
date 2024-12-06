@@ -1,6 +1,6 @@
 package io.runon.commons.keyword;
 
-import com.seomse.jdbc.objects.JdbcObjects;
+import io.runon.jdbc.objects.JdbcObjects;
 
 /**
  * @author macle

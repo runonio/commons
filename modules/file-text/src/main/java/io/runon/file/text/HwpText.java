@@ -1,7 +1,7 @@
 package io.runon.file.text;
 
 import com.argo.hwp.HwpTextExtractor;
-import com.seomse.commons.config.Config;
+import io.runon.commons.config.Config;
 
 import java.io.File;
 import java.io.IOException;

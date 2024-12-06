@@ -1,4 +1,4 @@
-import com.seomse.jdbc.objects.JdbcObjects;
+import io.runon.jdbc.objects.JdbcObjects;
 import io.runon.commons.keyword.CollectKeywordMap;
 import io.runon.commons.keyword.Keywords;
 

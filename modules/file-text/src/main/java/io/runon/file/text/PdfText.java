@@ -2,19 +2,16 @@ package io.runon.file.text;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.seomse.commons.utils.GsonUtils;
-import com.seomse.commons.utils.string.Strings;
+import io.runon.commons.utils.GsonUtils;
+import io.runon.commons.utils.string.Strings;
 import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.rendering.ImageType;
 import org.apache.pdfbox.rendering.PDFRenderer;
 import org.apache.pdfbox.text.PDFTextStripper;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 

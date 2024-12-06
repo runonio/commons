@@ -1,6 +1,6 @@
 package io.runon.commons.data.service.health;
 
-import com.seomse.commons.config.Config;
+import io.runon.commons.config.Config;
 
 /**
  * @author macle
