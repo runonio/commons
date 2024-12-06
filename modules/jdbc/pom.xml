@@ -9,9 +9,9 @@
     <version>1.2.1</version>
     <packaging>jar</packaging>
 
-    <name>seomse-jdbc</name>
+    <name>jdbc</name>
     <description>jdbc</description>
-    <url>https://github.com/seomse/seomse-commons</url>
+    <url>https://github.com/runonio/commons-jdk8</url>
 
     <licenses>
         <license>
@@ -37,7 +37,7 @@
     </developers>
 
     <scm>
-        <url>https://github.com/seomse/seomse-commons</url>
+        <url>https://github.com/runonio/commons-jdk8</url>
     </scm>
 
     <distributionManagement>

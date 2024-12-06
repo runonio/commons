@@ -10,7 +10,7 @@
 
     <name>data-service</name>
     <description>data-service</description>
-    <url>https://github.com/runonio/commons</url>
+    <url>https://github.com/runonio/commons-jdk8</url>
 
     <licenses>
         <license>
@@ -42,7 +42,7 @@
     </developers>
 
     <scm>
-        <url>https://github.com/runonio/commons</url>
+        <url>https://github.com/runonio/commons-jdk8</url>
     </scm>
 
     <distributionManagement>

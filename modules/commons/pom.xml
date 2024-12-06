@@ -11,7 +11,7 @@
 
     <name>commons</name>
     <description>config, utils, service</description>
-    <url>https://github.com/seomse/seomse-commons</url>
+    <url>https://github.com/runonio/commons-jdk8</url>
 
     <licenses>
         <license>
@@ -37,7 +37,7 @@
     </developers>
 
     <scm>
-        <url>https://github.com/seomse/seomse-commons</url>
+        <url>https://github.com/runonio/commons-jdk8</url>
     </scm>
 
     <distributionManagement>

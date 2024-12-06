@@ -7,9 +7,9 @@
     <version>0.0.3</version>
     <packaging>jar</packaging>
 
-    <name>keyword</name>
-    <description>keyword</description>
-    <url>https://github.com/runonio/commons</url>
+    <name>charmap-service</name>
+    <description>charmap-service</description>
+    <url>https://github.com/runonio/commons-jdk8</url>
 
     <licenses>
         <license>
@@ -35,7 +35,7 @@
     </developers>
 
     <scm>
-        <url>https://github.com/runonio/commons</url>
+        <url>https://github.com/runonio/commons-jdk8</url>
     </scm>
 
     <distributionManagement>

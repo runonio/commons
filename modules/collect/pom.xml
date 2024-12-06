@@ -8,9 +8,9 @@
     <packaging>jar</packaging>
 
 
-    <name>commons-collect</name>
-    <description>commons-collect</description>
-    <url>https://github.com/runonio/commons</url>
+    <name>collect</name>
+    <description>collect</description>
+    <url>https://github.com/runonio/commons-jdk8</url>
 
     <licenses>
         <license>
@@ -30,7 +30,7 @@
     </developers>
 
     <scm>
-        <url>https://github.com/runonio/commons</url>
+        <url>https://github.com/runonio/commons-jdk8</url>
     </scm>
 
     <distributionManagement>

@@ -9,9 +9,9 @@
     <version>0.9.7</version>
     <packaging>jar</packaging>
 
-    <name>seomse-crawling</name>
+    <name>crawling</name>
     <description>crawling</description>
-    <url>https://github.com/seomse/seomse-commons</url>
+    <url>https://github.com/runonio/commons-jdk8</url>
 
     <licenses>
         <license>
@@ -37,7 +37,7 @@
     </developers>
 
     <scm>
-        <url>https://github.com/seomse/seomse-commons</url>
+        <url>https://github.com/runonio/commons-jdk8</url>
     </scm>
 
     <distributionManagement>
