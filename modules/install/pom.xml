@@ -10,7 +10,7 @@
 
     <name>commons-install</name>
     <description>commons-install</description>
-    <url>https://github.com/runonio/commons-jdk8</url>
+    <url>https://github.com/runonio/commons</url>
 
     <licenses>
         <license>
@@ -36,7 +36,7 @@
     </developers>
 
     <scm>
-        <url>https://github.com/runonio/commons-jdk8</url>
+        <url>https://github.com/runonio/commons</url>
     </scm>
 
     <distributionManagement>

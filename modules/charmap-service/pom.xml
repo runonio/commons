@@ -9,7 +9,7 @@
 
     <name>charmap-service</name>
     <description>charmap-service</description>
-    <url>https://github.com/runonio/commons-jdk8</url>
+    <url>https://github.com/runonio/commons</url>
 
     <licenses>
         <license>
@@ -35,7 +35,7 @@
     </developers>
 
     <scm>
-        <url>https://github.com/runonio/commons-jdk8</url>
+        <url>https://github.com/runonio/commons</url>
     </scm>
 
     <distributionManagement>

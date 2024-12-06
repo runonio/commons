@@ -1,24 +1,24 @@
-rootProject.name = 'commons-jdk8'
+rootProject.name = 'commons'
 include 'commons'
-findProject(':commons').projectDir = new File(settingsDir,'modules/commons')
+project(':commons').projectDir = new File(settingsDir,'modules/commons')
 include 'jdbc'
-findProject(':jdbc').projectDir = new File(settingsDir,'modules/jdbc')
+project(':jdbc').projectDir = new File(settingsDir,'modules/jdbc')
 include 'crawling'
-findProject(':crawling').projectDir = new File(settingsDir,'modules/crawling')
+project(':crawling').projectDir = new File(settingsDir,'modules/crawling')
 include 'data-service'
-findProject(':data-service').projectDir = new File(settingsDir,'modules/data-service')
+project(':data-service').projectDir = new File(settingsDir,'modules/data-service')
 include 'keyword'
-findProject(':keyword').projectDir = new File(settingsDir,'modules/keyword')
+project(':keyword').projectDir = new File(settingsDir,'modules/keyword')
 include 'charmap-service'
-findProject(':charmap-service').projectDir = new File(settingsDir,'modules/charmap-service')
+project(':charmap-service').projectDir = new File(settingsDir,'modules/charmap-service')
 include 'install'
-findProject(':install').projectDir = new File(settingsDir,'modules/install')
+project(':install').projectDir = new File(settingsDir,'modules/install')
 include 'outputs'
-findProject(':outputs').projectDir = new File(settingsDir,'modules/outputs')
+project(':outputs').projectDir = new File(settingsDir,'modules/outputs')
 include 'file-text'
-findProject(':file-text').projectDir = new File(settingsDir,'modules/file-text')
+project(':file-text').projectDir = new File(settingsDir,'modules/file-text')
 include 'collect'
-findProject(':collect').projectDir = new File(settingsDir,'modules/collect')
+project(':collect').projectDir = new File(settingsDir,'modules/collect')
 include 'poi'
-findProject(':poi').projectDir = new File(settingsDir,'modules/poi')
+project(':poi').projectDir = new File(settingsDir,'modules/poi')
 
