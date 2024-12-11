@@ -132,6 +132,8 @@ public class Times {
     public static final long DAY_50= DAY_1 * 50L;
     public static final long DAY_100= DAY_1 * 100L;
 
+
+
     //주
     public static final long WEEK_1= DAY_7;
     public static final long WEEK_2= WEEK_1 * 2L;
@@ -150,6 +152,8 @@ public class Times {
     public static final long WEEK_21= WEEK_1 * 21L;
     public static final long WEEK_52= WEEK_1 * 52L;
 
+
+    public static final long YEAR_1 = DAY_1 * 365L;
 
     /**
      * 년원일시분
