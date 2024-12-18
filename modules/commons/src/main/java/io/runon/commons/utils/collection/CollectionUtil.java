@@ -46,4 +46,15 @@ public class CollectionUtil {
 
 		return obj.equals(obj2);
 	}
+
+
+	public static long [] getLongs(Collection<Long> longCollection){
+		long [] values = new long[longCollection.size()];
+		int index = 0;
+
+		for(Long l : longCollection){
+			values[index++] = l;
+		}
+		return values;
+	}
 }
