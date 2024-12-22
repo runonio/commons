@@ -13,8 +13,6 @@ xls(excel), word(doc), hwp, ppt, pdf를 지원합니다
 - [github.com/seomse](https://github.com/seomse)
 - [www.seomse.com](https://www.seomse.com/)
 
-### cafe
-- [cafe.naver.com/radvisor](https://cafe.naver.com/radvisor)
 
 
 ## main developer
