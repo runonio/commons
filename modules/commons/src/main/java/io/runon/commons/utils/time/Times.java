@@ -220,6 +220,18 @@ public class Times {
         return Integer.toString(zonedDateTime.getYear());
     }
 
+    /**
+     * 년
+     * @param time unix time
+     * @param zoneId example ZoneId.of("Asia/Seoul")
+     * @return yyyy
+     */
+    public static int yearInt(long time, ZoneId zoneId){
+        Instant intent = Instant.ofEpochMilli(time);
+        ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(intent, zoneId);
+        return zonedDateTime.getYear();
+    }
+
 
     public static long getTime(String format, String timeText, ZoneId zoneId){
         SimpleDateFormat dateFormat = new SimpleDateFormat(format);
