@@ -7,20 +7,20 @@ import lombok.extern.slf4j.Slf4j;
  * @author macle
  */
 @Slf4j
-public class ParallelArrayWorker<T> implements Runnable{
+public class ParallelWorker<T> implements Runnable{
 
-    private final ParallelArrayJob<T> job;
+    private final ParallelJob<T> job;
 
     private boolean isStop = false;
 
-    ParallelArrayWorker(ParallelArrayJob<T> job){
+    ParallelWorker(ParallelJob<T> job){
         this.job = job;
     }
 
     @Override
     public void run() {
 
-        ParallelArrayWork<T> work = job.work;
+        ParallelWork<T> work = job.work;
 
         try{
 
@@ -29,7 +29,7 @@ public class ParallelArrayWorker<T> implements Runnable{
                     break;
                 }
 
-                T t = job.get();
+                T t = job.next();
                 if(t == null){
                     break;
                 }

@@ -2,7 +2,7 @@ package io.runon.commons.parallel;
 /**
  * @author macle
  */
-public interface ParallelArrayWork <T>{
+public interface ParallelNext<T>  {
 
-    void work(T t);
+    T next();
 }
