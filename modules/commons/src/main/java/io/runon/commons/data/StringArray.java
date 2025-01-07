@@ -5,6 +5,8 @@ package io.runon.commons.data;
  */
 public class StringArray extends DataArray<String>{
 
+    public static final String [] EMPTY_ARRAY = new String[0];
+
 
     public StringArray(String ...array){
 

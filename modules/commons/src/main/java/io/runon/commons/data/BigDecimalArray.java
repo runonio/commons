@@ -16,13 +16,16 @@ public class BigDecimalArray extends DataArray<BigDecimal> {
 
 
 
-    @Override
-    public String toString(){
+    public JsonArray toJson(){
         JsonArray jsonArray = new JsonArray();
         for(BigDecimal num : array){
             jsonArray.add(num.toPlainString());
         }
+        return jsonArray;
+    }
 
-        return GsonUtils.GSON.toJson(jsonArray);
+    @Override
+    public String toString(){
+        return GsonUtils.GSON.toJson(toJson());
     }
 }
