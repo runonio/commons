@@ -48,6 +48,11 @@ public class Strings {
         return true;
     }
 
+
+    public static boolean equals(String a, String b){
+        return Check.equals(a,b);
+    }
+
     public static String [] addString(String [] array , String add){
         String [] newStrings = new String[array.length+1];
         System.arraycopy(array, 0, newStrings, 0, array.length);

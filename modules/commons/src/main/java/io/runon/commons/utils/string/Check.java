@@ -256,7 +256,7 @@ public class Check {
 	 * @param b String
 	 * @return boolean equals check
 	 */
-	public static boolean isEquals(String a, String b){
+	public static boolean equals(String a, String b){
 		if(a == null && b == null){
 			return true;
 		}

@@ -60,6 +60,14 @@ public class CollectTimes {
     }
 
 
+    public static void sleepRandomTime(long minTime, long time){
+        //랜덤 클로링 봇이라는걸 피하기위한 시간설정
+        long randomSleepTime = ThreadLocalRandom.current().nextLong(time) + minTime;
+        if(randomSleepTime > 0){
+            try{Thread.sleep(randomSleepTime);}catch(Exception ignore){}
+        }
+    }
+
     public static void sleepRandomTime(long time){
         //랜덤 클로링 봇이라는걸 피하기위한 시간설정
         long randomSleepTime = ThreadLocalRandom.current().nextLong(time);
