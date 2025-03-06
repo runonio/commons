@@ -286,5 +286,24 @@ public class Times {
 
     }
 
+    public static long getBeginTime(int beginYmd, ZoneId zoneId){
+        return YmdUtil.getTime(beginYmd, zoneId);
+    }
+
+    public static long getBeginTime(String beginYmd, ZoneId zoneId){
+        return YmdUtil.getTime(beginYmd, zoneId);
+    }
+
+
+    public static long getEndTime(String endYmd, ZoneId zoneId){
+        return  YmdUtil.getTime(endYmd, zoneId) + Times.DAY_1 ;
+    }
+
+    public static long getEndTime(int endYmd, ZoneId zoneId){
+
+        return  YmdUtil.getTime(endYmd, zoneId) + Times.DAY_1 ;
+    }
+
+
 
 }

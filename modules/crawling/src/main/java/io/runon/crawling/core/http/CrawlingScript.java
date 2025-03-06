@@ -111,6 +111,10 @@ public class CrawlingScript {
 		return getValue(start, end, 1);
 	}
 
+	public String getValueNext(String end){
+		return getValue(null, end, 1);
+	}
+
 	/**
 	 * 사이 값 얻기
 	 * @param start String start with
@@ -122,12 +126,19 @@ public class CrawlingScript {
 
 		String script = scripts[index];
 
-		int startIndex = script.indexOf(start);
-		if(startIndex == -1){
-			return null;
+		int startIndex;
+
+		if(start != null) {
+
+			startIndex = script.indexOf(start);
+			if (startIndex == -1) {
+				return null;
+			}
+			startIndex += start.length();
+		}else{
+			startIndex = 0;
 		}
 
-		startIndex += start.length();
 		int endIndex =  script.indexOf(end, startIndex);
 		if(endIndex == -1){
 			return null;
