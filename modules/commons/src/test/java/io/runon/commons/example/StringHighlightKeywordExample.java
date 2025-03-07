@@ -1,22 +1,8 @@
-/*
- * Copyright (C) 2020 Seomse Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+
 
 package io.runon.commons.example;
 
-import io.runon.commons.data.BeginEndImpl;
+import io.runon.commons.data.BeginEndData;
 import io.runon.commons.utils.string.highlight.StringHighlight;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -42,11 +28,11 @@ public class StringHighlightKeywordExample {
 
 
         JSONArray split_begin_ends =   obj.getJSONArray("split_begin_ends");
-        BeginEndImpl[] splitBeginEnds = new BeginEndImpl[split_begin_ends.length()];
+        BeginEndData[] splitBeginEnds = new BeginEndData[split_begin_ends.length()];
 
         for (int i = 0; i <splitBeginEnds.length ; i++) {
             JSONObject split_begin_end = split_begin_ends.getJSONObject(i);
-            splitBeginEnds[i] = new BeginEndImpl(split_begin_end.getInt("begin"), split_begin_end.getInt("end"));
+            splitBeginEnds[i] = new BeginEndData(split_begin_end.getInt("begin"), split_begin_end.getInt("end"));
         }
 
         String [] tokens = tokensValue.split(" ");
