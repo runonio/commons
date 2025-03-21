@@ -52,7 +52,7 @@ public class SynchronizerManager {
 
             String syncPackagesValue = Config.getConfig("sync.package");
             if(syncPackagesValue == null){
-                syncPackagesValue = Config.getConfig("default.package", "com.seomse,io.runon");
+                syncPackagesValue = Config.getConfig("default.package", "io.runon");
             }
 
             String [] syncPackages = syncPackagesValue.split(",");

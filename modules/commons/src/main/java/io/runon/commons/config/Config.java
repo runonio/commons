@@ -243,7 +243,7 @@ public class Config {
 	 * @param isErrorLog boolean isErrorLog
 	 */
 	@SuppressWarnings("SameParameterValue")
-	private static void setLogbackConfigPath(String configPath, boolean isErrorLog){
+	public static void setLogbackConfigPath(String configPath, boolean isErrorLog){
 		File file = new File(configPath);
 		if(!file.isFile()){
 			return ;
