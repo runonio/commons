@@ -1,6 +1,6 @@
-package io.runon.commons.utils;
+package io.runon.commons.utils.collection;
 
-import java.util.*;
+import java.util.HashMap;
 
 /**
  * Hash 관련 유틸

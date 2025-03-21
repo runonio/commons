@@ -110,4 +110,73 @@ public class Strings {
         return sb.toString();
     }
 
+
+
+    private final static String DEFAULT_SORT_KEY_SPLIT = ",";
+
+    /**
+     * 배열을 정렬하여 키생성
+     * @param array
+     * @return
+     */
+    public static String makeSortKey(String [] array){
+        return makeSortKey(array, DEFAULT_SORT_KEY_SPLIT);
+
+    }
+
+    /**
+     * 배열을 정렬하여 키생성
+     * @param array
+     * @param split
+     * @return
+     */
+    public static String makeSortKey(String [] array, String split){
+        if(array == null || array.length ==0){
+            throw new RuntimeException("array null");
+        }
+        if(array.length==1){
+            return array[0];
+        }
+        Arrays.sort(array);
+        StringBuilder sb = new StringBuilder();
+        sb.append(array[0]);
+        for(int i=1 ; i < array.length ; i++){
+            sb.append(split+array[i]);
+        }
+        return sb.toString();
+
+    }
+
+
+    public static String [] toSortArray(String arrayValue){
+        return arrayValue.split(DEFAULT_SORT_KEY_SPLIT);
+    }
+
+
+
+    public static boolean contains(String [] array, String [] inArray){
+
+        if(inArray.length > array.length){
+            return false;
+        }
+
+        for(String in: inArray){
+            if(!contains(array, in)){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static boolean contains(String [] array, String in){
+        for(String str : array){
+            if(str.equals(in)){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }
