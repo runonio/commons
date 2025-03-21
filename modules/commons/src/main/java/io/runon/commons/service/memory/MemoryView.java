@@ -4,7 +4,7 @@
 package io.runon.commons.service.memory;
 
 
-public class MemoryUse {
+public class MemoryView {
 	/**
 	 * 메가바이트
 	 */
@@ -56,10 +56,31 @@ public class MemoryUse {
 		 return runtime.maxMemory() ;
 	}
 
+	public static String getMemoryInfoToString(){
+
+		StringBuilder sb = new StringBuilder();
+
+		int mb = 1024*1024;
+
+		//Getting the runtime reference from system
+		Runtime runtime = Runtime.getRuntime();
+
+		sb.append("##### Heap utilization statistics [MB] #####");
+		//Print used memory
+		sb.append("\nUsed Memory:").append(((double) runtime.totalMemory() - (double) runtime.freeMemory()) / mb);
+
+		sb.append("\nFree Memory:").append((double) runtime.freeMemory() / (double) mb);
+		sb.append("\nTotal Memory:").append((double) runtime.totalMemory() / (double) mb);
+		sb.append("\nMax Memory:").append((double) runtime.maxMemory() / (double) mb);
+
+		return  sb.toString();
+	}
+
+
 	/**
 	 * 생성자
 	 */
-	private MemoryUse(){	
+	private MemoryView(){
 	}
 	
 }
