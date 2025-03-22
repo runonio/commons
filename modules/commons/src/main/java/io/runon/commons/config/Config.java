@@ -491,8 +491,15 @@ public class Config {
 		for(ConfigInfo configInfo : changeInfos){
 			log.trace("Config update key: " + configInfo.key + " value: " + configInfo.value);
 		}
+
+
+
+
 		ConfigObserver [] configObserverArray ;
 		synchronized (observerLock) {
+			if(observerList.isEmpty()){
+				return;
+			}
 			configObserverArray = observerList.toArray(new ConfigObserver[0]);
 		}
 

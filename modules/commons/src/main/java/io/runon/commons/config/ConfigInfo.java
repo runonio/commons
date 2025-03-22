@@ -73,4 +73,9 @@ public class ConfigInfo {
 	public boolean isDelete() {
 		return isDelete;
 	}
+
+
+	public void setDelete(boolean delete) {
+		isDelete = delete;
+	}
 }
