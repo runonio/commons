@@ -1,6 +1,6 @@
 
 
-package io.runon.commons.sync;
+package io.runon.commons.service;
 
 import io.runon.commons.config.Config;
 import io.runon.commons.utils.ExceptionUtil;
@@ -50,7 +50,7 @@ public class SynchronizerManager {
 
         try{
 
-            String syncPackagesValue = Config.getConfig("sync.package");
+            String syncPackagesValue = Config.getConfig("synchronizer.package");
             if(syncPackagesValue == null){
                 syncPackagesValue = Config.getConfig("default.package", "io.runon");
             }

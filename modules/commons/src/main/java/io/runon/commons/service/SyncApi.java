@@ -1,6 +1,6 @@
 
 
-package io.runon.commons.sync;
+package io.runon.commons.service;
 
 import io.runon.commons.api.ApiMessage;
 import io.runon.commons.api.Messages;

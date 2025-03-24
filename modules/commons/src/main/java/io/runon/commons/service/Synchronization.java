@@ -1,5 +1,5 @@
 
-package io.runon.commons.sync;
+package io.runon.commons.service;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

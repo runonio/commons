@@ -1,6 +1,6 @@
 
 
-package io.runon.commons.sync;
+package io.runon.commons.service;
 /**
  * 동기화
  * 이 클래스를 implements 하여 구현 하고 
