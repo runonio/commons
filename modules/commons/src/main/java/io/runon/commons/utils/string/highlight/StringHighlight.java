@@ -1,22 +1,8 @@
-/*
- * Copyright (C) 2020 Seomse Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 
 package io.runon.commons.utils.string.highlight;
 
 import io.runon.commons.data.BeginEnd;
+import io.runon.commons.data.BeginEndText;
 import io.runon.commons.exception.OutOfRangeException;
 
 import java.util.Arrays;
@@ -28,20 +14,8 @@ import java.util.Comparator;
  */
 public class StringHighlight {
 
-    /**
-     * 토큰 중복위치에 따른 처리가 필요함
-     * Highlight 문자열 생성
-     * @param text String
-     * @param tokens String []
-     * @param tokenIndexes int []
-     * @param splitBeginEnds BeginEnd []
-     * @param keywords String []
-     * @param pre String
-     * @param post String
-     * @param length int
-     * @return String
-     */
-    public static String make(String text, String [] tokens, int [] tokenIndexes, BeginEnd[] splitBeginEnds, String [] keywords, String pre, String post, int length ){
+
+    public static String make(String text, BeginEndText[] tokens,  BeginEnd[] splitBeginEnds, String [] keywords, String pre, String post, int length ){
 
         //글자 길이수 역순으로 정렬
         Arrays.sort(keywords, (a, b)->Integer.compare(b.length(), a.length()));
@@ -51,20 +25,20 @@ public class StringHighlight {
         HighlightSearch check =  null;
         outer:
         for (int i = 0; i <tokens.length ; i++) {
-            String token = tokens[i];
+            BeginEndText token = tokens[i];
             for (int jj = 0; jj <keywords.length ; jj++) {
                 String keyword = keywords[jj];
 
                 if(
                         token.equals(keyword)
-                                || ( keyword.length() > 1 && token.startsWith(keyword) )
-                                || ( keyword.length() > 1 && token.endsWith(keyword) )
+                                || ( keyword.length() > 1 && token.getText().startsWith(keyword) )
+                                || ( keyword.length() > 1 && token.getText().endsWith(keyword) )
                 ){
 
                     HighlightKeyword highlightKeyword = new HighlightKeyword();
                     highlightKeyword.index = jj;
-                    highlightKeyword.begin = tokenIndexes[i];
-                    highlightKeyword.end = tokenIndexes[i]+keyword.length();
+                    highlightKeyword.begin = token.getBegin();
+                    highlightKeyword.end = token.getEnd();
 
 
 
@@ -180,14 +154,17 @@ public class StringHighlight {
         for(HighlightKeyword highlightKeyword : highlightKeywords){
             highlightKeyword.begin -= highlightBegin;
             highlightKeyword.end -= highlightBegin;
+
+
+
         }
 
 
 
         if(highlightEnd == text.length()){
-            return make (text.substring(highlightBegin, highlightEnd), pre, post, highlightKeywords, false);
+            return make (text.substring(highlightBegin, highlightEnd), pre, post, highlightKeywords, true);
         }else{
-            return make (text.substring(highlightBegin, highlightEnd), pre, post, highlightKeywords, false) + "...";
+            return make (text.substring(highlightBegin, highlightEnd), pre, post, highlightKeywords, true) + "...";
         }
     }
 
@@ -223,6 +200,7 @@ public class StringHighlight {
         int lastIndex = 0;
 
         for(BeginEnd beginEnd : beginEnds){
+
             sb.append(text, lastIndex, beginEnd.getBegin());
             sb.append(pre).append(text, beginEnd.getBegin(), beginEnd.getEnd()).append(post);
             lastIndex = beginEnd.getEnd();

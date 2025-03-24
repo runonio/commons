@@ -2,15 +2,18 @@
 
 package io.runon.commons.data;
 
+import lombok.Data;
+
 /**
  * begin end
  * 구현체
  * @author macle
  */
+@Data
 public class BeginEndData implements BeginEnd {
 
-    private final int begin;
-    private final int end;
+    private int begin;
+    private int end;
 
     /**
      * 생성자
@@ -22,13 +25,7 @@ public class BeginEndData implements BeginEnd {
         this.end = end;
     }
 
-    @Override
-    public int getBegin() {
-        return begin;
-    }
+    public BeginEndData(){
 
-    @Override
-    public int getEnd() {
-        return end;
     }
 }
