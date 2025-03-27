@@ -3,9 +3,6 @@
 
 <properties version="1.0">
 	
-	<!-- 
-	  사용할때는 seomse_config.xml 로 이름변경 후 사용
- 	-->
 
 
 	<!-- DB 관련-->

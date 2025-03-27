@@ -135,7 +135,20 @@ public class Check {
 		}
 		return true;
 	}
-	
+
+
+	public static boolean isEngIn(String str){
+		str = str.toLowerCase();
+		int length = str.length();
+		for (int i=0; i < length ; i++){
+			char chk = str.charAt(i);
+			if(isEng(chk)){
+				return true;
+			}
+		}
+		return false;
+	}
+
 	/**
 	 * 케릭터가 영어로 이루어져 있는지 체크한다.
 	 * @param ch char char

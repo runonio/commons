@@ -26,7 +26,7 @@ public class FileSearchExample {
 
         fileSearch.addOutText("@Table");
         fileSearch.addOutText("package io.runon.collect.content.finesfss.ha.dbsync;");
-        List<File> fileList = fileSearch.search("C:\\project\\intellij\\runon\\content-collector\\modules\\finesfss\\src\\main", "com.seomse.jdbc");
+        List<File> fileList = fileSearch.search("C:\\project\\intellij\\runon\\content-collector\\modules\\finesfss\\src\\main", "io.runon.jdbc");
         for(File file : fileList){
             System.out.println(file.getName());
         }

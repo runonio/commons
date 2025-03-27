@@ -326,9 +326,15 @@ public class FileUtil {
 		return list;
 	}
 
+
+	public static String [] getLines(String filePath){
+		return getLines(new File(filePath));
+	}
+
 	public static String [] getLines(File file){
 		return getLineList(file, StandardCharsets.UTF_8).toArray(new String[0]);
 	}
+
 
 	public static List<String> getLineList(File file){
 		return getLineList(file, StandardCharsets.UTF_8);
@@ -1348,6 +1354,24 @@ public class FileUtil {
 				}
 			}
 		}
+	}
+
+
+	public static boolean outLines(Object [] array, String outPath){
+
+		if(array == null || array.length == 0){
+			return false;
+		}
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(array[0].toString());
+
+		for (int i = 1; i < array.length; i++) {
+			sb.append("\n").append(array[i].toString());
+		}
+		fileOutput(sb.toString(), outPath, false);
+
+		return true;
 	}
 
 	public static void main(String[] args) {
