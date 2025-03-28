@@ -1,8 +1,6 @@
 package io.runon.commons.utils;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.google.gson.*;
 import io.runon.commons.exception.ReflectiveOperationRuntimeException;
 import io.runon.commons.utils.packages.classes.field.FieldUtil;
 
@@ -19,6 +17,10 @@ import java.util.Set;
 public class GsonUtils {
 
     public static final Gson GSON = new Gson();
+    public static final Gson LOWER_CASE_WITH_UNDERSCORES_PRETTY =  new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).setPrettyPrinting().create();
+    public static final Gson LOWER_CASE_WITH_UNDERSCORES =  new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
+    public static final Gson PRETTY =  new GsonBuilder().setPrettyPrinting().create();
+
 
     public static String toJson(JsonObject jsonObject){
         return GSON.toJson(jsonObject);
