@@ -17,9 +17,7 @@
 package io.runon.commons.utils.string.highlight;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * 하이라이크 검색 정보
@@ -28,7 +26,55 @@ import java.util.Set;
 class HighlightSearch {
 
     List<HighlightKeyword> list = new ArrayList<>();
-    Set<Integer> keywordIndexSet = new HashSet<>();
+//    Set<Integer> keywordIndexSet = new HashSet<>();
+
+    public void add(HighlightKeyword newKeyword) {
+
+        int begin = newKeyword.getBegin();
+        int end = newKeyword.getEnd();
+
+        int endIndex = end-1;
+        int length = end - begin;
+
+        for (int i = 0; i < list.size(); i++) {
+            HighlightKeyword highlightKeyword= list.get(i);
+
+            if(highlightKeyword.getBegin() == begin && highlightKeyword.getEnd() == end){
+                return;
+            }
+
+            if(highlightKeyword.getBegin() <= begin && highlightKeyword.getEnd() >= end){
+                return ;
+            }
+
+            int keywordEndIndex = highlightKeyword.getEnd()-1;
+
+            //위치가 겹친경우
+            if(
+
+                    (highlightKeyword.getBegin() <= begin && keywordEndIndex >= begin)
+                            ||(highlightKeyword.getBegin() <= endIndex && keywordEndIndex >= endIndex)
+                            ||(begin <= highlightKeyword.getBegin() && endIndex >= highlightKeyword.getBegin())
+                            ||(begin <= keywordEndIndex && endIndex >=keywordEndIndex)
+            ){
+                highlightKeyword.begin = Math.min(highlightKeyword.getBegin(), begin);
+                highlightKeyword.end = Math.max(highlightKeyword.getEnd(), end);
+                return;
+            }
+        }
+
+        list.add(newKeyword);
+    }
+
+
+
+    public void merge(){
+        for(HighlightKeyword highlightKeyword: list){
+            for (HighlightKeyword highlightKeyword2: list){
+            }
+
+        }
+    }
 
     /**
      * 중복체크

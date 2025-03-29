@@ -17,4 +17,6 @@ public interface BeginEnd {
      * @return end point (index +1 )
      */
     int getEnd();
+
+
 }

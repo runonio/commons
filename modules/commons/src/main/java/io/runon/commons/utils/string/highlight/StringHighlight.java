@@ -20,75 +20,57 @@ public class StringHighlight {
         //글자 길이수 역순으로 정렬
         Arrays.sort(keywords, (a, b)->Integer.compare(b.length(), a.length()));
 
+        HighlightSearch search = new HighlightSearch();
 
-        HighlightSearch max = null;
-        HighlightSearch check =  null;
         outer:
         for (int i = 0; i <tokens.length ; i++) {
             BeginEndText token = tokens[i];
             for (int jj = 0; jj <keywords.length ; jj++) {
                 String keyword = keywords[jj];
 
-                if(
-                        token.equals(keyword)
-                                || ( keyword.length() > 1 && token.getText().startsWith(keyword) )
-                                || ( keyword.length() > 1 && token.getText().endsWith(keyword) )
-                ){
-
+                if(  token.getText().equals(keyword)){
                     HighlightKeyword highlightKeyword = new HighlightKeyword();
-                    highlightKeyword.index = jj;
                     highlightKeyword.begin = token.getBegin();
                     highlightKeyword.end = token.getEnd();
+                    search.add(highlightKeyword);
+                }
 
 
+                String subText = text.substring(token.getBegin(), token.getEnd());
 
-                    if(check == null
-                            ||  highlightKeyword.end - check.list.get(0).begin > length
-                    ){
-                        HighlightSearch search = new HighlightSearch();
-                        search.list.add(highlightKeyword);
-                        search.keywordIndexSet.add(jj);
+                if(
+                        //변형어 토큰으로인해 위치가 같을때만 앞뒤를 추가로 비교한다.
+                        subText.equals(token.getText())
+                        &&
+                        (
+                                ( keyword.length() > 1 && token.getText().startsWith(keyword) )
+                                || ( keyword.length() > 1 && token.getText().endsWith(keyword) )
+                        )
+                ){
 
-                        check = search;
 
-                        if(max == null){
-                            max = search;
-                        }
+                    HighlightKeyword highlightKeyword = new HighlightKeyword();
+//                    highlightKeyword.index = jj;
 
+                    int tokenLength = token.getEnd()-token.getBegin();
+                    if(tokenLength == keyword.length()){
+                        highlightKeyword.begin = token.getBegin();
+                        highlightKeyword.end = token.getEnd();
+                    }else if(token.getText().startsWith(keyword)){
+                        highlightKeyword.begin = token.getBegin();
+                        highlightKeyword.end = token.getEnd() - (tokenLength - keyword.length());
                     }else{
-                        //추가인지 교체인지 체크하기
-                        //--겹쳐있으면 시작위치가 같으면 큰걸로 교체하고, 시작위치가 다른 겹친범위는 무시한다. (경우가 발생하지 않음)
-                        //글자수로 정렬되어 있기때문에 겹친 범위는 전무 무시하게 한다.
-
-                        if(check.isOverlap(highlightKeyword.getBegin(), highlightKeyword.getEnd())){
-                            continue ;
-                        }
-
-                        check.list.add(highlightKeyword);
-                        check.keywordIndexSet.add(jj);
-
-                        if(
-                                max.keywordIndexSet.size() < check.keywordIndexSet.size()
-                                        || (max.keywordIndexSet.size() == check.keywordIndexSet.size() && max.list.size() < check.list.size())
-                        ){
-                            max = check;
-                        }
-
+                        highlightKeyword.begin = token.getBegin() + (tokenLength - keyword.length());
+                        highlightKeyword.end = token.getEnd();
                     }
 
-                    if(max.keywordIndexSet.size() == keywords.length){
-                        break outer;
-                    }
+                    search.add(highlightKeyword);
 
-
-
-                    break;
                 }
             }
         }
 
-
-        if(max == null){
+        if(search.list.isEmpty()){
             if(length > text.length()){
                 return text;
             }else{
@@ -103,11 +85,10 @@ public class StringHighlight {
             highlightBegin = 0;
             highlightEnd = text.length();
         }else{
-            highlightBegin = max.list.get(0).begin;
-            highlightEnd = max.list.get(max.list.size()-1).end;
+            highlightBegin = search.list.get(0).begin;
+            highlightEnd = search.list.get(search.list.size()-1).end;
 
             int gap = length - (highlightEnd - highlightBegin);
-
 
             //범위확장 가능여부 체크
             int splitBegin = -1;
@@ -150,63 +131,52 @@ public class StringHighlight {
             highlightEnd = Math.min(highlightEnd + gap, text.length());
         }
 
-        HighlightKeyword [] highlightKeywords = max.list.toArray(new HighlightKeyword[0]);
+        HighlightKeyword [] highlightKeywords = search.list.toArray(new HighlightKeyword[0]);
         for(HighlightKeyword highlightKeyword : highlightKeywords){
             highlightKeyword.begin -= highlightBegin;
             highlightKeyword.end -= highlightBegin;
 
-
-
         }
-
-
 
         if(highlightEnd == text.length()){
-            return make (text.substring(highlightBegin, highlightEnd), pre, post, highlightKeywords, true);
+            return make (text.substring(highlightBegin, highlightEnd), pre, post, highlightKeywords);
         }else{
-            return make (text.substring(highlightBegin, highlightEnd), pre, post, highlightKeywords, true) + "...";
+            return make (text.substring(highlightBegin, highlightEnd), pre, post, highlightKeywords) + "...";
         }
     }
 
+    public static String make(String text, String pre, String post, BeginEnd[] beginEnds){
 
-    /***
-     * Highlight 문자열 생성
-     * @param text String
-     * @param pre String
-     * @param post String
-     * @param beginEnds BeginEnd []
-     * @return String
-     */
-    public static String make(String text, String pre, String post, BeginEnd[] beginEnds) {
-        return make(text, pre, post, beginEnds, true);
-    }
+        Arrays.sort(beginEnds, Comparator.comparingInt(BeginEnd::getBegin));
 
-
-    /***
-     * Highlight 문자열 생성
-     * @param text String
-     * @param pre String
-     * @param post String
-     * @param beginEnds BeginEnd []
-     * @param isSort boolean beginEnds sort
-     * @return String
-     */
-    public static String make(String text, String pre, String post, BeginEnd[] beginEnds, boolean isSort){
-
-        if(isSort) {
-            Arrays.sort(beginEnds, Comparator.comparingInt(BeginEnd::getBegin));
-        }
         StringBuilder sb = new StringBuilder();
         int lastIndex = 0;
 
         for(BeginEnd beginEnd : beginEnds){
+            if(lastIndex > text.length()){
+                break;
+            }
+
+            if(beginEnd.getBegin() > text.length()){
+                break;
+            }
+
+            if(lastIndex > beginEnd.getBegin()){
+                continue;
+            }
+
+            int end = beginEnd.getEnd();
+            if(end > text.length()){
+                end = text.length();
+            }
 
             sb.append(text, lastIndex, beginEnd.getBegin());
-            sb.append(pre).append(text, beginEnd.getBegin(), beginEnd.getEnd()).append(post);
+
+            sb.append(pre).append(text, beginEnd.getBegin(), end).append(post);
             lastIndex = beginEnd.getEnd();
         }
 
-        if(lastIndex != text.length()){
+        if(lastIndex < text.length()){
             sb.append(text, lastIndex, text.length());
         }
 
