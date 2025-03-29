@@ -1,7 +1,9 @@
 package io.runon.commons.utils.string;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 문자열 관련 유틸성 클래스
@@ -145,6 +147,33 @@ public class Strings {
         }
         return sb.toString();
 
+    }
+
+    public static int inCount(String source, String target){
+        return inCount(source.toCharArray(), target.toCharArray());
+    }
+
+    public static int inCount(char [] source, char [] target){
+        Set<Integer> dupleSet = new HashSet<>();
+        int count = 0;
+
+        for (char c : source) {
+            for (int j = 0; j < target.length; j++) {
+                if (dupleSet.contains(j)) {
+                    continue;
+                }
+                if (c == target[j]) {
+                    count++;
+                    dupleSet.add(j);
+                    if (dupleSet.size() == target.length) {
+                        return count;
+                    }
+                }
+
+            }
+        }
+
+        return count;
     }
 
 
