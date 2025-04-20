@@ -1321,7 +1321,11 @@ public class FileUtil {
 	}
 
 	public static String getExtension(String fileName){
-		return fileName.substring(fileName.lastIndexOf(".") + 1);
+		int index = fileName.lastIndexOf(".");
+		if(index < 0){
+			return "";
+		}
+		return fileName.substring(index +1);
 	}
 
 

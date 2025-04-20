@@ -79,7 +79,7 @@ public class OutDirFileInfoToExcel {
                 cell.setCellValue(file.getName());
 
                 cell = row.createCell(4);
-                cell.setCellValue(FileUtils.getExtension(file.getName()));
+                cell.setCellValue(FileUtil.getExtension(file.getName()));
 
                 rowIndex++;
             }
