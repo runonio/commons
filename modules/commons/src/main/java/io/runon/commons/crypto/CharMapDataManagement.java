@@ -1,20 +1,16 @@
-package io.runon.commons.charmap.service;
+package io.runon.commons.crypto;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import io.runon.commons.config.Config;
 import io.runon.commons.utils.FileUtil;
 import io.runon.commons.utils.string.Check;
-import io.runon.commons.crypto.CharMap;
-import io.runon.commons.crypto.CharMapManager;
-import io.runon.commons.crypto.StringCrypto;
 
 import java.io.File;
 import java.util.Map;
 import java.util.Set;
 
 /**
- * 수집기그룹 정보
  * @author macle
  */
 public class CharMapDataManagement {
@@ -51,7 +47,7 @@ public class CharMapDataManagement {
 
         Map<String, CharMap> map  = CharMapManager.getInstance().getDataMap();
 
-        if(map.size() == 0){
+        if(map.isEmpty()){
             return;
         }
 
@@ -95,11 +91,9 @@ public class CharMapDataManagement {
 
     }
 
-
     public void addCharMap(String id, CharMap charMap){
         String filePath = Config.getConfig("application.crypto.charmap.path");
         CharMapManager charMapManager = CharMapManager.getInstance();
-
         synchronized (lock) {
             charMapManager.put(id, charMap);
             String str = outStr();
@@ -114,7 +108,7 @@ public class CharMapDataManagement {
 
         Map<String, CharMap> map = charMapManager.getDataMap();
 
-        if(map.size() == 0){
+        if(map.isEmpty()){
             return "";
         }
 
@@ -138,34 +132,11 @@ public class CharMapDataManagement {
 
     public static void loadData(String encData){
         String [] lines = encData.split("\n");
-
-        Gson gson = new Gson();
-
-        for(String line : lines){
-            if("".equals(line)){
-                continue;
-            }
-
-            line = StringCrypto.DEFAULT_256.dec(line);
-            JsonObject jsonObject = gson.fromJson(line, JsonObject.class);
-
-            CharMapManager charMapManager = CharMapManager.getInstance();
-
-            String id = jsonObject.get("id").getAsString();
-            String data = jsonObject.get("data").getAsString();
-            charMapManager.put(id, new CharMap(data));
-        }
+        CharMapManager.getInstance().setCharMap(lines);
     }
 
     public String getLastData() {
         return lastData;
     }
 
-    public static void main(String[] args) {
-        CharMapDataManagement charMapDataManagement = new CharMapDataManagement();
-        charMapDataManagement.addRandomCharMap();
-        CharMapManager charMapManager = CharMapManager.getInstance();
-        System.out.println(charMapManager);
-
-    }
 }

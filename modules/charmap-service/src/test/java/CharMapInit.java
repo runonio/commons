@@ -1,4 +1,4 @@
-import io.runon.commons.charmap.service.CharMapDataManagement;
+import io.runon.commons.crypto.CharMapDataManagement;
 
 /**
  * @author macle
@@ -7,7 +7,7 @@ public class CharMapInit {
 
     public static void main(String[] args) {
         CharMapDataManagement charMapDataManagement = CharMapDataManagement.getInstance();
-        charMapDataManagement.addRandomCharMap(1,5);
+        charMapDataManagement.addRandomCharMap(0,4);
 
     }
 

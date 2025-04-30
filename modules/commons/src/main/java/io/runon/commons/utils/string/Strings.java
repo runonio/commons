@@ -208,4 +208,20 @@ public class Strings {
         return false;
     }
 
+
+    public static long sumCharNumbers(String str){
+        if(str == null || str.isEmpty()){
+            return 0;
+        }
+
+        long sum = 0;
+
+        char[] chars = str.toCharArray();
+        for(char c : chars){
+            sum += c;
+        }
+
+        return sum;
+    }
+
 }

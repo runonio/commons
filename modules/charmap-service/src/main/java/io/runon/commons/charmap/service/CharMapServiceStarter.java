@@ -2,6 +2,7 @@ package io.runon.commons.charmap.service;
 
 import io.runon.commons.config.Config;
 import io.runon.commons.config.ConfigSet;
+import io.runon.commons.crypto.CharMapDataManagement;
 import io.runon.commons.utils.FileUtil;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;

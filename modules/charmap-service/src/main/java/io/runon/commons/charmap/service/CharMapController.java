@@ -2,6 +2,7 @@ package io.runon.commons.charmap.service;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import io.runon.commons.crypto.CharMapDataManagement;
 import io.runon.commons.utils.ExceptionUtil;
 import io.runon.commons.crypto.CharMap;
 import io.runon.commons.crypto.CharMapManager;
