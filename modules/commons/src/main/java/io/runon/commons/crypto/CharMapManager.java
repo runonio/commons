@@ -2,7 +2,6 @@ package io.runon.commons.crypto;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import io.runon.commons.config.Config;
 import io.runon.commons.exception.AlreadyException;
 import io.runon.commons.http.HttpApis;
 import io.runon.commons.utils.string.Strings;

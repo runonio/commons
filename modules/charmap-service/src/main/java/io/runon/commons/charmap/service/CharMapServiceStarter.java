@@ -16,7 +16,7 @@ import java.util.HashMap;
 public class CharMapServiceStarter {
 
     public static void startApp(){
-        int port = Config.getInteger("collect.content.port", 31315);
+        int port = Config.getInteger("service.port", Config.getInteger("collect.content.port", 31315));
         HashMap<String, Object> props = new HashMap<>();
         props.put("server.port", port);
         props.put("logging.config", ConfigSet.LOG_BACK_PATH);

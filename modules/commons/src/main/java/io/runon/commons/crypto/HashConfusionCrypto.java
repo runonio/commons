@@ -15,6 +15,16 @@ public class HashConfusionCrypto {
         return encStr(key, str, 16, null);
     }
 
+
+    public static String encStr(int key, String str, int keySize, CharMap charMap){
+        return encStr(Integer.toString(key), str, keySize, charMap);
+    }
+
+    public static String encStr(long key, String str, int keySize, CharMap charMap){
+        return encStr(Long.toString(key), str, keySize, charMap);
+    }
+
+
     public static String encStr(String key, String str, int keySize, CharMap charMap){
         try{
             byte [] data = str.getBytes(StandardCharsets.UTF_8);
@@ -28,6 +38,15 @@ public class HashConfusionCrypto {
 
     public static String decStr(String key, String str){
         return decStr(key, str, 16, null);
+    }
+
+
+    public static String decStr(int key, String str, int keySize, CharMap charMap){
+        return decStr(Integer.toString(key), str, keySize, charMap);
+    }
+
+    public static String decStr(long key, String str, int keySize, CharMap charMap){
+        return decStr(Long.toString(key), str, keySize, charMap);
     }
 
     public static String decStr(String key, String encStr, int keySize, CharMap charMap){
