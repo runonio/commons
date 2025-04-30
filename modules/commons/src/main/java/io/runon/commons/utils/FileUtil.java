@@ -624,15 +624,19 @@ public class FileUtil {
 		String fileSeparator = FileSystems.getDefault().getSeparator();
 
 		File file = new File(path);
-		File parent = file.getParentFile();
+
+		String absolutePath = file.getAbsolutePath();
+
+		String parentPath = absolutePath.substring(0, absolutePath.lastIndexOf(fileSeparator));
+
 
 		String extension = FileUtil.getExtension(file.getName());
 		String fileName = file.getName();
 		if(!extension.isEmpty()){
-			fileName = fileName.substring(0, fileName.lastIndexOf(extension));
+			fileName = fileName.substring(0, fileName.lastIndexOf("."+extension));
 		}
 
-		String reName = parent.getAbsolutePath() + fileSeparator + fileName +"-"+ Times.ymdhm(System.currentTimeMillis(), ZoneId.of("Asia/Seoul")).replace(" ","") +"."+ extension;
+		String reName = parentPath + fileSeparator + fileName +"-"+ Times.ymdhm(System.currentTimeMillis(), ZoneId.of("Asia/Seoul")).replace(" ","") +"."+ extension;
 
 		if(FileUtil.isFile(reName)){
 			reName = FileUtil.makeName(new File(reName));
