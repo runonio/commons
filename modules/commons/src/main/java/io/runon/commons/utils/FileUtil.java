@@ -3,6 +3,7 @@ package io.runon.commons.utils;
 
 import io.runon.commons.exception.IORuntimeException;
 import io.runon.commons.utils.string.Check;
+import io.runon.commons.utils.time.Times;
 import io.runon.commons.validation.FileValidation;
 import lombok.extern.slf4j.Slf4j;
 
@@ -10,9 +11,11 @@ import java.io.*;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.ZoneId;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -615,6 +618,27 @@ public class FileUtil {
 			log.error(ExceptionUtil.getStackTrace(e));
 			return false;
 		}
+	}
+
+	public static String makeBackupName(String path){
+		String fileSeparator = FileSystems.getDefault().getSeparator();
+
+		File file = new File(path);
+		File parent = file.getParentFile();
+
+		String extension = FileUtil.getExtension(file.getName());
+		String fileName = file.getName();
+		if(!extension.isEmpty()){
+			fileName = fileName.substring(0, fileName.lastIndexOf(extension));
+		}
+
+		String reName = parent.getAbsolutePath() + fileSeparator + fileName +"-"+ Times.ymdhm(System.currentTimeMillis(), ZoneId.of("Asia/Seoul")).replace(" ","") +"."+ extension;
+
+		if(FileUtil.isFile(reName)){
+			reName = FileUtil.makeName(new File(reName));
+		}
+
+		return reName;
 	}
 
 	/**

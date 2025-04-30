@@ -11,6 +11,7 @@ import java.util.Set;
  */
 public class Strings {
 
+
     /**
      * 배열 비교를 위해 구성요소를 정렬한후 비교함
      * 정렬을 원하지 않을경우 복사된 배열을 보내야 함
@@ -114,39 +115,22 @@ public class Strings {
 
 
 
-    private final static String DEFAULT_SORT_KEY_SPLIT = ",";
+    private final static String DEFAULT_SORT_SPLIT = ",";
 
-    /**
-     * 배열을 정렬하여 키생성
-     * @param array
-     * @return
-     */
-    public static String makeSortKey(String [] array){
-        return makeSortKey(array, DEFAULT_SORT_KEY_SPLIT);
+    public static String sumSortText(String [] array){
+        return sumSortText(array, DEFAULT_SORT_SPLIT);
 
     }
 
-    /**
-     * 배열을 정렬하여 키생성
-     * @param array
-     * @param split
-     * @return
-     */
-    public static String makeSortKey(String [] array, String split){
+    public static String sumSortText(String [] array, String split){
         if(array == null || array.length ==0){
-            throw new RuntimeException("array null");
+            return "";
         }
         if(array.length==1){
             return array[0];
         }
         Arrays.sort(array);
-        StringBuilder sb = new StringBuilder();
-        sb.append(array[0]);
-        for(int i=1 ; i < array.length ; i++){
-            sb.append(split+array[i]);
-        }
-        return sb.toString();
-
+        return sumText(array,split);
     }
 
     public static int inCount(String source, String target){
@@ -178,7 +162,7 @@ public class Strings {
 
 
     public static String [] toSortArray(String arrayValue){
-        return arrayValue.split(DEFAULT_SORT_KEY_SPLIT);
+        return arrayValue.split(DEFAULT_SORT_SPLIT);
     }
 
 
@@ -222,6 +206,19 @@ public class Strings {
         }
 
         return sum;
+    }
+
+    public static String sumText(String [] array, String split){
+        if(array == null || array.length == 0){
+            return "";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(array[0]);
+        for (int i = 1; i < array.length ; i++) {
+            sb.append(split).append(array[i]);
+        }
+        return sb.toString();
     }
 
 }
