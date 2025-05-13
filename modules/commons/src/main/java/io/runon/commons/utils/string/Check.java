@@ -198,7 +198,7 @@ public class Check {
 	 * @param ch char
 	 * @return boolean hangul check flag
 	 */
-	public static boolean isHangulSyllable(char ch) {
+	public static boolean isHangulText(char ch) {
 	
 		UnicodeBlock block = UnicodeBlock.of(ch);
 
@@ -211,11 +211,11 @@ public class Check {
 	 * @param str String
 	 * @return boolean hangul check flag
 	 */
-	public static boolean isHangulSyllable(String str) {
+	public static boolean isHangulText(String str) {
 	
 		int length = str.length();
 		for (int i=0; i < length ; i++){
-			if(!isHangulSyllable(str.charAt(i))){
+			if(!isHangulText(str.charAt(i))){
 				return false;
 			}
 		}
@@ -236,7 +236,7 @@ public class Check {
 		for (int i=0; i < length ; i++){
 			
 			char ch = str.charAt(i);
-			if(!isHangulSyllable(ch)
+			if(!isHangulText(ch)
 					&& ch !=' '
 					&& !isNumber(ch)){
 				return false;
@@ -254,8 +254,8 @@ public class Check {
 	 * @param ch char
 	 * @return boolean hangul type check flag
 	 */
-	public static boolean isSyllableType(char ch){
-		return isHangulSyllable(ch)
+	public static boolean isCompleteText(char ch){
+		return isHangulText(ch)
 				|| isNumber(ch)
 				|| isEng(ch);
 
