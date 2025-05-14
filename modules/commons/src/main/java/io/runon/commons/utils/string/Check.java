@@ -32,7 +32,7 @@ public class Check {
 	 * @return boolean email check flag
 	 */
 	public static boolean isEmailPattern(String str){
-		Pattern pattern=Pattern.compile("^[a-zA-Z0-9]+@[a-zA-Z0-9]+$");
+		Pattern pattern=Pattern.compile("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$");
 		Matcher match=pattern.matcher(str);
 		return match.find();
 	}
@@ -345,5 +345,9 @@ public class Check {
 		}
 		return true;
 	}
-	
+
+
+	public static void main(String[] args) {
+		System.out.println(isEmailPattern("ysys86a@gmail.com"));
+	}
 }
