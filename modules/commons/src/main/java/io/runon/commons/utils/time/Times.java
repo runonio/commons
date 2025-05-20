@@ -152,7 +152,6 @@ public class Times {
     public static final long WEEK_21= WEEK_1 * 21L;
     public static final long WEEK_52= WEEK_1 * 52L;
 
-
     public static final long YEAR_1 = DAY_1 * 365L;
 
 
@@ -205,8 +204,7 @@ public class Times {
     public static String ym(long time, ZoneId zoneId){
         Instant intent = Instant.ofEpochMilli(time);
         ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(intent, zoneId);
-        return zonedDateTime.getYear() + DateUtil.getDateText(zonedDateTime.getMonthValue())
-                ;
+        return zonedDateTime.getYear() + DateUtil.getDateText(zonedDateTime.getMonthValue());
     }
 
     /**
@@ -233,7 +231,6 @@ public class Times {
         return zonedDateTime.getYear();
     }
 
-
     public static long getTime(String format, String timeText, ZoneId zoneId){
         SimpleDateFormat dateFormat = new SimpleDateFormat(format);
         dateFormat.setTimeZone(TimeZone.getTimeZone(zoneId));
@@ -244,8 +241,6 @@ public class Times {
         }
     }
 
-    
-    
     public static long getTimeHm(String hhmm){
         hhmm = hhmm.trim();
 
@@ -285,6 +280,13 @@ public class Times {
         time = time + addTime;
         return ymdhm(time, zoneId);
 
+    }
+
+    public static int getYear(ZoneId zoneId){
+
+        Instant i = Instant.ofEpochMilli(System.currentTimeMillis());
+        ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(i, zoneId);
+        return zonedDateTime.getYear();
     }
 
     public static long getBeginTime(int beginYmd, ZoneId zoneId){
