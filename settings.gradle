@@ -1,24 +1,25 @@
 rootProject.name = 'commons'
 include 'commons'
-project(':commons').projectDir = new File(settingsDir,'../../runon/commons/modules/commons')
+project(':commons').projectDir = new File(settingsDir, '../../runon/commons/modules/commons')
 include 'jdbc'
-project(':jdbc').projectDir = new File(settingsDir,'../../runon/commons/modules/jdbc')
+project(':jdbc').projectDir = new File(settingsDir, '../../runon/commons/modules/jdbc')
 include 'crawling'
-project(':crawling').projectDir = new File(settingsDir,'../../runon/commons/modules/crawling')
+project(':crawling').projectDir = new File(settingsDir, '../../runon/commons/modules/crawling')
 include 'data-service'
-project(':data-service').projectDir = new File(settingsDir,'../../runon/commons/modules/data-service')
+project(':data-service').projectDir = new File(settingsDir, '../../runon/commons/modules/data-service')
 include 'keyword'
-project(':keyword').projectDir = new File(settingsDir,'../../runon/commons/modules/keyword')
+project(':keyword').projectDir = new File(settingsDir, '../../runon/commons/modules/keyword')
 include 'charmap-service'
-project(':charmap-service').projectDir = new File(settingsDir,'../../runon/commons/modules/charmap-service')
+project(':charmap-service').projectDir = new File(settingsDir, '../../runon/commons/modules/charmap-service')
 include 'install'
-project(':install').projectDir = new File(settingsDir,'../../runon/commons/modules/install')
+project(':install').projectDir = new File(settingsDir, '../../runon/commons/modules/install')
 include 'outputs'
-project(':outputs').projectDir = new File(settingsDir,'../../runon/commons/modules/outputs')
+project(':outputs').projectDir = new File(settingsDir, '../../runon/commons/modules/outputs')
 include 'file-text'
-project(':file-text').projectDir = new File(settingsDir,'../../runon/commons/modules/file-text')
+project(':file-text').projectDir = new File(settingsDir, '../../runon/commons/modules/file-text')
 include 'collect'
-project(':collect').projectDir = new File(settingsDir,'../../runon/commons/modules/collect')
+project(':collect').projectDir = new File(settingsDir, '../../runon/commons/modules/collect')
 include 'poi'
-project(':poi').projectDir = new File(settingsDir,'../../runon/commons/modules/poi')
-
+project(':poi').projectDir = new File(settingsDir, '../../runon/commons/modules/poi')
+include 'load-balancing'
+project(':load-balancing').projectDir = new File(settingsDir, '../../runon/commons/modules/load-balancing')

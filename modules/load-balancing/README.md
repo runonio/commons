@@ -1,12 +1,7 @@
-# seomse-poi
+# commons
 
-# 개발환경
--   open jdk 1.8
-
-# 구성
- poi
- - excel 데이터를 가져 오기 위한 유틸성 클래스
-
+## 개발환경
+- open jdk 1.8
 
 # communication
 ### blog, homepage

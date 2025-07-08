@@ -21,24 +21,12 @@
 ### 서비스 관리
  - 서비스로 실행되는 Thread 관리기능 제공
  
-### 공통에 많은 기능이 있는 문제
-- 아직은 규모가 크지 않아서 공통에 작업하고 있는 부분들은 내부 규모가 커지면 개별 artifact 로 분리될 수 있습니다.
-- 너무 많은 부분이 공통이 모이는 문제는 많이 경계 하고 있습니다.. 아무래도 데이터 처리 관련 일을 많이 하다 보니 관련 부분에 대한 공통이 많이질 것 같네요.. 
-
-# post
-- [java 파일 라인수 얻기, 특정라인 빨리 읽기 (빠른 라인처리)](https://runon.io/dev/2020/01/20/java_file_fast_read_line/)
-
 # communication
 ### blog, homepage
 - [runon.io](https://runon.io)
 - [github.com/runonio](https://github.com/runonio)
-- [github.com/seomse](https://github.com/seomse)
-- [www.seomse.com](https://www.seomse.com/)
-
-
 
 ## main developer
 - macle
   - github(source code): [github.com/macle86](https://github.com/macle86)
   - email: ysys86a@gmail.com
-  - kakaotalk(1:1): https://open.kakao.com/o/sspZGH3g

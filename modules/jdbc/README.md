@@ -1,8 +1,7 @@
-# seomse-jdbc
+# jdbc
 
 # 개발환경
 - open jdk 1.8
-
 
 # 개요
 oracle, tibero, mysql, mariadb, postgresql, msssql 계열의 DB를 지원 하기 위해 개발 되었습니다.
@@ -98,12 +97,9 @@ public class StockItem {
 ### blog, homepage
 - [runon.io](https://runon.io)
 - [github.com/runonio](https://github.com/runonio)
-- [github.com/seomse](https://github.com/seomse)
-- [www.seomse.com](https://www.seomse.com/)
 
 
 ## main developer
 - macle
   - github(source code): [github.com/macle86](https://github.com/macle86)
   - email: ysys86a@gmail.com
-  - kakaotalk(1:1): https://open.kakao.com/o/sspZGH3g
