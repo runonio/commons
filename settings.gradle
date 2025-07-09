@@ -21,5 +21,7 @@ include 'collect'
 project(':collect').projectDir = new File(settingsDir, '../../runon/commons/modules/collect')
 include 'poi'
 project(':poi').projectDir = new File(settingsDir, '../../runon/commons/modules/poi')
-include 'load-balancing'
-project(':load-balancing').projectDir = new File(settingsDir, '../../runon/commons/modules/load-balancing')
+
+include 'system'
+project(':system').projectDir = new File(settingsDir, '../../runon/commons/modules/system')
+

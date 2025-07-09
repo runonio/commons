@@ -10,7 +10,6 @@ repositories {
 dependencies {
 
     implementation project(path: ':commons')
-    implementation project(path: ':jdbc')
     //json
     implementation 'com.google.code.gson:gson:2.10.1'
 

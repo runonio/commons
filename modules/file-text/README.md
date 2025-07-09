@@ -1,7 +1,6 @@
 # file-text
 파일을 보내면 텍스트로 돌려줍니다.
 xls(excel), word(doc), hwp, ppt, pdf를 지원합니다
-## gradle
 
 ## 개발환경
 - open jdk 1.8

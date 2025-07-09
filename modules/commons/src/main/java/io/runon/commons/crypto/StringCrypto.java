@@ -209,14 +209,14 @@ public class StringCrypto {
      */
     public static String enc(String key, String value, int keySize){
         try {
-            byte[] keyBytes = CryptoUtils.makeKeyByte(key, keySize);
+            byte[] keyBytes = Cryptos.makeKeyByte(key, keySize);
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
             SecretKeySpec keySpec = new SecretKeySpec(keyBytes, "AES");
             IvParameterSpec ivSpec;
             if(keySize == 16){
                 ivSpec = new IvParameterSpec(keyBytes);
             }else{
-                ivSpec = new IvParameterSpec(CryptoUtils.makeKeyByte(key, 16));
+                ivSpec = new IvParameterSpec(Cryptos.makeKeyByte(key, 16));
             }
             cipher.init(Cipher.ENCRYPT_MODE, keySpec, ivSpec);
             byte[] results = cipher.doFinal(value.getBytes(StandardCharsets.UTF_8));
@@ -237,14 +237,14 @@ public class StringCrypto {
      */
     public static String dec(String key, String enc , int keySize){
         try {
-            byte[] keyBytes= CryptoUtils.makeKeyByte(key, keySize);
+            byte[] keyBytes= Cryptos.makeKeyByte(key, keySize);
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
             SecretKeySpec keySpec = new SecretKeySpec(keyBytes, "AES");
             IvParameterSpec ivSpec;
             if(keySize == 16){
                 ivSpec = new IvParameterSpec(keyBytes);
             }else{
-                ivSpec = new IvParameterSpec(CryptoUtils.makeKeyByte(key, 16));
+                ivSpec = new IvParameterSpec(Cryptos.makeKeyByte(key, 16));
             }
             cipher.init(Cipher.DECRYPT_MODE, keySpec, ivSpec);
 

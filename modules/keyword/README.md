@@ -7,7 +7,6 @@
 ## 개발환경
 - open jdk 1.8
 
-
 # communication
 ### blog, homepage
 - [runon.io](https://runon.io)

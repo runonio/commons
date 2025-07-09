@@ -75,7 +75,7 @@ public class HashConfusionCrypto {
                 hKey = charMap.change(hKey);
             }
 
-            byte[] keyBytes = CryptoUtils.makeKeyByte(hKey, keySize);
+            byte[] keyBytes = Cryptos.makeKeyByte(hKey, keySize);
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
             SecretKeySpec keySpec = new SecretKeySpec(keyBytes, "AES");
 
@@ -83,7 +83,7 @@ public class HashConfusionCrypto {
             if(keySize == 16){
                 ivSpec = new IvParameterSpec(keyBytes);
             }else{
-                ivSpec = new IvParameterSpec(CryptoUtils.makeKeyByte(hKey, 16));
+                ivSpec = new IvParameterSpec(Cryptos.makeKeyByte(hKey, 16));
             }
 
             cipher.init(Cipher.ENCRYPT_MODE, keySpec, ivSpec);
@@ -106,14 +106,14 @@ public class HashConfusionCrypto {
                 hKey = charMap.change(hKey);
             }
 
-            byte[] keyBytes = CryptoUtils.makeKeyByte(hKey, keySize);
+            byte[] keyBytes = Cryptos.makeKeyByte(hKey, keySize);
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
             SecretKeySpec keySpec = new SecretKeySpec(keyBytes, "AES");
             IvParameterSpec ivSpec;
             if(keySize == 16){
                 ivSpec = new IvParameterSpec(keyBytes);
             }else{
-                ivSpec = new IvParameterSpec(CryptoUtils.makeKeyByte(hKey, 16));
+                ivSpec = new IvParameterSpec(Cryptos.makeKeyByte(hKey, 16));
             }
             cipher.init(Cipher.DECRYPT_MODE, keySpec, ivSpec);
             return cipher.doFinal(data);

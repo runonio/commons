@@ -1,5 +1,3 @@
-# collect
-데이터 수집 공통모듈
 
 ## 개발환경
 - open jdk 1.8
@@ -8,8 +6,6 @@
 ### blog, homepage
 - [runon.io](https://runon.io)
 - [github.com/runonio](https://github.com/runonio)
-
-
 
 ## main developer
 - macle

@@ -1,4 +1,3 @@
-# data-service
 
 ## 개발환경
 - open jdk 1.8
