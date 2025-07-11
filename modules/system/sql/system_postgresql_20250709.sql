@@ -56,7 +56,7 @@ CREATE TABLE file
     sha256               VARCHAR NULL,
     split_type           VARCHAR NOT NULL DEFAULT 'single',
     split_info           VARCHAR NULL,
-    encrypt_type         VARCHAR NULL,
+    encrypt_type         VARCHAR NOT NULL DEFAULT 'N',
     file_path_type       VARCHAR NULL DEFAULT 'DB',
     file_path            VARCHAR NULL,
     meta_data            VARCHAR NULL,

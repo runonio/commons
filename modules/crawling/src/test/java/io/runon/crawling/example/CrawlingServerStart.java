@@ -11,7 +11,7 @@ import io.runon.crawling.CrawlingManager;
 public class CrawlingServerStart {
     public static void main(String[] args) {
 
-        ApiServer apiServer = new ApiServer(33001,"com.seomse");
+        ApiServer apiServer = new ApiServer(33001,"io.runon");
         apiServer.start();
 
         //noinspection ResultOfMethodCallIgnored

@@ -47,8 +47,24 @@ public class CharMapManager {
         }
     }
 
+
+
+
     public CharMap getCharMap(String id){
         return map.get(id);
+    }
+
+    public CharMap getRowIdMap(Object rowObject){
+        CharMap charMap = null;
+        if(rowObject.getClass() == String.class){
+            charMap = getRowIdMap((String) rowObject);
+        }else if(rowObject.getClass() == Integer.class){
+            charMap = getRowIdMap( (int) rowObject);
+        }else if(rowObject.getClass() == Long.class){
+            charMap = getRowIdMap((long)rowObject);
+        }
+
+        return charMap;
     }
 
     public CharMap getRowIdMap(String rowId){
@@ -118,5 +134,7 @@ public class CharMapManager {
             put(charMap);
         }
     }
+
+
 
 }

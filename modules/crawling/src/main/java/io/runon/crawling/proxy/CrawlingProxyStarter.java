@@ -52,7 +52,7 @@ public class CrawlingProxyStarter extends Thread{
                 for (int i = 0; i <hostAddrPortArray.length ; i++) {
                     try {
 
-                        String response = ApiRequests.sendToReceiveMessage(hostAddrPortArray[i].getHostAddress(), hostAddrPortArray[i].getPort(), "com.seomse.crawling.ha", "ActiveAddrPortApi", "");
+                        String response = ApiRequests.sendToReceiveMessage(hostAddrPortArray[i].getHostAddress(), hostAddrPortArray[i].getPort(), "io.runon.crawling.ha", "ActiveAddrPortApi", "");
 
                         if (response.startsWith("S")) {
                             String[] activeInfo = response.substring(1).split(",");

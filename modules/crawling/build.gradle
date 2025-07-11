@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group 'com.seomse.commons'
+group 'io.runon'
 version '0.9.7'
 
 repositories {

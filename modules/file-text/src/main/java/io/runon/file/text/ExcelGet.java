@@ -13,7 +13,6 @@ import java.text.SimpleDateFormat;
 /**
  * excel 데이터 가져다 쓸때의 유틸성 클래스
  * src test
- * com.seomse.poi.excel.example
  * 위 예제를 보고 활용
  * @author macle
  */

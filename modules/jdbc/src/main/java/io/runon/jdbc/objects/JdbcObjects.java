@@ -1388,16 +1388,16 @@ public class JdbcObjects {
         }
 
         StringBuilder importBuilder = new StringBuilder();
-        importBuilder.append("\nimport com.seomse.jdbc.annotation.Column;");
-        importBuilder.append("\nimport com.seomse.jdbc.annotation.Table;");
+        importBuilder.append("\nimport io.runon.jdbc.annotation.Column;");
+        importBuilder.append("\nimport io.runon.jdbc.annotation.Table;");
         if(isAnnotationPrimaryKey){
-            importBuilder.append("\nimport com.seomse.jdbc.annotation.PrimaryKey;");
+            importBuilder.append("\nimport io.runon.jdbc.annotation.PrimaryKey;");
         }
         if(isAnnotationDateTime){
-            importBuilder.append("\nimport com.seomse.jdbc.annotation.DateTime;");
+            importBuilder.append("\nimport io.runon.jdbc.annotation.DateTime;");
         }
         if(isAnnotationFlogBoolean){
-            importBuilder.append("\nimport com.seomse.jdbc.annotation.FlagBoolean;");
+            importBuilder.append("\nimport io.runon.jdbc.annotation.FlagBoolean;");
         }
 
 

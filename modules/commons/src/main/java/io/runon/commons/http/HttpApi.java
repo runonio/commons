@@ -8,12 +8,10 @@ import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.zip.GZIPInputStream;
 
 /**
@@ -21,6 +19,8 @@ import java.util.zip.GZIPInputStream;
  */
 @Setter
 public class HttpApi {
+
+    public static final String LINE_FEED = "\r\n";
 
 
     private String defaultAddress ="";
@@ -84,6 +84,8 @@ public class HttpApi {
     public HttpApiResponse getResponse(String urlAddr, Map<String, String> requestProperty){
         return getResponse(urlAddr, defaultMethod, requestProperty, null, defaultCharSet);
     }
+
+
 
 
     public HttpApiResponse getResponse(String urlAddr, String method, Map<String, String> requestProperty, String outStreamParam, Charset charset){
@@ -150,6 +152,113 @@ public class HttpApi {
             throw new IORuntimeException(e);
         }
     }
+    public HttpApiResponse sendFile(String urlAddr, File file){
+        return sendFile(urlAddr, file, "file", null,null, StandardCharsets.UTF_8);
+    }
+
+    public HttpApiResponse sendFile(String urlAddr, File file, String message){
+        return sendFile(urlAddr, file, "file", message,"message", StandardCharsets.UTF_8);
+    }
+
+    public HttpApiResponse sendFile(String urlAddr, File file, String fileFiledName, String message, String messageFiledName, Charset charset){
+
+        FileInputStream inputStream = null;
+        PrintWriter writer = null;
+        try {
+
+            String boundary = UUID.randomUUID().toString();
+
+            URL url = new URL(defaultAddress+urlAddr);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setUseCaches(false);
+            conn.setDoOutput(true);
+            conn.setDoInput(true);
+
+            if(readTimeOut != null) {
+                conn.setReadTimeout(readTimeOut);
+            }
+
+            if(connectTimeOut != null) {
+                conn.setConnectTimeout(connectTimeOut);
+            }
+
+            conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
+
+            if(fileFiledName == null){
+                fileFiledName = "file";
+            }
+
+
+            OutputStream outputStream = conn.getOutputStream();
+            writer = new PrintWriter(new OutputStreamWriter(outputStream, charset), true);
+
+            if(message != null){
+                if(messageFiledName == null){
+                    messageFiledName = "message";
+                }
+
+                writer.append("--" + boundary).append(LINE_FEED);
+                writer.append("Content-Disposition: form-data; name=\"" + messageFiledName + "\"").append(LINE_FEED);
+                writer.append("Content-Type: text/plain; charset=" + charset).append(LINE_FEED);
+                writer.append(LINE_FEED);
+                writer.append(message).append(LINE_FEED);
+                writer.flush();
+            }
+
+            String fileName = file.getName();
+            String contentType = URLConnection.guessContentTypeFromName(fileName); // MIME 타입 추정
+            writer.append("--" + boundary).append(LINE_FEED);
+            writer.append("Content-Disposition: form-data; name=\"" + fileFiledName + "\"; filename=\"" + fileName + "\"")
+                    .append(LINE_FEED);
+            writer.append("Content-Type: " + (contentType != null ? contentType : "application/octet-stream"))
+                    .append(LINE_FEED);
+            writer.append(LINE_FEED);
+            writer.flush();
+
+            inputStream = new FileInputStream(file);
+            byte[] buffer = new byte[4096];
+            int bytesRead;
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+            outputStream.flush();
+            inputStream.close();
+            inputStream = null;
+            writer.append(LINE_FEED);
+            writer.append("--" + boundary + "--").append(LINE_FEED);
+            writer.close();
+            writer =null;
+
+            HttpApiResponse httpResponse = new HttpApiResponse();
+            httpResponse.setResponseCode(conn.getResponseCode());
+            httpResponse.setHeaderFields(conn.getHeaderFields());
+            httpResponse.setMessage(getMessage(conn, charset));
+
+            try{
+                conn.disconnect();
+            }catch (Exception ignore){}
+
+            return httpResponse;
+
+        }catch (IOException e){
+            throw new IORuntimeException(e);
+        }finally {
+            try {
+                    if (inputStream != null) {
+                    inputStream.close();
+                }
+            }catch (Exception ignore){}
+
+            try {
+                if (writer != null) {
+                    writer.close();
+                }
+            }catch (Exception ignore){}
+        }
+
+    }
+
 
     public File downloadFile(String urlAddress, String downloadPath){
         InputStream in = null;

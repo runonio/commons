@@ -16,7 +16,7 @@ import java.util.HashMap;
 public class CharMapServiceStarter {
 
     public static void startApp(){
-        int port = Config.getInteger("service.port", Config.getInteger("collect.content.port", 31315));
+        int port = Config.getInteger("service.port", Config.getInteger("service.port", 31315));
         HashMap<String, Object> props = new HashMap<>();
         props.put("server.port", port);
         props.put("logging.config", ConfigSet.LOG_BACK_PATH);
@@ -24,10 +24,10 @@ public class CharMapServiceStarter {
 
         CharMapDataManagement charMapDataManagement = CharMapDataManagement.getInstance();
 
-        String filePath = Config.getConfig("application.crypto.charmap.path",ConfigSet.CONFIG_DIR_PATH+"/charmaps");
+        String filePath = Config.getConfig("crypto.charmap.path",ConfigSet.CONFIG_DIR_PATH+"/charmaps");
 
         if(!FileUtil.isFile(filePath)){
-            charMapDataManagement.addRandomCharMap(0,4);
+            charMapDataManagement.addRandomCharMap(0, (Config.getInteger("crypto.charmap.length", 10) -1));
         }
 
         new SpringApplicationBuilder()

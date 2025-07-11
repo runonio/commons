@@ -39,7 +39,7 @@ public class CrawlingProxy {
 		apiCommunicationArray = new ApiCommunication[communicationCount];
 		for(int i=0 ; i<communicationCount ; i++) {
 			Socket socket = new Socket(hostAddress, port);
-			ApiCommunication apiCommunication = new ApiCommunication("com.seomse.crawling.proxy.api", socket);
+			ApiCommunication apiCommunication = new ApiCommunication("io.runon.crawling.proxy.api", socket);
 			apiCommunication.setEndCallback(arg0 -> {
 				synchronized (lock) {
 					log.info("connect end");

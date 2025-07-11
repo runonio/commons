@@ -90,4 +90,11 @@ public class HttpApis {
     public static File downloadFile(String urlAddress, String downloadPath){
         return GET.downloadFile(urlAddress, downloadPath);
     }
+
+    public static HttpApiResponse sendFile(String urlAddress, File file){
+        return POST.sendFile(urlAddress, file);
+    }
+    public static HttpApiResponse sendFile(String urlAddress, File file, String message){
+        return POST.sendFile(urlAddress, file, message);
+    }
 }

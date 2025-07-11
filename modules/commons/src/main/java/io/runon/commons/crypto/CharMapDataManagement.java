@@ -34,7 +34,7 @@ public class CharMapDataManagement {
     private final Object lock = new Object();
 
     public void loadData(){
-        String filePath = Config.getConfig("application.crypto.charmap.path","config/charmaps");
+        String filePath = Config.getConfig("crypto.charmap.path","config/charmaps");
 
         if(!FileUtil.isFile(filePath)){
             return ;
@@ -71,7 +71,7 @@ public class CharMapDataManagement {
     }
 
     public void addRandomCharMap(long startNum, long endNum){
-        String filePath = Config.getConfig("application.crypto.charmap.path", "config/charmaps");
+        String filePath = Config.getConfig("crypto.charmap.path", "config/charmaps");
         CharMapManager charMapManager = CharMapManager.getInstance();
 
         synchronized (lock) {
@@ -92,7 +92,7 @@ public class CharMapDataManagement {
     }
 
     public void addCharMap(String id, CharMap charMap){
-        String filePath = Config.getConfig("application.crypto.charmap.path");
+        String filePath = Config.getConfig("crypto.charmap.path");
         CharMapManager charMapManager = CharMapManager.getInstance();
         synchronized (lock) {
             charMapManager.put(id, charMap);
