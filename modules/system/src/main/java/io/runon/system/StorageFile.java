@@ -1,17 +1,21 @@
 package io.runon.system;
 
 
+import io.runon.commons.crypto.Cryptos;
+import io.runon.commons.utils.ExceptionUtil;
 import io.runon.jdbc.annotation.Column;
 import io.runon.jdbc.annotation.Table;
 import io.runon.jdbc.annotation.PrimaryKey;
 import io.runon.jdbc.annotation.DateTime;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 
 /**
  * 저장소 파일
  * @author macle
  */
+@Slf4j
 @Data
 @Table(name="file")
 public class StorageFile {
@@ -50,6 +54,14 @@ public class StorageFile {
 
     @DateTime
     @Column(name = "updated_at")
-    long time;
+    long time = System.currentTimeMillis();
 
+
+    public void setSha256(){
+        try {
+            sha256 = Cryptos.getHashText(fileBytes, "SHA-256");
+        }catch (Exception e){
+            log.error(ExceptionUtil.getStackTrace(e));
+        }
+    }
 }

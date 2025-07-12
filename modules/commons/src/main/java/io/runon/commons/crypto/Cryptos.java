@@ -3,10 +3,25 @@ package io.runon.commons.crypto;
 import io.runon.commons.config.Config;
 
 import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 /**
  * @author macle
  */
 public class Cryptos {
+
+    public static String getHashText(byte [] bytes, String algorithm) throws NoSuchAlgorithmException {
+        StringBuilder builder = new StringBuilder();
+        MessageDigest md = MessageDigest.getInstance(algorithm);
+        byte [] hashBytes = md.digest(bytes);
+
+        for (byte b : hashBytes) {
+            builder.append(String.format("%02x", b));
+        }
+        return builder.toString();
+    }
+
     public static byte [] makeKeyByte(String key, int size){
         byte[] keyBytes= new byte[size];
         byte[] b= key.getBytes(StandardCharsets.UTF_8);

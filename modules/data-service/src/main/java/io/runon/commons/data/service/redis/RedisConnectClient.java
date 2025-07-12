@@ -8,6 +8,7 @@ import io.lettuce.core.api.async.RedisHashAsyncCommands;
 import io.lettuce.core.api.async.RedisStringAsyncCommands;
 import io.lettuce.core.api.sync.RedisCommands;
 import io.lettuce.core.api.sync.RedisHashCommands;
+import io.lettuce.core.api.sync.RedisListCommands;
 import io.lettuce.core.api.sync.RedisStringCommands;
 import io.lettuce.core.pubsub.StatefulRedisPubSubConnection;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +18,6 @@ import java.util.Map;
 /**
  * @author macle
  */
-@Slf4j
 public class RedisConnectClient implements RedisConnect{
 
     private final RedisClient redisClient;
@@ -42,6 +42,11 @@ public class RedisConnectClient implements RedisConnect{
     }
 
     @Override
+    public RedisListCommands<String, String> syncList() {
+        return sync;
+    }
+
+    @Override
     public RedisStringAsyncCommands<String, String> asyncString() {
         return async;
     }
@@ -57,6 +62,7 @@ public class RedisConnectClient implements RedisConnect{
         connection.setAutoFlushCommands(true);
         async = connection.async();
         sync = connection.sync();
+
         return connection;
     }
 

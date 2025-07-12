@@ -5,17 +5,19 @@ import io.lettuce.core.api.StatefulConnection;
 import io.lettuce.core.api.async.RedisHashAsyncCommands;
 import io.lettuce.core.api.async.RedisStringAsyncCommands;
 import io.lettuce.core.api.sync.RedisHashCommands;
+import io.lettuce.core.api.sync.RedisListCommands;
 import io.lettuce.core.api.sync.RedisStringCommands;
+import io.lettuce.core.pubsub.RedisPubSubListener;
 import io.lettuce.core.pubsub.StatefulRedisPubSubConnection;
 import io.lettuce.core.pubsub.api.async.RedisPubSubAsyncCommands;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 /**
  * @author macle
  */
-@Slf4j
 public class ServiceRedis {
 
 
@@ -33,6 +35,8 @@ public class ServiceRedis {
     private RedisStringCommands<String, String> syncString;
     private RedisHashCommands<String, String> syncHash;
 
+    private RedisListCommands<String, String> syncList;
+
     private StatefulRedisPubSubConnection<String, String> pubConnection;
     private RedisPubSubAsyncCommands<String, String> pubCommands;
 
@@ -44,10 +48,12 @@ public class ServiceRedis {
         asyncString = redisConnect.asyncString();
         syncString = redisConnect.syncString();
         syncHash = redisConnect.syncHash();
+        syncList = redisConnect.syncList();
 
         pubConnection = redisConnect.connectPubSub();
         pubConnection.setAutoFlushCommands(true);
         pubCommands = pubConnection.async();
+
 
     }
 
@@ -59,14 +65,70 @@ public class ServiceRedis {
     public RedisFuture<Long> publish(String channel, String message){
         synchronized (lockPubSub){
             connectPubSub();
+
             return pubCommands.publish(channel, message);
         }
     }
+
+    public RedisFuture<Void> subscribe(String channel, RedisChannelListener channelListener){
+        synchronized (lockPubSub){
+            connectPubSub();
+            pubConnection.addListener(channelListener);
+            return pubCommands.subscribe(channel);
+        }
+    }
+
+
+
+    public RedisPubSubAsyncCommands<String, String> getPubCommands() {
+        synchronized (lockPubSub){
+            connectPubSub();
+            return pubCommands;
+        }
+
+    }
+
+    public void addListener(RedisPubSubListener<String, String> listener){
+        synchronized (lockPubSub){
+            connectPubSub();
+            pubConnection.addListener(listener);
+        }
+    }
+
 
     public Map<String, String> hgetall(String key){
         synchronized (lock){
             connect();
             return syncHash.hgetall(key);
+        }
+    }
+
+
+    /**
+     * 첫위치에 추기
+     */
+    public Long lpush(String key, String value){
+        synchronized (lock){
+            connect();
+            //왼쪽 0번째꺼 꺼내기
+            return syncList.lpush(key,value);
+        }
+    }
+
+
+    public Long push(String key, String value){
+        synchronized (lock){
+            connect();
+            //왼쪽 0번째꺼 꺼내기
+            return syncList.rpush(key,value);
+        }
+    }
+
+    public String pop(String key){
+        synchronized (lock){
+            connect();
+            //왼쪽 0번째꺼 꺼내기
+            return syncList.lpop(key);
         }
     }
 
@@ -155,17 +217,23 @@ public class ServiceRedis {
 
     private void connect(){
         if (!connection.isOpen()) {
-            connection.close();
+            try {
+                connection.close();
+            }catch (Exception ignore){}
             connection = redisConnect.connection();
             asyncHash = redisConnect.asyncHash();
             asyncString = redisConnect.asyncString();
             syncString = redisConnect.syncString();
             syncHash = redisConnect.syncHash();
+            syncList = redisConnect.syncList();
         }
     }
 
     private void connectPubSub(){
         if (!pubConnection.isOpen()) {
+            try {
+                pubConnection.close();
+            }catch (Exception ignore){}
             pubConnection = redisConnect.connectPubSub();
             pubConnection.setAutoFlushCommands(true);
             pubCommands = pubConnection.async();

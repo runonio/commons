@@ -2,6 +2,7 @@ package io.runon.commons.data.service.notify;
 
 import io.runon.commons.data.service.health.ServerHealthCommons;
 import io.runon.commons.data.service.redis.Redis;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 
 import java.util.Map;
@@ -9,6 +10,7 @@ import java.util.Map;
 /**
  * @author macle
  */
+
 public class NotifyCommons {
 
    public static final String SERVER_PRIORITY_KEY = "notify_service_priority";

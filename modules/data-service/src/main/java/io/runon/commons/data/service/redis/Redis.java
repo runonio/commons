@@ -54,7 +54,19 @@ public class Redis {
     }
 
 
+    public static Long lpush(String key, String value){
+        return ServiceRedis.instance.lpush(key,value);
 
+    }
+
+
+    public static Long push(String key, String value){
+        return ServiceRedis.instance.push(key,value);
+    }
+
+    public static String pop(String key){
+        return ServiceRedis.instance.pop(key);
+    }
 
     public static RedisFuture<Boolean> hsetAsync(String key, String field, String value){
         return ServiceRedis.instance.hsetAsync(key,field,value);
