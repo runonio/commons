@@ -16,7 +16,7 @@ public class HashMapBuilder<K, V> {
         return this;
     }
 
-    public HashMap<K, V> getMap() {
+    public HashMap<K, V> get() {
         return map;
     }
 }

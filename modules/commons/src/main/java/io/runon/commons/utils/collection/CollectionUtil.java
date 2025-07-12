@@ -16,6 +16,9 @@
 package io.runon.commons.utils.collection;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * java.util.Collection 패지키 유틸성 메소드
  *
@@ -57,4 +60,24 @@ public class CollectionUtil {
 		}
 		return values;
 	}
+
+	public static Set<String> makeStrSet(String text){
+		return makeStrSet(text, ",",true);
+	}
+
+	public static  Set<String> makeStrSet(String text, String splitRegex, boolean isTrim){
+		String [] lines = text.split(splitRegex);
+		Set<String> set = new HashSet<>();
+
+		for(String line : lines){
+			if(isTrim){
+				set.add(line.trim());
+			}else{
+				set.add(line);
+			}
+		}
+
+		return set;
+	}
+
 }

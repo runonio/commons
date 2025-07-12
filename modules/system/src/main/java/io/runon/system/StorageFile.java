@@ -37,7 +37,7 @@ public class StorageFile {
 
 
     @Column(name = "encrypt_type")
-    String encryptType;
+    String encryptType ="SCM";
 
     @Column(name = "file_path_type")
     String filePathType;
