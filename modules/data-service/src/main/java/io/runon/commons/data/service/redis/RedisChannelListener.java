@@ -2,7 +2,7 @@ package io.runon.commons.data.service.redis;
 /**
  * @author macle
  */
-public class RedisChannelListener extends RedisSubListener {
+public abstract class RedisChannelListener extends RedisSubListener {
 
     private final String channel;
     public RedisChannelListener(String channel){
@@ -16,7 +16,5 @@ public class RedisChannelListener extends RedisSubListener {
         }
     }
 
-    public void message(String message){
-
-    }
+    public abstract void message(String message);
 }

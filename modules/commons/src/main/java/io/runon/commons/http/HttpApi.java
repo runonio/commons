@@ -1,11 +1,13 @@
 package io.runon.commons.http;
 
+import io.runon.commons.exception.ConnectRuntimeException;
 import io.runon.commons.exception.IORuntimeException;
 import io.runon.commons.utils.FileUtil;
 import lombok.Setter;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
+import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
@@ -148,7 +150,9 @@ public class HttpApi {
             }catch (Exception ignore){}
 
             return httpResponse;
-        }catch (IOException e){
+        }catch (ConnectException connectException){
+            throw new ConnectRuntimeException(connectException);
+        } catch (IOException e){
             throw new IORuntimeException(e);
         }
     }

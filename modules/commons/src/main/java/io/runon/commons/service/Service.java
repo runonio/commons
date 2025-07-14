@@ -1,22 +1,8 @@
-/*
- * Copyright (C) 2020 Seomse Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 
 package io.runon.commons.service;
 
 import io.runon.commons.callback.ObjCallback;
+import io.runon.commons.service.ServiceManager;
 import io.runon.commons.utils.ExceptionUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -56,6 +42,8 @@ public abstract class Service extends Thread {
     private boolean isStop = false;
 
     protected State state = State.STAND;
+
+    protected Thread serviceThread;
 
     /**
      * 상태설정 
@@ -138,14 +126,14 @@ public abstract class Service extends Thread {
             ServiceManager.getInstance().addService(this);
         }
 
+        serviceThread = Thread.currentThread();
+
         if(delayStartTime != null && delayStartTime > 0 ){
-            try{
+
+            try {
                 Thread.sleep(delayStartTime);
-            }catch(Exception e){
-                log.error(ExceptionUtil.getStackTrace(e));
-                serviceStop();
-                return;
-            }
+            } catch (InterruptedException ignore) {}
+
         }
 
         if(state == State.STOP){
@@ -167,13 +155,12 @@ public abstract class Service extends Thread {
                 while(state != State.STOP){
                     if(state == State.START){
                         work();
-
-
                     }
 
                     if(sleepTime != null && state != State.STOP && sleepTime > 0){
-                        //noinspection BusyWait
-                        Thread.sleep(sleepTime);
+                        try {
+                            Thread.sleep(sleepTime);
+                        } catch (InterruptedException ignore) {}
                     }
                 }
             }catch(Exception e){
@@ -207,4 +194,15 @@ public abstract class Service extends Thread {
      * 서비스 작업 내용 정의
      */
     public abstract void work();
+
+
+    public void interrupt(){
+        try {
+            serviceThread.interrupt();
+        }catch (Exception ignore){}
+    }
+
+    public Thread getServiceThread() {
+        return serviceThread;
+    }
 }

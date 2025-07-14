@@ -538,6 +538,10 @@ public class FileUtil {
 	@SuppressWarnings("WeakerAccess")
 	public static boolean fileCopy(String inFileName, String outFileName) {
 		try {
+			if(!FileUtil.isFile(inFileName)){
+				return false;
+			}
+
 			FileInputStream fis = new FileInputStream(inFileName);
 			FileOutputStream fos = new FileOutputStream(outFileName);
 
@@ -553,10 +557,9 @@ public class FileUtil {
 			fis.close();
 			fos.close();
 			return true;
-		} catch (Exception e) {
+		} catch (IOException e) {
 			//io, nio 패키지를 같이쓰면 잘 되도 에러나는 경우가 있으므로 로그처리
-			log.error(ExceptionUtil.getStackTrace(e));
-			return false;
+			throw new IORuntimeException(e);
 		}
 	}
 

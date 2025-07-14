@@ -10,10 +10,11 @@ import io.lettuce.core.api.sync.RedisStringCommands;
 import io.lettuce.core.pubsub.RedisPubSubListener;
 import io.lettuce.core.pubsub.StatefulRedisPubSubConnection;
 import io.lettuce.core.pubsub.api.async.RedisPubSubAsyncCommands;
-import lombok.extern.slf4j.Slf4j;
+import io.runon.commons.callback.StrCallback;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 /**
  * @author macle
@@ -40,6 +41,8 @@ public class ServiceRedis {
     private StatefulRedisPubSubConnection<String, String> pubConnection;
     private RedisPubSubAsyncCommands<String, String> pubCommands;
 
+
+
     private ServiceRedis(){
         redisConnect = RedisConnectFactory.newRedisConnect();
 
@@ -53,9 +56,24 @@ public class ServiceRedis {
         pubConnection = redisConnect.connectPubSub();
         pubConnection.setAutoFlushCommands(true);
         pubCommands = pubConnection.async();
-
-
     }
+
+    private final Object observerLock = new Object();
+    private List<StrCallback> connectObserverList = new ArrayList<>();
+
+    public void addConnectObserver(StrCallback observer){
+        synchronized (observerLock) {
+            connectObserverList.add(observer);
+        }
+    }
+
+    public void removeConnectObserver(StrCallback observer){
+        synchronized (observerLock) {
+            connectObserverList.remove(observer);
+        }
+    }
+
+
 
 
     private final Object lock = new Object();
@@ -65,7 +83,6 @@ public class ServiceRedis {
     public RedisFuture<Long> publish(String channel, String message){
         synchronized (lockPubSub){
             connectPubSub();
-
             return pubCommands.publish(channel, message);
         }
     }
@@ -73,19 +90,20 @@ public class ServiceRedis {
     public RedisFuture<Void> subscribe(String channel, RedisChannelListener channelListener){
         synchronized (lockPubSub){
             connectPubSub();
+            //중복 되어 등복 되는 경우 방지
+            try {
+                pubConnection.removeListener(channelListener);
+            }catch (Exception ignore){}
             pubConnection.addListener(channelListener);
             return pubCommands.subscribe(channel);
         }
     }
-
-
 
     public RedisPubSubAsyncCommands<String, String> getPubCommands() {
         synchronized (lockPubSub){
             connectPubSub();
             return pubCommands;
         }
-
     }
 
     public void addListener(RedisPubSubListener<String, String> listener){
@@ -95,14 +113,12 @@ public class ServiceRedis {
         }
     }
 
-
     public Map<String, String> hgetall(String key){
         synchronized (lock){
             connect();
             return syncHash.hgetall(key);
         }
     }
-
 
     /**
      * 첫위치에 추기
@@ -114,7 +130,6 @@ public class ServiceRedis {
             return syncList.lpush(key,value);
         }
     }
-
 
     public Long push(String key, String value){
         synchronized (lock){
@@ -213,8 +228,6 @@ public class ServiceRedis {
         }
     }
 
-
-
     private void connect(){
         if (!connection.isOpen()) {
             try {
@@ -226,6 +239,20 @@ public class ServiceRedis {
             syncString = redisConnect.syncString();
             syncHash = redisConnect.syncHash();
             syncList = redisConnect.syncList();
+
+            if(!connectObserverList.isEmpty()){
+                new Thread(()->{
+                    synchronized (lockPubSub){
+                        for(StrCallback observer : connectObserverList){
+                            try {
+                                observer.callback("redis_connection");
+                            }catch (Exception ignore){}
+                        }
+                    }
+                }).start();
+            }
+
+
         }
     }
 
@@ -237,7 +264,19 @@ public class ServiceRedis {
             pubConnection = redisConnect.connectPubSub();
             pubConnection.setAutoFlushCommands(true);
             pubCommands = pubConnection.async();
+            if(!connectObserverList.isEmpty()) {
+                new Thread(() -> {
+                    synchronized (lockPubSub) {
+                        for (StrCallback observer : connectObserverList) {
+                            try {
+                                observer.callback("pubsub_connection");
+                            } catch (Exception ignore) {
+                            }
+                        }
+                    }
+                }).start();
+            }
+
         }
     }
-
 }

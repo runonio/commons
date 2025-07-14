@@ -11,6 +11,10 @@ import java.util.Map;
 @SuppressWarnings("UnusedReturnValue")
 public class Redis {
 
+    public static RedisFuture<Void> subscribe(String channel, RedisChannelListener channelListener){
+        return ServiceRedis.getInstance().subscribe(channel, channelListener);
+    }
+
     public static RedisFuture<Long> publish(String channel, String message){
         return ServiceRedis.instance.publish(channel,message);
     }
@@ -80,10 +84,8 @@ public class Redis {
         return ServiceRedis.instance.hdelAsync(key, fields);
     }
 
-
     public static RedisFuture<String> setAsync(String key, String value){
         return ServiceRedis.instance.setAsync(key, value);
-
     }
 
 

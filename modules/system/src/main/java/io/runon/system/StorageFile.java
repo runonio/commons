@@ -1,6 +1,7 @@
 package io.runon.system;
 
 
+import io.runon.commons.crypto.CryptoType;
 import io.runon.commons.crypto.Cryptos;
 import io.runon.commons.utils.ExceptionUtil;
 import io.runon.jdbc.annotation.Column;
@@ -41,10 +42,11 @@ public class StorageFile {
 
 
     @Column(name = "encrypt_type")
-    String encryptType ="SCM";
+    CryptoType encryptType =CryptoType.SCM;
+
 
     @Column(name = "file_path_type")
-    String filePathType;
+    FilePathType filePathType;
 
     @Column(name = "file_path")
     String filePath;
@@ -58,6 +60,11 @@ public class StorageFile {
 
 
     public void setSha256(){
+
+        if(fileBytes == null){
+            return;
+        }
+
         try {
             sha256 = Cryptos.getHashText(fileBytes, "SHA-256");
         }catch (Exception e){

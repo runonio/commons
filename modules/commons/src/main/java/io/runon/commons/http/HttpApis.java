@@ -50,7 +50,7 @@ public class HttpApis {
         requestProperty.put("Accept", "application/json");
         httpApi.setDefaultRequestProperty(requestProperty);
         //용량이 큰 요청을 할 수 있다.
-        httpApi.setReadTimeOut((int)Times.MINUTE_10);
+//        httpApi.setReadTimeOut((int)Times.MINUTE_10);
         return httpApi;
     }
 
