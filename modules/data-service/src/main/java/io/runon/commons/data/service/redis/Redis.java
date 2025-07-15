@@ -3,6 +3,7 @@ package io.runon.commons.data.service.redis;
 import io.lettuce.core.RedisFuture;
 import org.json.JSONArray;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,6 +32,10 @@ public class Redis {
      */
     public static Boolean hset(String key, String field, String value){
         return ServiceRedis.instance.hset(key, field, value);
+    }
+
+    public static List<String> getListAll(String key){
+        return ServiceRedis.instance.getListAll(key);
     }
 
     /**

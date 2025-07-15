@@ -56,6 +56,8 @@ public class ServiceRedis {
         pubConnection = redisConnect.connectPubSub();
         pubConnection.setAutoFlushCommands(true);
         pubCommands = pubConnection.async();
+
+
     }
 
     private final Object observerLock = new Object();
@@ -72,6 +74,8 @@ public class ServiceRedis {
             connectObserverList.remove(observer);
         }
     }
+
+
 
 
 
@@ -117,6 +121,13 @@ public class ServiceRedis {
         synchronized (lock){
             connect();
             return syncHash.hgetall(key);
+        }
+    }
+
+    public List<String> getListAll(String key){
+        synchronized (lock){
+            connect();
+            return syncList.lrange(key, 0, -1);
         }
     }
 
