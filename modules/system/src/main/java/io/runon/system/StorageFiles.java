@@ -5,6 +5,7 @@ import io.runon.commons.config.Config;
 import io.runon.commons.crypto.CryptoType;
 import io.runon.commons.crypto.Cryptos;
 import io.runon.commons.exception.IORuntimeException;
+import io.runon.commons.utils.FileUtil;
 import io.runon.commons.utils.GsonUtils;
 import io.runon.jdbc.Database;
 import io.runon.jdbc.JdbcQuery;
@@ -44,7 +45,7 @@ public class StorageFiles {
             storageFile.setFileBytes(Cryptos.encByte(storageFile.getFileBytes(), storageFile.getEncryptType(), storageFile.getFileId(), Config.getInteger("crypto.default.key.size", 32)));
 
             String sttFilePath = storageFile.getFilePath();
-
+            FileUtil.mkdirsParent(sttFilePath);
             try (FileOutputStream fos = new FileOutputStream(sttFilePath)) {
                 fos.write(storageFile.getFileBytes());
                 fos.flush();

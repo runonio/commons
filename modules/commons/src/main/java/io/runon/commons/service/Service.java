@@ -43,7 +43,6 @@ public abstract class Service extends Thread {
 
     protected State state = State.STAND;
 
-    protected Thread serviceThread;
 
     /**
      * 상태설정 
@@ -126,8 +125,6 @@ public abstract class Service extends Thread {
             ServiceManager.getInstance().addService(this);
         }
 
-        serviceThread = Thread.currentThread();
-
         if(delayStartTime != null && delayStartTime > 0 ){
 
             try {
@@ -196,13 +193,5 @@ public abstract class Service extends Thread {
     public abstract void work();
 
 
-    public void interrupt(){
-        try {
-            serviceThread.interrupt();
-        }catch (Exception ignore){}
-    }
 
-    public Thread getServiceThread() {
-        return serviceThread;
-    }
 }
