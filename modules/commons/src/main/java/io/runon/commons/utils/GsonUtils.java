@@ -31,6 +31,14 @@ public class GsonUtils {
 
 
     public static JsonObject fromJsonObject(String jsonText){
+        if(jsonText == null ){
+            return new JsonObject();
+        }
+        jsonText = jsonText.trim();
+        if(jsonText.trim().isEmpty()){
+            return new JsonObject();
+        }
+
         return GSON.fromJson(jsonText, JsonObject.class);
     }
 
