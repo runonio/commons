@@ -7,21 +7,21 @@ import java.util.List;
 /**
  * @author macle
  */
-public class BeginEndIndexEmpty extends BeginEndIndexData {
+public class StartEndIndexEmpty extends StartEndIndexData {
 	/**
 	 * 생성자
 	 */
-	BeginEndIndexEmpty(){
+	StartEndIndexEmpty(){
 		
 	}
 
 	@Override
-	public void addBeginEndIndex(int startIndex, int endIndex){
+	public void addStartEndIndex(int startIndex, int endIndex){
 		
 	}
 
 	@Override
-	public List<BeginEndIndex> getBeginEndIndexList() {
+	public List<StartEndIndex> getStartEndIndexList() {
 		return Collections.emptyList();
 	}
 

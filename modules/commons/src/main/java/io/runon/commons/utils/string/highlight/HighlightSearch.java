@@ -30,20 +30,20 @@ class HighlightSearch {
 
     public void add(HighlightKeyword newKeyword) {
 
-        int begin = newKeyword.getBegin();
+        int start = newKeyword.getStart();
         int end = newKeyword.getEnd();
 
         int endIndex = end-1;
-        int length = end - begin;
+        int length = end - start;
 
         for (int i = 0; i < list.size(); i++) {
             HighlightKeyword highlightKeyword= list.get(i);
 
-            if(highlightKeyword.getBegin() == begin && highlightKeyword.getEnd() == end){
+            if(highlightKeyword.getStart() == start && highlightKeyword.getEnd() == end){
                 return;
             }
 
-            if(highlightKeyword.getBegin() <= begin && highlightKeyword.getEnd() >= end){
+            if(highlightKeyword.getStart() <= start && highlightKeyword.getEnd() >= end){
                 return ;
             }
 
@@ -52,12 +52,12 @@ class HighlightSearch {
             //위치가 겹친경우
             if(
 
-                    (highlightKeyword.getBegin() <= begin && keywordEndIndex >= begin)
-                            ||(highlightKeyword.getBegin() <= endIndex && keywordEndIndex >= endIndex)
-                            ||(begin <= highlightKeyword.getBegin() && endIndex >= highlightKeyword.getBegin())
-                            ||(begin <= keywordEndIndex && endIndex >=keywordEndIndex)
+                    (highlightKeyword.getStart() <= start && keywordEndIndex >= start)
+                            ||(highlightKeyword.getStart() <= endIndex && keywordEndIndex >= endIndex)
+                            ||(start <= highlightKeyword.getStart() && endIndex >= highlightKeyword.getStart())
+                            ||(start <= keywordEndIndex && endIndex >=keywordEndIndex)
             ){
-                highlightKeyword.begin = Math.min(highlightKeyword.getBegin(), begin);
+                highlightKeyword.start = Math.min(highlightKeyword.getStart(), start);
                 highlightKeyword.end = Math.max(highlightKeyword.getEnd(), end);
                 return;
             }
@@ -79,35 +79,35 @@ class HighlightSearch {
     /**
      * 중복체크
      * 기존에 가진 키워드와 중복된 위치가 있는지 체크한다
-     * @param begin
+     * @param start
      * @param end
      * @return 위치가 겹치는지 여부
      */
-    boolean isOverlap(int begin, int end){
+    boolean isOverlap(int start, int end){
 
         int endIndex = end - 1;
 
         for(HighlightKeyword highlightKeyword : list ){
 
             // 하이라이트 기준으로 체크
-            if(highlightKeyword.getBegin() <= begin && highlightKeyword.getEnd() > begin){
+            if(highlightKeyword.getStart() <= start && highlightKeyword.getEnd() > start){
                 //시작 부분이 겹치면
                 return true;
             }
-            if(highlightKeyword.getBegin() <= endIndex && highlightKeyword.getEnd() > endIndex){
+            if(highlightKeyword.getStart() <= endIndex && highlightKeyword.getEnd() > endIndex){
                 //끝 위치가 겹치면
                 return true;
             }
 
             //새로 들어온 위치 기준으로 체크
-            if(begin <= highlightKeyword.getBegin() && end > highlightKeyword.getBegin()){
+            if(start <= highlightKeyword.getStart() && end > highlightKeyword.getStart()){
                 //시작 위치가 겹치면
                 return true;
             }
 
             int highlightEndIndex = highlightKeyword.getEnd()-1;
             //새로 들어온 위치 기준으로 체크
-            if(begin <= highlightEndIndex && end > highlightEndIndex){
+            if(start <= highlightEndIndex && end > highlightEndIndex){
                 //끝 위치가 겹치면
                 return true;
             }

@@ -3,11 +3,11 @@ package io.runon.commons.data;
 /**
  * @author macle
  */
-public class TextBeginEndIndex extends BeginEndIndex {
+public class TextStartEndIndex extends StartEndIndex {
 	protected String text;
 	
 	
-	public TextBeginEndIndex(){
+	public TextStartEndIndex(){
 		
 	}
 	public void setText(String text) {
@@ -15,10 +15,10 @@ public class TextBeginEndIndex extends BeginEndIndex {
 	}
 
 
-	public TextBeginEndIndex(String text){
+	public TextStartEndIndex(String text){
 		this.text = text;
 	}
-	public TextBeginEndIndex(String text, int startIndex, int endIndex){
+	public TextStartEndIndex(String text, int startIndex, int endIndex){
 		super(startIndex, endIndex);
 		this.text = text;
 	}

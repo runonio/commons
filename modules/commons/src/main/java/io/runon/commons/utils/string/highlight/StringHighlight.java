@@ -1,8 +1,8 @@
 
 package io.runon.commons.utils.string.highlight;
 
-import io.runon.commons.data.BeginEnd;
-import io.runon.commons.data.BeginEndText;
+import io.runon.commons.data.StartEnd;
+import io.runon.commons.data.StartEndText;
 import io.runon.commons.exception.OutOfRangeException;
 
 import java.util.Arrays;
@@ -15,7 +15,7 @@ import java.util.Comparator;
 public class StringHighlight {
 
 
-    public static String make(String text, BeginEndText[] tokens,  BeginEnd[] splitBeginEnds, String [] keywords, String pre, String post, int length ){
+    public static String make(String text, StartEndText[] tokens, StartEnd[] splitStartEnds, String [] keywords, String pre, String post, int length ){
 
         //글자 길이수 역순으로 정렬
         Arrays.sort(keywords, (a, b)->Integer.compare(b.length(), a.length()));
@@ -24,19 +24,19 @@ public class StringHighlight {
 
         outer:
         for (int i = 0; i <tokens.length ; i++) {
-            BeginEndText token = tokens[i];
+            StartEndText token = tokens[i];
             for (int jj = 0; jj <keywords.length ; jj++) {
                 String keyword = keywords[jj];
 
                 if(  token.getText().equals(keyword)){
                     HighlightKeyword highlightKeyword = new HighlightKeyword();
-                    highlightKeyword.begin = token.getBegin();
+                    highlightKeyword.start = token.getStart();
                     highlightKeyword.end = token.getEnd();
                     search.add(highlightKeyword);
                 }
 
 
-                String subText = text.substring(token.getBegin(), token.getEnd());
+                String subText = text.substring(token.getStart(), token.getEnd());
 
                 if(
                         //변형어 토큰으로인해 위치가 같을때만 앞뒤를 추가로 비교한다.
@@ -52,15 +52,15 @@ public class StringHighlight {
                     HighlightKeyword highlightKeyword = new HighlightKeyword();
 //                    highlightKeyword.index = jj;
 
-                    int tokenLength = token.getEnd()-token.getBegin();
+                    int tokenLength = token.getEnd()-token.getStart();
                     if(tokenLength == keyword.length()){
-                        highlightKeyword.begin = token.getBegin();
+                        highlightKeyword.start = token.getStart();
                         highlightKeyword.end = token.getEnd();
                     }else if(token.getText().startsWith(keyword)){
-                        highlightKeyword.begin = token.getBegin();
+                        highlightKeyword.start = token.getStart();
                         highlightKeyword.end = token.getEnd() - (tokenLength - keyword.length());
                     }else{
-                        highlightKeyword.begin = token.getBegin() + (tokenLength - keyword.length());
+                        highlightKeyword.start = token.getStart() + (tokenLength - keyword.length());
                         highlightKeyword.end = token.getEnd();
                     }
 
@@ -78,102 +78,102 @@ public class StringHighlight {
             }
         }
 
-        int highlightBegin;
+        int highlightStart;
         int highlightEnd;
 
         if(text.length() < length){
-            highlightBegin = 0;
+            highlightStart = 0;
             highlightEnd = text.length();
         }else{
-            highlightBegin = search.list.get(0).begin;
+            highlightStart = search.list.get(0).start;
             highlightEnd = search.list.get(search.list.size()-1).end;
 
-            int gap = length - (highlightEnd - highlightBegin);
+            int gap = length - (highlightEnd - highlightStart);
 
             //범위확장 가능여부 체크
-            int splitBegin = -1;
+            int splitStart = -1;
 
-            for (BeginEnd beginEnd : splitBeginEnds) {
-                if (beginEnd.getBegin() <= highlightBegin && beginEnd.getEnd() > highlightBegin) {
-                    splitBegin = beginEnd.getBegin();
+            for (StartEnd startEnd : splitStartEnds) {
+                if (startEnd.getStart() <= highlightStart && startEnd.getEnd() > highlightStart) {
+                    splitStart = startEnd.getStart();
                     break;
                 }
             }
 
-            if(splitBegin == -1){
-                throw new OutOfRangeException("splitBeginEnds error");
+            if(splitStart == -1){
+                throw new OutOfRangeException("splitStartEnds error");
             }
 
             //앞부분 확장
-            if( highlightEnd - splitBegin < length){
-                highlightBegin = splitBegin;
+            if( highlightEnd - splitStart < length){
+                highlightStart = splitStart;
 
             }else{
 
-                int spaceIndex = text.lastIndexOf(' ', highlightBegin);
+                int spaceIndex = text.lastIndexOf(' ', highlightStart);
                 if(spaceIndex == -1){
-                    if(highlightBegin < gap){
-                        highlightBegin = 0;
+                    if(highlightStart < gap){
+                        highlightStart = 0;
                     }
                 }else{
 
                     int checkIndex = spaceIndex+1;
 
-                    if(checkIndex != highlightBegin && highlightBegin - checkIndex < gap){
-                        highlightBegin = checkIndex;
+                    if(checkIndex != highlightStart && highlightStart - checkIndex < gap){
+                        highlightStart = checkIndex;
                     }
                 }
             }
 
             //뒷 부분 확장
-            gap = length - (highlightEnd - highlightBegin);
+            gap = length - (highlightEnd - highlightStart);
 
             highlightEnd = Math.min(highlightEnd + gap, text.length());
         }
 
         HighlightKeyword [] highlightKeywords = search.list.toArray(new HighlightKeyword[0]);
         for(HighlightKeyword highlightKeyword : highlightKeywords){
-            highlightKeyword.begin -= highlightBegin;
-            highlightKeyword.end -= highlightBegin;
+            highlightKeyword.start -= highlightStart;
+            highlightKeyword.end -= highlightStart;
 
         }
 
         if(highlightEnd == text.length()){
-            return make (text.substring(highlightBegin, highlightEnd), pre, post, highlightKeywords);
+            return make (text.substring(highlightStart, highlightEnd), pre, post, highlightKeywords);
         }else{
-            return make (text.substring(highlightBegin, highlightEnd), pre, post, highlightKeywords) + "...";
+            return make (text.substring(highlightStart, highlightEnd), pre, post, highlightKeywords) + "...";
         }
     }
 
-    public static String make(String text, String pre, String post, BeginEnd[] beginEnds){
+    public static String make(String text, String pre, String post, StartEnd[] startEnds){
 
-        Arrays.sort(beginEnds, Comparator.comparingInt(BeginEnd::getBegin));
+        Arrays.sort(startEnds, Comparator.comparingInt(StartEnd::getStart));
 
         StringBuilder sb = new StringBuilder();
         int lastIndex = 0;
 
-        for(BeginEnd beginEnd : beginEnds){
+        for(StartEnd startEnd : startEnds){
             if(lastIndex > text.length()){
                 break;
             }
 
-            if(beginEnd.getBegin() > text.length()){
+            if(startEnd.getStart() > text.length()){
                 break;
             }
 
-            if(lastIndex > beginEnd.getBegin()){
+            if(lastIndex > startEnd.getStart()){
                 continue;
             }
 
-            int end = beginEnd.getEnd();
+            int end = startEnd.getEnd();
             if(end > text.length()){
                 end = text.length();
             }
 
-            sb.append(text, lastIndex, beginEnd.getBegin());
+            sb.append(text, lastIndex, startEnd.getStart());
 
-            sb.append(pre).append(text, beginEnd.getBegin(), end).append(post);
-            lastIndex = beginEnd.getEnd();
+            sb.append(pre).append(text, startEnd.getStart(), end).append(post);
+            lastIndex = startEnd.getEnd();
         }
 
         if(lastIndex < text.length()){

@@ -65,33 +65,33 @@ public class BetweenString {
 
     /**
      * 사이 값 얻기
-     * @param begin String start with
+     * @param start String start with
      * @param end String end with
 
      * @return String
      */
-    private String getValue(String begin, String end){
+    private String getValue(String start, String end){
 
 
-        int startIndex = text.indexOf(begin);
+        int startIndex = text.indexOf(start);
         if(startIndex == -1){
             return null;
         }
 
-        startIndex += begin.length();
+        startIndex += start.length();
         int endIndex =  text.indexOf(end, startIndex);
         if(endIndex == -1){
             return null;
         }
 
-        String result = getBetween(text, begin, end);
+        String result = getBetween(text, start, end);
 
         if(isXmlRemove){
             result = TextParsing.replaceInLine(result,"<!DOCTYPE", "loose.dtd\">","");
         }
 
         if(isNumberCharEntry){
-            result = TextParsing.replaceNumberChar(result,numberCharBegin,numberCharEnd);
+            result = TextParsing.replaceNumberChar(result, numberCharStart,numberCharEnd);
         }
 
         if(isHtmlRemove) {
@@ -108,11 +108,11 @@ public class BetweenString {
         return result;
     }
 
-    private String numberCharBegin= "&#";
+    private String numberCharStart = "&#";
     private String numberCharEnd = ";";
 
-    public void setNumberCharBegin(String numberCharBegin) {
-        this.numberCharBegin = numberCharBegin;
+    public void setNumberCharStart(String numberCharStart) {
+        this.numberCharStart = numberCharStart;
     }
 
     public void setNumberCharEnd(String numberCharEnd) {
@@ -143,14 +143,14 @@ public class BetweenString {
         return text;
     }
 
-    public static String getBetween(String text, String begin, String end){
+    public static String getBetween(String text, String start, String end){
 
-        int startIndex = text.indexOf(begin);
+        int startIndex = text.indexOf(start);
         if(startIndex == -1){
             return null;
         }
 
-        startIndex += begin.length();
+        startIndex += start.length();
         int endIndex =  text.indexOf(end, startIndex);
         if(endIndex == -1){
             return null;

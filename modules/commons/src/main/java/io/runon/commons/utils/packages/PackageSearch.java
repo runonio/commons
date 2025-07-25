@@ -29,7 +29,7 @@ public class PackageSearch {
 	
 	public enum Option{
 		INCLUDE //포함되어있으면
-		, BEGIN //시작이
+		, START //시작이
 		, END //끝이
 	}
 	
@@ -108,7 +108,7 @@ public class PackageSearch {
 				
 				break;
 				
-			case BEGIN:
+			case START:
 				if(!fileName.startsWith(text))
 					continue;
 				break;	

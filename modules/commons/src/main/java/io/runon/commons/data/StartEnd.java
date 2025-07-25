@@ -1,16 +1,11 @@
 
 package io.runon.commons.data;
 /**
- * begin, end
  * @author macle
  */
-public interface BeginEnd {
+public interface StartEnd {
 
-    /**
-     * begin
-     * @return begin index
-     */
-    int getBegin();
+    int getStart();
 
     /**
      * end

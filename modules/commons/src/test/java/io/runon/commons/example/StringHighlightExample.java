@@ -2,7 +2,7 @@
 
 package io.runon.commons.example;
 
-import io.runon.commons.data.BeginEnd;
+import io.runon.commons.data.StartEnd;
 import io.runon.commons.utils.string.highlight.StringHighlight;
 
 /**
@@ -14,9 +14,9 @@ public class StringHighlightExample {
 
         String text = "섬세한사람들 작더라도 쓸모있게 만드는 개발자 모임이다.";
 
-        BeginEnd se1 = new BeginEnd() {
+        StartEnd se1 = new StartEnd() {
             @Override
-            public int getBegin() {
+            public int getStart() {
                 return 0;
             }
 
@@ -26,9 +26,9 @@ public class StringHighlightExample {
             }
         };
 
-        BeginEnd se2 = new BeginEnd() {
+        StartEnd se2 = new StartEnd() {
             @Override
-            public int getBegin() {
+            public int getStart() {
                 return 21;
             }
 
@@ -38,9 +38,9 @@ public class StringHighlightExample {
             }
         };
 
-        BeginEnd se3 = new BeginEnd() {
+        StartEnd se3 = new StartEnd() {
             @Override
-            public int getBegin() {
+            public int getStart() {
                 return 25;
             }
 
@@ -50,12 +50,12 @@ public class StringHighlightExample {
             }
         };
 
-        BeginEnd[] beginEnds = new BeginEnd[3];
-        beginEnds[0] = se1;
-        beginEnds[1] = se2;
-        beginEnds[2] = se3;
+        StartEnd[] startEnds = new StartEnd[3];
+        startEnds[0] = se1;
+        startEnds[1] = se2;
+        startEnds[2] = se3;
 
-        System.out.println(StringHighlight.make(text,"<em>","</em>", beginEnds));
+        System.out.println(StringHighlight.make(text,"<em>","</em>", startEnds));
     }
 
 }

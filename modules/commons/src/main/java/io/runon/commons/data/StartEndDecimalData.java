@@ -7,18 +7,18 @@ import java.math.BigDecimal;
  * @author macle
  */
 @Data
-public class BeginEndDecimalData implements BeginEndDecimal{
+public class StartEndDecimalData implements StartEndDecimal {
 
     BigDecimal number;
-    int begin;
+    int start;
     int end;
 
-    public BeginEndDecimalData(){
+    public StartEndDecimalData(){
 
     }
 
-    public BeginEndDecimalData(int begin, int end, BigDecimal number){
-        this.begin = begin;
+    public StartEndDecimalData(int start, int end, BigDecimal number){
+        this.start = start;
         this.end = end;
         this.number = number;
     }

@@ -27,21 +27,21 @@ import java.util.List;
 public class Remove {
 
 
-    public static String betweenFirst(String text, String beginStr, String endStr){
-        return betweenFirst(text, false, beginStr, endStr);
+    public static String betweenFirst(String text, String startStr, String endStr){
+        return betweenFirst(text, false, startStr, endStr);
     }
 
-    public static String betweenFirst( String text,boolean isRemoveSymbol, String beginStr, String endStr) {
+    public static String betweenFirst( String text,boolean isRemoveSymbol, String startStr, String endStr) {
 
-        int beginIndex = text.indexOf(beginStr);
-        if(beginIndex == -1){
+        int startIndex = text.indexOf(startStr);
+        if(startIndex == -1){
             return text;
         }
 
-        int searchEndStart = beginIndex + beginStr.length();
+        int searchEndStart = startIndex + startStr.length();
 
         if(!isRemoveSymbol){
-            beginIndex = searchEndStart;
+            startIndex = searchEndStart;
         }
 
         int endIndex = text.indexOf(endStr,searchEndStart );
@@ -54,7 +54,7 @@ public class Remove {
         }
 
 
-        return text.substring(0, beginIndex) +
+        return text.substring(0, startIndex) +
                 text.substring(endIndex);
     }
 
