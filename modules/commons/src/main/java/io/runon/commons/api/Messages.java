@@ -6,6 +6,6 @@ package io.runon.commons.api;
  * @author macle
  */
 public interface Messages {
-    String SUCCESS = "{SUCCESS}";
-    String FAIL = "{FAIL}";
+    String SUCCESS = "SUCCESS";
+    String FAIL = "FAIL";
 }

@@ -120,8 +120,9 @@ public class StorageFiles {
     }
 
 
-
     public static void out(StorageFile storageFile, String outPath){
+
+
         FilePathType filePathType = storageFile.getFilePathType();
         if (filePathType == FilePathType.DB) {
             if(storageFile.getSplitType().startsWith("split")){
@@ -146,7 +147,24 @@ public class StorageFiles {
         }
     }
 
+    public static StorageFile getStorageFile(String fileId){
+       return JdbcObjects.getObj(StorageFile.class, "file_id='" + fileId +"'");
+    }
 
+    public static String makeExtension(StorageFile storageFile, String path){
+        try {
+
+            int index = path.lastIndexOf(".");
+            if(index < 1){
+                return path;
+            }
+
+            String originalName = storageFile.getFileName();
+            String extension = FileUtil.getExtension(originalName);
+            path = path + "." + extension;
+        } catch (Exception ignore) {}
+        return path;
+    }
 
 
 

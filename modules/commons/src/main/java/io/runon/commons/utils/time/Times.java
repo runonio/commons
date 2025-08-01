@@ -289,12 +289,12 @@ public class Times {
         return zonedDateTime.getYear();
     }
 
-    public static long getBeginTime(int beginYmd, ZoneId zoneId){
-        return YmdUtil.getTime(beginYmd, zoneId);
+    public static long getStartTime(int startYmd, ZoneId zoneId){
+        return YmdUtil.getTime(startYmd, zoneId);
     }
 
-    public static long getBeginTime(String beginYmd, ZoneId zoneId){
-        return YmdUtil.getTime(beginYmd, zoneId);
+    public static long getStartTime(String startYmd, ZoneId zoneId){
+        return YmdUtil.getTime(startYmd, zoneId);
     }
 
 

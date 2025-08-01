@@ -22,13 +22,9 @@ public class GsonUtils {
     public static final Gson PRETTY =  new GsonBuilder().setPrettyPrinting().create();
 
 
-    public static String toJson(JsonObject jsonObject){
-        return GSON.toJson(jsonObject);
+    public static String toJson(Object obj){
+        return GSON.toJson(obj);
     }
-    public static String toJson(JsonArray jsonArray){
-        return GSON.toJson(jsonArray);
-    }
-
 
     public static JsonObject fromJsonObject(String jsonText){
         if(jsonText == null ){
