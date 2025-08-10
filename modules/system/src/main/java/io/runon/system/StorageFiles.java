@@ -155,7 +155,7 @@ public class StorageFiles {
         try {
 
             int index = path.lastIndexOf(".");
-            if(index < 1){
+            if(index > 0){
                 return path;
             }
 

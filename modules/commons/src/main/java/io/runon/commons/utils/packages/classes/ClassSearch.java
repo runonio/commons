@@ -41,7 +41,6 @@ public class ClassSearch {
 
 		String javaHomePath = System.getProperty("java.home");
 
-		Set<String> duplication = new HashSet<>();
 
 		String fileExtension = ".class";
 
@@ -85,6 +84,8 @@ public class ClassSearch {
 
 
 	public void addClass(List<Class<?>> classes, String className){
+
+
 		if(inPackages != null){
 			boolean isIn = false;
 			for(String in : inPackages){
@@ -101,8 +102,13 @@ public class ClassSearch {
 		}
 
 		try{
-			Class<?> c = Class.forName(className);
 
+			//방법	static 초기화 실행	용도
+			//Class.forName(className)	O	클래스 로딩 + static 초기화
+			// ClassLoader.loadClass(className)	X	클래스 로딩만, static 초기화는 나중에 필요할 때 실행
+			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+			Class<?> c = classLoader.loadClass(className);
+//
 			if(inClasses != null){
 				boolean isIn = false;
 				for(Class<?> in: inClasses){
@@ -116,7 +122,6 @@ public class ClassSearch {
 					return;
 				}
 			}
-
 			classes.add(c);
 		}catch (Exception ignore){}
 	}

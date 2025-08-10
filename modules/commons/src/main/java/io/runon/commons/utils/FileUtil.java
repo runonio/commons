@@ -51,6 +51,9 @@ public class FileUtil {
 	public static String getFileContents(String filePath){
 		return getFileContents(new File(filePath), StandardCharsets.UTF_8);
 	}
+	public static String getFileContents(File file){
+		return getFileContents(file,  StandardCharsets.UTF_8);
+	}
 
 	public static String getFileContents(String filePath,  Charset charset){
 		return getFileContents(new File(filePath), charset);
@@ -1359,6 +1362,18 @@ public class FileUtil {
 		return fileName.substring(index +1);
 	}
 
+	public static String removeExtension(String fileName) {
+
+		String extension = getExtension(fileName);
+
+		if(extension.isEmpty()){
+			return fileName;
+		}
+
+		return fileName.substring(0, fileName.length() - (extension.length() + 1));
+
+	}
+
 
 	public static File [] getDirs(File rootDirFile, String dirName){
 //		getFiles()
@@ -1414,6 +1429,7 @@ public class FileUtil {
 
 		System.out.println(file.getParentFile().getAbsolutePath());
 		System.out.println(file.getParentFile().isDirectory());
+		System.out.println(removeExtension(file.getName()));
 
 	}
 }

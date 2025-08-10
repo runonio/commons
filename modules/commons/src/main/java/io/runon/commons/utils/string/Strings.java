@@ -9,6 +9,7 @@ import java.util.Set;
  * 문자열 관련 유틸성 클래스
  * @author macle
  */
+@SuppressWarnings("rawtypes")
 public class Strings {
 
 
@@ -208,15 +209,28 @@ public class Strings {
         return sum;
     }
 
-    public static String sumText(String [] array, String split){
+    public static String sumText(Object [] array, String split){
         if(array == null || array.length == 0){
             return "";
         }
 
         StringBuilder sb = new StringBuilder();
-        sb.append(array[0]);
+        sb.append(array[0].toString());
         for (int i = 1; i < array.length ; i++) {
-            sb.append(split).append(array[i]);
+            sb.append(split).append(array[i].toString());
+        }
+        return sb.toString();
+    }
+
+    public static String sumText(List list, String split){
+        if(list == null || list.isEmpty()){
+            return "";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(list.get(0).toString());
+        for (int i = 1; i < list.size() ; i++) {
+            sb.append(split).append(list.get(i).toString());
         }
         return sb.toString();
     }

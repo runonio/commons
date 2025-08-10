@@ -40,10 +40,8 @@ public class StorageFile {
     @Column(name = "split_info")
     String splitInfo;
 
-
     @Column(name = "encrypt_type")
     CryptoType encryptType =CryptoType.SCM;
-
 
     @Column(name = "file_path_type")
     FilePathType filePathType;
