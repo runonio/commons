@@ -9,8 +9,8 @@ include 'data-service'
 project(':data-service').projectDir = new File(settingsDir, '../../runon/commons/modules/data-service')
 include 'keyword'
 project(':keyword').projectDir = new File(settingsDir, '../../runon/commons/modules/keyword')
-include 'charmap-service'
-project(':charmap-service').projectDir = new File(settingsDir, '../../runon/commons/modules/charmap-service')
+include 'crypto-service'
+project(':crypto-service').projectDir = new File(settingsDir, '../../runon/commons/modules/crypto-service')
 include 'install'
 project(':install').projectDir = new File(settingsDir, '../../runon/commons/modules/install')
 include 'outputs'
