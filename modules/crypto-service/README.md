@@ -1,5 +1,5 @@
-# charmap-service
-charmap 서비스 모듈
+# crypto-service
+crypto 서비스 모듈
 
 ## 개발환경
 - open jdk 1.8

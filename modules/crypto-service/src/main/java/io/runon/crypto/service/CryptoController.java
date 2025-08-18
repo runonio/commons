@@ -2,17 +2,14 @@ package io.runon.crypto.service;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import io.runon.commons.crypto.CharMapDataManagement;
+import io.runon.commons.crypto.*;
 import io.runon.commons.utils.ExceptionUtil;
-import io.runon.commons.crypto.CharMap;
-import io.runon.commons.crypto.CharMapManager;
-import io.runon.commons.crypto.StringCrypto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 /**
  * @author macle
@@ -59,5 +56,22 @@ public class CryptoController {
             return "";
         }
     }
+
+
+    @PostMapping(value = "/crypto/dec/bytes/file", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public byte[] decBytes(@RequestPart("file") MultipartFile file, @RequestPart("key") String message) throws IOException {
+
+        // bytes 처리
+        return Cryptos.decByte(file.getBytes(), message);
+    }
+
+    @PostMapping(value = "/crypto/dec/text")
+    public String decBytes(@RequestParam("text") String text, @RequestParam("key") String key){
+
+        // bytes 처리
+        return Cryptos.decStr(text, key);
+    }
+
+
 
 }

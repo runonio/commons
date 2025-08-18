@@ -16,11 +16,16 @@ import java.util.HashMap;
 public class CryptoServiceStarter {
 
     public static void startApp(){
-        int port = Config.getInteger("service.port", Config.getInteger("service.port", 31315));
+        int port = Config.getInteger("service.port",  31315);
         HashMap<String, Object> props = new HashMap<>();
         props.put("server.port", port);
         props.put("logging.config", ConfigSet.LOG_BACK_PATH);
         String [] springbootArgs = new String[0];
+        String size = Config.getConfig("spring.servlet.multipart.max-file-size");
+        if(size != null){
+            props.put("spring.servlet.multipart.max-file-size", size);
+            props.put("spring.servlet.multipart.max-request-size", size);
+        }
 
         CharMapDataManagement charMapDataManagement = CharMapDataManagement.getInstance();
 
@@ -29,6 +34,8 @@ public class CryptoServiceStarter {
         if(!FileUtil.isFile(filePath)){
             charMapDataManagement.addRandomCharMap(0, (Config.getInteger("crypto.charmap.length", 10) -1));
         }
+
+
 
         new SpringApplicationBuilder()
                 .sources(CryptoServiceStarter.class)

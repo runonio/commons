@@ -11,6 +11,7 @@ import java.security.NoSuchAlgorithmException;
  */
 public class Cryptos {
 
+
     public static String getHashText(byte [] bytes, String algorithm) throws NoSuchAlgorithmException {
         StringBuilder builder = new StringBuilder();
         MessageDigest md = MessageDigest.getInstance(algorithm);

@@ -30,7 +30,7 @@ public class HashConfusionCrypto {
             byte [] data = str.getBytes(StandardCharsets.UTF_8);
             byte [] encData = enc(key, data, keySize, charMap);
             Base64.Encoder encoder = Base64.getEncoder();
-            return new String(encoder.encode(encData));
+            return encoder.encodeToString(encData);
         }catch (Exception e){
             throw new CryptoException(e);
         }

@@ -863,7 +863,6 @@ public class FileUtil {
 			File [] files = file.listFiles();
 
 			if(files == null){
-				log.error("file delete fail: " + file.getAbsolutePath());
 				return false;
 			}
 			boolean isResult = true;
@@ -872,14 +871,12 @@ public class FileUtil {
 				if(cFile.isDirectory()) {
 					boolean chkResult = delete(cFile);
 					if(!chkResult) {
-						log.error("file delete fail: " + cFile.getAbsolutePath());
 
 						isResult= false;
 					}
 				}else {
 					boolean chkResult =cFile.delete();
 					if(!chkResult) {
-						log.error("file delete fail: " + cFile.getAbsolutePath());
 
 						isResult= false;
 					}
@@ -888,19 +885,12 @@ public class FileUtil {
 
 			boolean chkResult = file.delete();
 			if(!chkResult) {
-				log.error("file delete fail: " + file.getAbsolutePath());
-
 				isResult= false;
 			}
 
 			return isResult;
 		}else {
-			boolean chkResult =  file.delete();
-			if(!chkResult) {
-				log.error("file delete fail: " + file.getAbsolutePath());
-			}
-
-			return chkResult;
+			return file.delete();
 		}
 	}
 
@@ -1424,7 +1414,19 @@ public class FileUtil {
 		return true;
 	}
 
-	public static void main(String[] args) {
+
+    public static void removeFiles(String ...paths){
+        for(String path : paths){
+            File file = new File(path);
+            if(file.isFile()){
+                file.delete();
+            }
+        }
+    }
+
+
+
+    public static void main(String[] args) {
 		File file = new File("temp/text.txt");
 
 		System.out.println(file.getParentFile().getAbsolutePath());
