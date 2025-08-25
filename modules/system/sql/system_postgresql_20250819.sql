@@ -11,10 +11,8 @@ CREATE TABLE category
     updated_at           TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (category_id)
 );
-
 create index idx_category_01
     on category (updated_at desc);
-
 
 CREATE TABLE category_code
 (
@@ -28,8 +26,6 @@ CREATE TABLE category_code
     updated_at           TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (category_id,code)
 );
-
-
 create index idx_category_code_01
     on category_code (updated_at desc);
 
@@ -42,11 +38,8 @@ CREATE TABLE category_key_value
     updated_at           TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (category_id,data_key)
 );
-
-
 create index idx_category_key_value_01
     on category_key_value (updated_at desc);
-
 
 CREATE TABLE file
 (
@@ -54,6 +47,7 @@ CREATE TABLE file
     file_name            VARCHAR NULL,
     file_bytes           bytea NULL,
     sha256               VARCHAR NULL,
+    file_type            VARCHAR NOT NULL DEFAULT 'F',
     split_type           VARCHAR NOT NULL DEFAULT 'single',
     split_info           VARCHAR NULL,
     encrypt_type         VARCHAR NOT NULL DEFAULT 'N',
@@ -64,11 +58,8 @@ CREATE TABLE file
     updated_at           TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (file_id)
 );
-
-
 create index idx_file_01
     on file (updated_at desc);
-
 
 CREATE TABLE key_value
 (
@@ -80,16 +71,10 @@ CREATE TABLE key_value
     updated_at           TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (data_key)
 );
-
-
 create index idx_key_value_01
     on key_value (updated_at desc);
-
-
 create index idx_key_value_02
     on key_value (data_type desc);
-
-
 
 comment on table category is '카테고리';
         comment on column category.category_id is '카테고리아이디';
@@ -123,6 +108,7 @@ comment on table file is '파일';
          comment on column file.file_name is '파일명';
          comment on column file.file_bytes is '파일_바이트배열';
          comment on column file.sha256 is 'sha256';
+         comment on column file.file_type is '파일유형';
          comment on column file.split_type is '분할유형';
          comment on column file.split_info is '분할정보';
          comment on column file.encrypt_type is '암호화모드';
@@ -139,7 +125,3 @@ comment on table key_value is 'key_value';
          comment on column key_value.meta_data is 'meta_data';
          comment on column key_value.is_del is '삭제여부';
          comment on column key_value.updated_at is '업데이트일시';
-
-
-
-
