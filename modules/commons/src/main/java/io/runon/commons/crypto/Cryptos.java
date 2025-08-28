@@ -1,10 +1,18 @@
 package io.runon.commons.crypto;
 
 import io.runon.commons.config.Config;
+import io.runon.commons.exception.IORuntimeException;
+import io.runon.commons.utils.FileUtil;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 /**
  * @author macle
@@ -106,5 +114,68 @@ public class Cryptos {
         }
         return str;
     }
+    
+    /**
+     * 복호화 하여저장
+     */
+    public static boolean copyDec(String inPath, String outPath, CryptoType cryptoType, Object keyObject, int keySize){
+        File file = new File(inPath);
+        if(!file.exists()){
+            return false;
+        }
+
+        String filePath = file.getAbsolutePath();
+
+        if(file.isDirectory()){
+            FileUtil.mkdirs(outPath);
+            //하위까지 전체복사
+            List<File> fileList = FileUtil.getFileList(inPath);
+            for(File subFile : fileList){
+                String subPath = subFile.getAbsolutePath();
+                String newPath = subPath.substring(filePath.length());
+                newPath = outPath + "/" + newPath;
+
+
+                File newFile = new File(newPath);
+                //noinspection ResultOfMethodCallIgnored
+                newFile.getParentFile().mkdirs();
+                if(subFile.isDirectory())//noinspection SingleStatementInBlock
+                {
+                    //noinspection ResultOfMethodCallIgnored
+                    newFile.mkdir();
+                }else{
+                    copyFileDec(subPath, newPath, cryptoType, keyObject, keySize);
+                }
+
+            }
+            fileList.clear();
+
+        }else{
+            return copyFileDec(inPath, outPath, cryptoType, keyObject, keySize);
+        }
+        return true;
+    }
+
+
+    public static boolean copyFileDec(String inFilePath, String outFilePath, CryptoType cryptoType, Object keyObject, int keySize){
+
+       if(!FileUtil.isFile(inFilePath))
+            return false;
+        try {
+            byte[] bytes = Files.readAllBytes(new File(inFilePath).toPath());
+            bytes = Cryptos.decByte(bytes, cryptoType, keyObject, keySize);
+            try (FileOutputStream fos = new FileOutputStream(outFilePath, false)) {
+                fos.write(bytes);
+                fos.flush();
+                fos.getFD().sync();
+            }
+            return true;
+        } catch (IOException e) {
+            throw new IORuntimeException(e);
+        }
+
+    }
+
+
 
 }

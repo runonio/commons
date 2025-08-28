@@ -502,6 +502,7 @@ public class FileUtil {
 		String filePath = file.getAbsolutePath();
 
 		if(file.isDirectory()){
+            mkdirs(outPath);
 			//하위까지 전체복사
 			List<File> fileList = getFileList(inPath);
 			for(File subFile : fileList){
@@ -532,21 +533,22 @@ public class FileUtil {
 	}
 
 
-	/**
+
+    /**
 	 * 파일을 복사한다.
-	 * @param inFileName String 복사대상
-	 * @param outFileName String 복사파일
+	 * @param inFilePath String 복사대상
+	 * @param outFilePath String 복사파일
 	 * @return boolean success, fail flag
 	 */
 	@SuppressWarnings("WeakerAccess")
-	public static boolean fileCopy(String inFileName, String outFileName) {
+	public static boolean fileCopy(String inFilePath, String outFilePath) {
 		try {
-			if(!FileUtil.isFile(inFileName)){
+			if(!FileUtil.isFile(inFilePath)){
 				return false;
 			}
 
-			FileInputStream fis = new FileInputStream(inFileName);
-			FileOutputStream fos = new FileOutputStream(outFileName);
+			FileInputStream fis = new FileInputStream(inFilePath);
+			FileOutputStream fos = new FileOutputStream(outFilePath);
 
 			FileChannel fcin =  fis.getChannel();
 			FileChannel fcout = fos.getChannel();

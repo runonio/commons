@@ -44,7 +44,10 @@ public class StorageFile {
     CryptoType encryptType =CryptoType.SCM;
 
     @Column(name = "file_path_type")
-    FilePathType filePathType;
+    FilePathType filePathType = FilePathType.DB;
+
+    @Column(name = "file_path")
+    StorageFileType fileType =  StorageFileType.F;
 
     @Column(name = "file_path")
     String filePath;

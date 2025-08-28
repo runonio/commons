@@ -62,8 +62,6 @@ public class StorageFiles {
 
     }
 
-
-
     /**
      * 파일분할저장
      */
@@ -122,7 +120,6 @@ public class StorageFiles {
 
     public static void out(StorageFile storageFile, String outPath){
 
-
         FilePathType filePathType = storageFile.getFilePathType();
         if (filePathType == FilePathType.DB) {
             if(storageFile.getSplitType().startsWith("split")){
@@ -132,17 +129,16 @@ public class StorageFiles {
             outBytes(storageFile.getFileId(), storageFile.fileBytes, outPath, storageFile.getEncryptType(), false);
 
         }else{
-            //저장 경로이면
-            try {
-                byte [] bytes = Files.readAllBytes(new File(storageFile.getFilePath()).toPath());
-                bytes = Cryptos.decByte(bytes, storageFile.getEncryptType(), storageFile.getFileId(),Config. getInteger("crypto.default.key.size", 32));
-                try(FileOutputStream fos = new FileOutputStream(outPath, false)) {
-                    fos.write(bytes);
-                    fos.flush();
-                    fos.getFD().sync();
-                }
-            }catch (IOException e){
-                throw new IllegalStateException(e);
+            if(storageFile.getFileType() == StorageFileType.F) {
+                //파일유형이 파일이면
+                //저장 경로이면
+                Cryptos.copyFileDec(storageFile.getFilePath(), outPath, storageFile.getEncryptType(), storageFile.getFileId(), Config.getInteger("crypto.default.key.size", 32));
+
+            }else{
+                //파일유형이 디렉토리 이면
+                //관련 경로에 있는 파일을 전부 복화화 해서 저장
+                Cryptos.copyDec(storageFile.getFilePath(), outPath, storageFile.getEncryptType(), storageFile.getFileId(), Config.getInteger("crypto.default.key.size", 32));
+
             }
         }
     }
@@ -167,6 +163,11 @@ public class StorageFiles {
     }
 
 
+    public static CryptoType getEncryptType(String fileId){
+        String value = JdbcQuery.getResultOne("select encrypt_type from file where file_id='" + fileId +"'");
+        return CryptoType.valueOf(value);
+    }
+
 
     public static void outFileSplit(StorageFile storageFile, String outPath)  {
 
@@ -185,7 +186,6 @@ public class StorageFiles {
             byte [] bytes = JdbcQuery.getResultBytes("select file_bytes from file where file_id='" + fileId +"'");
             outBytes(fileId, bytes, outPath, storageFile.getEncryptType(), true);
         }
-
     }
 
 
