@@ -27,7 +27,7 @@ public class StorageFiles {
     public static void saveFile(StorageFile storageFile, String sequenceName, String sequencePreFix){
 
         storageFile.setSha256();
-
+        storageFile.setFileType(StorageFileType.F);
         FilePathType filePathType = storageFile.getFilePathType();
         if (filePathType == FilePathType.DB) {
             //DB 저장이면
@@ -44,9 +44,9 @@ public class StorageFiles {
             //경로 저장이면
             storageFile.setFileBytes(Cryptos.encByte(storageFile.getFileBytes(), storageFile.getEncryptType(), storageFile.getFileId(), Config.getInteger("crypto.default.key.size", 32)));
 
-            String sttFilePath = storageFile.getFilePath();
-            FileUtil.mkdirsParent(sttFilePath);
-            try (FileOutputStream fos = new FileOutputStream(sttFilePath)) {
+            String filePath = storageFile.getFilePath();
+            FileUtil.mkdirsParent(filePath);
+            try (FileOutputStream fos = new FileOutputStream(filePath)) {
                 fos.write(storageFile.getFileBytes());
                 fos.flush();
                 fos.getFD().sync();
@@ -57,9 +57,16 @@ public class StorageFiles {
             //DB에 저장하지 않으므로 null 입력
             storageFile.setFileBytes(null);
             JdbcObjects.insertOrUpdate(storageFile);
-
         }
+    }
 
+    /**
+     * 같은 네트워크 드라이버일때 파일을 경로체로 이동시킨다. storge 관리체계에서 관리되는 형태로 저장한다.
+     */
+    public static void saveDir(StorageFile storageFile, String copyDir){
+        storageFile.setFileType(StorageFileType.D);
+        Cryptos.copyDec(copyDir, storageFile.getFilePath(), storageFile.getEncryptType(), storageFile.getFileId(), Config.getInteger("crypto.default.key.size", 32));
+        JdbcObjects.insertOrUpdate(storageFile);
     }
 
     /**

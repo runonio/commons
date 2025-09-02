@@ -241,4 +241,43 @@ public class GsonUtils {
         }
     }
 
+    public static String updateJsonObjStr(String json, String key, String value){
+        return updateJsonObjStr(json,key,value,PRETTY);
+    }
+
+
+
+
+    public static String updateJsonObjStr(String json, String key, String value, Gson gson){
+        JsonObject object;
+        if(json == null){
+            object = new JsonObject();
+        }else{
+            object = gson.fromJson(json, JsonObject.class);
+        }
+
+        object.addProperty(key, value);
+
+        return gson.toJson(object);
+    }
+
+
+    public static String updateJsonObjStr(String json, JsonObject updateObj){
+         return updateJsonObjStr(json, updateObj, PRETTY);
+    }
+
+    public static String updateJsonObjStr(String json, JsonObject updateObj, Gson gson){
+        JsonObject object;
+        if(json == null){
+            object = updateObj;
+        }else{
+            object = gson.fromJson(json, JsonObject.class);
+            updateObj.entrySet().forEach(entry -> {
+                object.add(entry.getKey(), entry.getValue());
+            });
+        }
+        return gson.toJson(object);
+    }
+
+
 }

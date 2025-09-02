@@ -114,7 +114,7 @@ public class Cryptos {
         }
         return str;
     }
-    
+
     /**
      * 복호화 하여저장
      */
@@ -162,6 +162,11 @@ public class Cryptos {
        if(!FileUtil.isFile(inFilePath))
             return false;
         try {
+            if(cryptoType == CryptoType.N){
+                FileUtil.fileCopy(inFilePath, outFilePath);
+                return true;
+            }
+
             byte[] bytes = Files.readAllBytes(new File(inFilePath).toPath());
             bytes = Cryptos.decByte(bytes, cryptoType, keyObject, keySize);
             try (FileOutputStream fos = new FileOutputStream(outFilePath, false)) {
