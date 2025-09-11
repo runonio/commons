@@ -2,6 +2,8 @@
 
 package io.runon.jdbc.sequence;
 
+import io.runon.commons.config.Config;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,6 +17,14 @@ public class SequenceManager {
     private final Map<String, SequenceMaker> dbTypeMap = new HashMap<>();
 
     private final Object lock = new Object();
+
+    public SequenceManager(){
+        String jdbcType = Config.getConfig("application.jdbc.type");
+        if(jdbcType != null){
+            setDefaultMaker(jdbcType);
+        }
+    }
+
 
     /**
      * 시퀀스 값 얻기

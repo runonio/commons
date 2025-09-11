@@ -1,4 +1,6 @@
 
+create sequence seq_file;
+
 CREATE TABLE category
 (
     category_id          VARCHAR NOT NULL,

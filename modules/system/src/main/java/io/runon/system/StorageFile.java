@@ -4,10 +4,7 @@ package io.runon.system;
 import io.runon.commons.crypto.CryptoType;
 import io.runon.commons.crypto.Cryptos;
 import io.runon.commons.utils.ExceptionUtil;
-import io.runon.jdbc.annotation.Column;
-import io.runon.jdbc.annotation.Table;
-import io.runon.jdbc.annotation.PrimaryKey;
-import io.runon.jdbc.annotation.DateTime;
+import io.runon.jdbc.annotation.*;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 public class StorageFile {
 
     @PrimaryKey(seq = 1)
-    @Column(name = "file_id")
+    @Column(name = "file_id") @Sequence(name ="seq_file", prefix ="F_")
     String fileId;
 
     @Column(name = "file_name")

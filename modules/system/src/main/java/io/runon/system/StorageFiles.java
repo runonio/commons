@@ -208,4 +208,9 @@ public class StorageFiles {
         }
     }
 
+    public static String nextFileId(){
+        return "F_" + Database.nextVal("seq_file");
+    }
+
+
 }
