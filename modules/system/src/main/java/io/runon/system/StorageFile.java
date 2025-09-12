@@ -43,7 +43,7 @@ public class StorageFile {
     @Column(name = "file_path_type")
     FilePathType filePathType = FilePathType.DB;
 
-    @Column(name = "file_path")
+    @Column(name = "file_type")
     StorageFileType fileType =  StorageFileType.F;
 
     @Column(name = "file_path")

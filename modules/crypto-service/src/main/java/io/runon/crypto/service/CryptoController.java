@@ -65,11 +65,11 @@ public class CryptoController {
         return Cryptos.decByte(file.getBytes(), message);
     }
 
-    @PostMapping(value = "/crypto/dec/text")
-    public String decBytes(@RequestParam("text") String text, @RequestParam("key") String key){
-
+    @RequestMapping(value = "/crypto/dec/text" , method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
+    public String decBytes(@RequestBody final String jsonValue){
+        JsonObject jsonObject = new Gson().fromJson(jsonValue, JsonObject.class);
         // bytes 처리
-        return Cryptos.decStr(text, key);
+        return Cryptos.decStr(jsonObject.get("text").getAsString(), jsonObject.get("key").getAsString());
     }
 
 
