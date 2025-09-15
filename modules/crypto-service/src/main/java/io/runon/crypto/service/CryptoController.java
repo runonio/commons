@@ -18,7 +18,6 @@ import java.io.IOException;
 @RestController
 public class CryptoController {
 
-
     @RequestMapping(value = "/charmap/maps" , method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
     public String getCharMaps() {
         try{
@@ -30,18 +29,14 @@ public class CryptoController {
         }
     }
 
-
     @RequestMapping(value = "/charmap/id" , method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
     public String getCharMap(@RequestBody final String jsonValue) {
         try{
-
-
             JsonObject jsonObject = new Gson().fromJson(jsonValue, JsonObject.class);
 
             CharMapManager charMapManager = CharMapManager.getInstance();
 
             String id = jsonObject.get("id").getAsString();
-
 
             CharMap charMap = charMapManager.getCharMap(id);
 
@@ -57,10 +52,8 @@ public class CryptoController {
         }
     }
 
-
     @PostMapping(value = "/crypto/dec/bytes/file", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public byte[] decBytes(@RequestPart("file") MultipartFile file, @RequestPart("key") String message) throws IOException {
-
         // bytes 처리
         return Cryptos.decByte(file.getBytes(), message);
     }
@@ -71,7 +64,5 @@ public class CryptoController {
         // bytes 처리
         return Cryptos.decStr(jsonObject.get("text").getAsString(), jsonObject.get("key").getAsString());
     }
-
-
 
 }
