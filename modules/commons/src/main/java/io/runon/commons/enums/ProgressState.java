@@ -6,5 +6,6 @@ public enum ProgressState {
     COMPLETE
     , WAITING
     , RUNNING
+    , STOP
     , ERROR
 }
