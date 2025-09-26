@@ -1,4 +1,5 @@
 [versions]
+#  ./gradlew.bat wrapper --gradle-version 9.1.0 gradle 업데이트 방법
 # 개발은 최신 버전으로 하고 배포시 버전은 따로 파일을 만들어서 관리.
 lombok = "latest.release"
 
