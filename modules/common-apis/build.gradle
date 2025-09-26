@@ -8,8 +8,9 @@ repositories {
 
 dependencies {
 
-    implementation project(path: ':jdbc')
     implementation project(path: ':commons')
+    implementation project(path: ':system')
+    implementation project(path: ':jdbc')
 
     implementation libs.postgresql
     implementation libs.logbackClassic
@@ -17,8 +18,11 @@ dependencies {
     implementation libs.gson
     implementation libs.json
 
+    implementation libs.springBootStarterWeb
+
     compileOnly libs.lombok
     annotationProcessor libs.lombok
+
 }
 
 test {

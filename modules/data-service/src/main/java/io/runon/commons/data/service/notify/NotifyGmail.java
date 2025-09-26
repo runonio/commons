@@ -5,12 +5,13 @@ import io.runon.commons.crypto.LoginCrypto;
 import io.runon.commons.data.service.exception.MailSendFailException;
 import io.runon.commons.data.service.exception.SendMailInfoException;
 import io.runon.commons.data.service.redis.Redis;
+import jakarta.mail.*;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+
 import java.util.Properties;
 
 /**

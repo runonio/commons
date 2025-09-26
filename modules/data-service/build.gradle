@@ -7,24 +7,22 @@ repositories {
     mavenCentral()
 }
 
-
 dependencies {
 
     implementation project(path: ':commons')
 
-    implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.13'
+    implementation libs.logbackClassic
 
+    implementation libs.gson
+    implementation libs.json
 
-    implementation 'com.google.code.gson:gson:2.10.1'
-    implementation group: 'org.json', name: 'json', version: '20240303'
+    implementation libs.lettuceCore
+    implementation libs.snakeyaml
 
-    implementation group: 'io.lettuce', name: 'lettuce-core', version: '6.3.2.RELEASE'
-    implementation group: 'org.yaml', name: 'snakeyaml', version: '2.2'
+    implementation libs.jakartaMail
 
-    implementation group: 'com.sun.mail', name: 'javax.mail', version: '1.6.2'
-
-    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.38'
-    annotationProcessor 'org.projectlombok:lombok:1.18.38'
+    compileOnly libs.lombok
+    annotationProcessor libs.lombok
 
 }
 

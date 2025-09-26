@@ -1,8 +1,8 @@
-# collect
-데이터 수집 공통모듈
+# commons-apis
+공통 프로젝트에서 제공할 수 있는 api 항목 정리
 
-## 개발환경
-- open jdk 17
+# 개발환경
+-   open jdk 17
 
 # communication
 ### blog, homepage

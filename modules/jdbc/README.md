@@ -1,7 +1,7 @@
 # jdbc
 
 # 개발환경
-- open jdk 1.8
+- open jdk 17
 
 # 개요
 oracle, tibero, mysql, mariadb, postgresql, msssql 계열의 DB를 지원 하기 위해 개발 되었습니다.

@@ -2,8 +2,8 @@
 
 package io.runon.commons.service;
 
-import io.runon.commons.api.ApiMessage;
-import io.runon.commons.api.Messages;
+import io.runon.commons.apis.socket.ApiMessage;
+import io.runon.commons.apis.socket.Messages;
 import io.runon.commons.utils.ExceptionUtil;
 
 /**
