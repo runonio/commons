@@ -20,13 +20,16 @@
  
 ### 서비스 관리
  - 서비스로 실행되는 Thread 관리기능 제공
- 
+
 # communication
-### blog, homepage
+## blog, homepage
 - [runon.io](https://runon.io)
+- [blog.runon.io](https://blog.runon.io)
 - [github.com/runonio](https://github.com/runonio)
+
+## contact
+- email: info@runon.io
 
 ## main developer
 - macle
-  - github(source code): [github.com/macle86](https://github.com/macle86)
-  - email: ysys86a@gmail.com
+    - git: [github.com/macle86](https://github.com/macle86)
