@@ -94,7 +94,7 @@ public class StockItem {
 
 
 # communication
-## blog, homepage
+## site, blog, git
 - [runon.io](https://runon.io)
 - [blog.runon.io](https://blog.runon.io)
 - [github.com/runonio](https://github.com/runonio)

@@ -22,7 +22,7 @@
  - 서비스로 실행되는 Thread 관리기능 제공
 
 # communication
-## blog, homepage
+## site, blog, git
 - [runon.io](https://runon.io)
 - [blog.runon.io](https://blog.runon.io)
 - [github.com/runonio](https://github.com/runonio)
