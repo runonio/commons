@@ -10,6 +10,7 @@ CREATE TABLE category
     description          VARCHAR NULL,
     meta_data            VARCHAR NULL,
     is_del               boolean NOT NULL DEFAULT false,
+    created_at           TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at           TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (category_id)
 );
@@ -25,6 +26,7 @@ CREATE TABLE category_code
     description          VARCHAR NULL,
     meta_data            VARCHAR NULL,
     is_del               boolean NOT NULL DEFAULT false,
+    created_at           TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at           TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (category_id,code)
 );
@@ -37,6 +39,7 @@ CREATE TABLE category_key_value
     data_key             VARCHAR NOT NULL,
     data_value           VARCHAR NULL,
     meta_data            VARCHAR NULL,
+    created_at           TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at           TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (category_id,data_key)
 );
@@ -70,6 +73,7 @@ CREATE TABLE key_value
     data_type            VARCHAR NULL DEFAULT 'CONFIG',
     meta_data            VARCHAR NULL,
     is_del               boolean NOT NULL DEFAULT false,
+    created_at           TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at           TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (data_key)
 );
@@ -77,6 +81,28 @@ create index idx_key_value_01
     on key_value (updated_at desc);
 create index idx_key_value_02
     on key_value (data_type desc);
+
+
+CREATE TABLE service
+(
+    service_id           VARCHAR NOT NULL,
+    service_name         VARCHAR NULL,
+    service_type         VARCHAR NOT NULL,
+    host_address         VARCHAR NULL,
+    port                 INTEGER NULL,
+    description          VARCHAR NULL,
+    meta_data            VARCHAR NULL,
+    started_at           TIMESTAMP NULL,
+    ended_at             TIMESTAMP NULL,
+    created_at           TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at           TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (service_id)
+);
+
+create index idx_service_01
+    on service (updated_at desc);
+create index idx_service_02
+    on service (service_type desc);
 
 comment on table category is '카테고리';
         comment on column category.category_id is '카테고리아이디';
@@ -86,6 +112,7 @@ comment on table category is '카테고리';
          comment on column category.description is 'description';
          comment on column category.meta_data is 'meta_data';
          comment on column category.is_del is '삭제여부';
+         comment on column category.created_at is '생성일시';
          comment on column category.updated_at is '업데이트일시';
 
 comment on table category_code is '카테고리코드';
@@ -96,6 +123,7 @@ comment on table category_code is '카테고리코드';
          comment on column category_code.description is 'description';
          comment on column category_code.meta_data is 'meta_data';
          comment on column category_code.is_del is '삭제여부';
+         comment on column category_code.created_at is '생성일시';
          comment on column category_code.updated_at is '업데이트일시';
 
 comment on table category_key_value is '카테고리key_value';
@@ -103,6 +131,7 @@ comment on table category_key_value is '카테고리key_value';
          comment on column category_key_value.data_key is '데이터키';
          comment on column category_key_value.data_value is '데이터값';
          comment on column category_key_value.meta_data is 'meta_data';
+         comment on column category_key_value.created_at is '생성일시';
          comment on column category_key_value.updated_at is '업데이트일시';
 
 comment on table file is '파일';
@@ -126,4 +155,18 @@ comment on table key_value is 'key_value';
          comment on column key_value.data_type is '데이터유형';
          comment on column key_value.meta_data is 'meta_data';
          comment on column key_value.is_del is '삭제여부';
+         comment on column key_value.created_at is '생성일시';
          comment on column key_value.updated_at is '업데이트일시';
+
+comment on table service is '서비스';
+        comment on column service.service_id is '서비스아이디';
+         comment on column service.service_name is '서비스명';
+         comment on column service.service_type is '서비스유형';
+         comment on column service.host_address is 'host_address';
+         comment on column service.port is '포트번호';
+         comment on column service.description is 'description';
+         comment on column service.meta_data is 'meta_data';
+         comment on column service.started_at is '시작일시';
+         comment on column service.ended_at is '종료일시';
+         comment on column service.created_at is '생성일시';
+         comment on column service.updated_at is '업데이트일시';

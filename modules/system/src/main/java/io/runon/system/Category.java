@@ -35,8 +35,6 @@ public class Category {
     @Column(name = "is_del")
     boolean isDel = false;
 
-
-
     @DateTime
     @Column(name = "updated_at")
     long updatedAt  = System.currentTimeMillis();

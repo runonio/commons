@@ -13,7 +13,7 @@ public class ObjectMake {
         //noinspection ResultOfMethodCallIgnored
         ApplicationConnectionPool.getInstance();
 
-        String tableName = "file";
+        String tableName = "service";
         System.out.println("class make info");
         System.out.println(JdbcObjects.makeObjectValue(tableName, false));
 
