@@ -44,7 +44,7 @@ public class HttpApis {
     }
 
     public static void main(String[] args) {
-
+        startApp();
     }
 
 }
