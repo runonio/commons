@@ -647,11 +647,15 @@ public class FileUtil {
 		String reName = parentPath + fileSeparator + fileName +"-"+ Times.ymdhm(System.currentTimeMillis(), ZoneId.of("Asia/Seoul")).replace(" ","") +"."+ extension;
 
 		if(FileUtil.isFile(reName)){
-			reName = FileUtil.makeName(new File(reName));
+			reName = FileUtil.makeName(reName);
 		}
 
 		return reName;
 	}
+
+    public static String makeName(String path){
+        return makeName(new File(path));
+    }
 
 	/**
 	 * 이름이 중복일때 이름생성 확장자전에 (1) 을 붙여서생성
@@ -659,6 +663,10 @@ public class FileUtil {
 	 * @return String 사용될 파일명
 	 */
 	public static String makeName(File file){
+
+        if(file.isFile()){
+            return file.getAbsolutePath();
+        }
 
 		String parentPath ;
 
@@ -701,11 +709,11 @@ public class FileUtil {
 			}
 		}
 
-		while (isFile(parentPath + "/" + fileName + "(" + makeIndex + ")" + extension)) {
+		while (isFile(parentPath + File.separator + fileName + "(" + makeIndex + ")" + extension)) {
 			makeIndex++;
 		}
 
-		return parentPath + "/" + fileName + "(" + makeIndex +")" + extension;
+		return parentPath + File.separator + fileName + "(" + makeIndex +")" + extension;
 	}
 
 	/**

@@ -161,6 +161,7 @@ public abstract class Service extends Thread {
                     }
                 }
             }catch(Exception e){
+
                 log.error(ExceptionUtil.getStackTrace(e));
                 serviceStop();
                 return;
