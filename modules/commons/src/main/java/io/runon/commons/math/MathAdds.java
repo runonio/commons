@@ -12,20 +12,13 @@ public class MathAdds {
         return positiveInteger*(positiveInteger+1)/2;
     }
 
-
-
     public static double weightGap(double a, double b){
-
-
         if( a > b){
             return b/a;
         }else{
             return a/b;
         }
-
     }
-
-
 
     /**
      * 분포평균 얻기 (10%[0.1] 를지정하면 상위10% 하위10%를 제거한 중간값들의 평균)

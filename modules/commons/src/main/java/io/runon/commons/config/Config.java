@@ -530,5 +530,4 @@ public class Config {
 		THREAD_COUNT = maxThreadCount;
 		return THREAD_COUNT;
 	}
-
 }

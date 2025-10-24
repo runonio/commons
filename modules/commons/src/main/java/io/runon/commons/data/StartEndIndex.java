@@ -80,7 +80,10 @@ public class StartEndIndex {
 	public void setEndIndex(int endIndex) {
 		this.endIndex = endIndex;
 	}
-
+    
+    public void setEnd(int end){
+        this.endIndex = end - 1;
+    }
 
 	public int getEnd(){
 		return endIndex+1;
