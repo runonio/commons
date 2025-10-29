@@ -4,7 +4,9 @@ import com.google.gson.JsonArray;
 import io.runon.commons.config.Config;
 import io.runon.commons.crypto.CryptoType;
 import io.runon.commons.crypto.Cryptos;
+import io.runon.commons.exception.EmptyException;
 import io.runon.commons.exception.IORuntimeException;
+import io.runon.commons.exception.MismatchException;
 import io.runon.commons.utils.FileUtil;
 import io.runon.commons.utils.GsonUtils;
 import io.runon.jdbc.Database;
@@ -15,6 +17,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.Map;
 
 /**
  * 저장소 파일
@@ -124,7 +127,6 @@ public class StorageFiles {
         JdbcObjects.insertOrUpdate(storageFile);
     }
 
-
     public static void out(StorageFile storageFile, String outPath){
 
         FilePathType filePathType = storageFile.getFilePathType();
@@ -169,12 +171,10 @@ public class StorageFiles {
         return path;
     }
 
-
     public static CryptoType getEncryptType(String fileId){
         String value = JdbcQuery.getResultOne("select encrypt_type from file where file_id='" + fileId +"'");
         return CryptoType.valueOf(value);
     }
-
 
     public static void outFileSplit(StorageFile storageFile, String outPath)  {
 
@@ -195,7 +195,6 @@ public class StorageFiles {
         }
     }
 
-
     public static void outBytes(String fileId, byte [] bytes, String outPath, CryptoType cryptoType, boolean isAppend) {
         bytes = Cryptos.decByte(bytes, cryptoType, fileId,Config. getInteger("crypto.default.key.size", 32));
         try(FileOutputStream fos = new FileOutputStream(outPath, isAppend)) {
@@ -212,5 +211,29 @@ public class StorageFiles {
         return "F_" + Database.nextVal("seq_file");
     }
 
+
+    /**
+     * 파일 속성이 경로일때
+     */
+    public static String getPath(String fileId){
+        Map<String, String> data = JdbcQuery.getMapString("select file_path_type, file_path from file where file_id='" + fileId +"'");
+        if(data == null){
+            throw new EmptyException("file row data empty file id: " + fileId);
+        }
+
+        String type = data.get("file_path_type").toUpperCase();
+        if(!type.equals("PATH")){
+           throw new MismatchException("type error, type is not PATH: " + type );
+        }
+
+        return data.get("file_path");
+    }
+
+    public static void main(String[] args) {
+        Config.getConfig("");
+        String path = getPath("whisper-pt-large-v3-turbo");
+        System.out.println(path);
+
+    }
 
 }
