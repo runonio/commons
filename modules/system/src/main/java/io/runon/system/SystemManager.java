@@ -48,7 +48,6 @@ public class SystemManager implements Synchronizer {
     @Override
     public void sync() {
         configSync();
-
     }
 
     public void configSync(){

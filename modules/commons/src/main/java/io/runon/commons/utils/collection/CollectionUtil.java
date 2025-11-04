@@ -16,6 +16,7 @@
 package io.runon.commons.utils.collection;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -50,7 +51,9 @@ public class CollectionUtil {
 		return obj.equals(obj2);
 	}
 
-
+    /**
+     * 객체형이 아니라 toArray로 빼내기 어려운 기본형에 대한 메소드
+     */
 	public static long [] getLongs(Collection<Long> longCollection){
 		long [] values = new long[longCollection.size()];
 		int index = 0;
@@ -61,7 +64,34 @@ public class CollectionUtil {
 		return values;
 	}
 
-	public static Set<String> makeStrSet(String text){
+
+
+    /**
+     * 객체형이 아니라 toArray로 빼내기 어려운 기본형에 대한 메소드
+     */
+    public static int [] getInts(Collection<Integer> collections){
+        int [] values = new int[collections.size()];
+        int index = 0;
+        for(Integer value : collections){
+            values[index++] = value;
+        }
+        return values;
+    }
+    
+    /**
+     * 객체형이 아니라 toArray로 빼내기 어려운 기본형에 대한 메소드
+     */
+    public static double [] getDoubles(Collection<Double> collections){
+        double [] values = new double[collections.size()];
+        int index = 0;
+        for(Double value : collections){
+            values[index++] = value;
+        }
+        return values;
+    }
+
+
+    public static Set<String> makeStrSet(String text){
 		return makeStrSet(text, ",",true);
 	}
 
@@ -79,5 +109,11 @@ public class CollectionUtil {
 
 		return set;
 	}
+
+
+
+
+
+
 
 }
