@@ -36,10 +36,15 @@ public class JdbcField {
     public static void setFieldObject(ResultSet result, Field field, String columnName, Object resultObj ) throws IllegalArgumentException, IllegalAccessException, SQLException{
         field.setAccessible(true);
 
-
         if(field.getType().isEnum()){
-            //noinspection unchecked,rawtypes
-            field.set(resultObj, Enum.valueOf((Class<Enum>)field.getType(), result.getString(columnName)));
+            
+            String value = result.getString(columnName);
+            if(result.wasNull()) {
+                field.set(resultObj, null);
+            }else{
+                //noinspection unchecked,rawtypes
+                field.set(resultObj, Enum.valueOf((Class<Enum>)field.getType(), value));
+            }
             return;
         }
 

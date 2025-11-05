@@ -664,7 +664,7 @@ public class FileUtil {
 	 */
 	public static String makeName(File file){
 
-        if(file.isFile()){
+        if(!file.isFile()){
             return file.getAbsolutePath();
         }
 

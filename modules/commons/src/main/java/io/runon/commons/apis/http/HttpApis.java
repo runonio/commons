@@ -9,6 +9,9 @@ import java.util.Map;
  * @author macle
  */
 public class HttpApis {
+
+    public static final HttpApi GET_2_SECOND = makeDefaultGet(2000);
+
     public static final HttpApi GET = makeDefaultGet();
 
     public static final HttpApi POST_JSON = makeDefaultPostJson();
@@ -23,6 +26,16 @@ public class HttpApis {
         httpApi.setDefaultCharSet(StandardCharsets.UTF_8);
         return httpApi;
     }
+
+    public static HttpApi makeDefaultGet(int timeOut){
+        HttpApi httpApi = new HttpApi();
+        httpApi.setDefaultMethod("GET");
+        httpApi.setDefaultCharSet(StandardCharsets.UTF_8);
+        httpApi.setReadTimeOut(timeOut);
+        httpApi.setConnectTimeOut(timeOut);
+        return httpApi;
+    }
+
 
     public static HttpApi makeDefaultPost(){
         HttpApi httpApi = new HttpApi();
