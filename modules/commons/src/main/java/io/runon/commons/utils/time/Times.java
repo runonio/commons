@@ -176,6 +176,24 @@ public class Times {
         return zonedDateTime.getYear() + DateUtil.getDateText(zonedDateTime.getMonthValue()) + DateUtil.getDateText(zonedDateTime.getDayOfMonth()) + " " + DateUtil.getDateText(zonedDateTime.getHour()) + DateUtil.getDateText(zonedDateTime.getMinute()) ;
     }
 
+    public static String ymdhms(long time, ZoneId zoneId){
+        Instant i = Instant.ofEpochMilli(time);
+        ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(i, zoneId);
+
+        return zonedDateTime.getYear() + DateUtil.getDateText(zonedDateTime.getMonthValue()) + DateUtil.getDateText(zonedDateTime.getDayOfMonth()) + " " + DateUtil.getDateText(zonedDateTime.getHour()) + DateUtil.getDateText(zonedDateTime.getMinute())
+                + DateUtil.getDateText(zonedDateTime.getSecond())
+                ;
+    }
+
+    public static String ymdhms(ZoneId zoneId){
+        Instant i = Instant.ofEpochMilli(System.currentTimeMillis());
+        ZonedDateTime zonedDateTime = ZonedDateTime.ofInstant(i, zoneId);
+
+        return zonedDateTime.getYear() + DateUtil.getDateText(zonedDateTime.getMonthValue()) + DateUtil.getDateText(zonedDateTime.getDayOfMonth()) + " " + DateUtil.getDateText(zonedDateTime.getHour()) + DateUtil.getDateText(zonedDateTime.getMinute())
+                + DateUtil.getDateText(zonedDateTime.getSecond())
+                ;
+    }
+
     /**
      * 년월일시
      * @param time unix time
