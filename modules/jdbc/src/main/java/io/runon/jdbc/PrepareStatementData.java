@@ -39,6 +39,13 @@ public class PrepareStatementData {
 		this.data = data;
 	}
 
+    public PrepareStatementData(JdbcDataType type, Object data) {
+        this.type = type;
+        this.data = data;
+    }
+    public PrepareStatementData() {
+
+    }
 
 
 

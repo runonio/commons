@@ -22,7 +22,20 @@ public class TableSql {
         StringBuilder sqlBuilder = new StringBuilder();
 
         if( whereValue != null){
-            sqlBuilder.append(" WHERE ").append(whereValue);
+            whereValue = whereValue.trim();
+            //이미 조건이 설정된 조컨문이면
+            if(whereValue.startsWith("WHERE ")
+                    || whereValue.startsWith("where ")
+                    || whereValue.startsWith("ORDER BY ")
+                    || whereValue.startsWith("order by ")
+            ){
+                //그대로 연결할것, next 내용을 통체로 쿼리로 사용하는 경우.
+                sqlBuilder.append(" ");
+                sqlBuilder.append(whereValue);
+            }else{
+                sqlBuilder.append(" WHERE ").append(whereValue);
+            }
+
         }else{
             String where = table.where();
             if(!where.equals(Table.EMPTY)){

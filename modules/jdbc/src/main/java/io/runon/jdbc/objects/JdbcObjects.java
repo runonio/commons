@@ -330,6 +330,7 @@ public class JdbcObjects {
             size = table.size();
         }
 
+
         //noinspection CaughtExceptionImmediatelyRethrown
         try{
             StmtResultSet stmtResultSet = JdbcCommon.makeStmtResultSet(conn, selectSql, prepareStatementDataMap, table.fetchSize());
