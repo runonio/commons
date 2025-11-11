@@ -72,6 +72,12 @@ public class StorageFiles {
         JdbcObjects.insertOrUpdate(storageFile);
     }
 
+    public static void saveDirNoTCrypto(StorageFile storageFile, String copyDir){
+        storageFile.setEncryptType(CryptoType.N);
+        FileUtil.copy(copyDir, storageFile.getFilePath());
+        JdbcObjects.insertOrUpdate(storageFile);
+    }
+
     /**
      * 파일분할저장
      */
@@ -230,9 +236,8 @@ public class StorageFiles {
     }
 
     public static void main(String[] args) {
-        Config.getConfig("");
-        String path = getPath("whisper-pt-large-v3-turbo");
-        System.out.println(path);
+
+        FileUtil.copy("D:\\stt\\data\\stt-models\\whisper-large-v3", "D:\\stt\\data\\stt-models\\M_1");
 
     }
 
