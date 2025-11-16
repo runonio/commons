@@ -27,7 +27,7 @@ import java.util.LinkedHashSet;
  * ip, mac 관련 유틸
  * @author macle
  */
-public class NetworkUtil {
+public class NetworkUtils {
 
 
 	/**
@@ -108,7 +108,7 @@ public class NetworkUtil {
 
 					if (!inetAddress.isLoopbackAddress() && !inetAddress.isLinkLocalAddress() && inetAddress.isSiteLocalAddress()) {
 						if(macBytes != null){
-							set.add(NetworkUtil.getMacAddress(networkInterface.getHardwareAddress()));
+							set.add(NetworkUtils.getMacAddress(networkInterface.getHardwareAddress()));
 						}
 					}
 				}

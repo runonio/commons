@@ -26,7 +26,7 @@ import java.util.*;
  * 년월일 yyyyMMdd 형태를 사용 할때의 유틸성 내용 정리
  * @author macle
  */
-public class YmdUtil {
+public class YmdUtils {
 
 	/**
 	 * 시작일부터 끝일까지의 날짜리스트값 얻기

@@ -2,7 +2,7 @@ package io.runon.commons.apis.http;
 
 import io.runon.commons.exception.ConnectRuntimeException;
 import io.runon.commons.exception.IORuntimeException;
-import io.runon.commons.utils.FileUtil;
+import io.runon.commons.utils.FileUtils;
 import lombok.Setter;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -271,7 +271,7 @@ public class HttpApi {
 
         File pathFile = new File(downloadPath);
         String dirPath = pathFile.getParentFile().getAbsolutePath();
-        if(!FileUtil.isDirectory(dirPath)){
+        if(!FileUtils.isDirectory(dirPath)){
             //noinspection ResultOfMethodCallIgnored
             new File(dirPath).mkdirs();
         }

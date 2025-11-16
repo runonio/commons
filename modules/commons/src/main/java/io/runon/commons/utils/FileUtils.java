@@ -1,6 +1,7 @@
 
 package io.runon.commons.utils;
 
+import io.runon.commons.config.Config;
 import io.runon.commons.exception.IORuntimeException;
 import io.runon.commons.utils.string.Check;
 import io.runon.commons.utils.time.Times;
@@ -28,7 +29,7 @@ import java.util.zip.ZipInputStream;
  * @author macle
  */
 @Slf4j
-public class FileUtil {
+public class FileUtils {
 
 
 	@SuppressWarnings({"unused", "WeakerAccess"})
@@ -244,7 +245,7 @@ public class FileUtil {
 		if(charset == null){
 			charset = StandardCharsets.UTF_8;
 		}
-		File [] files = FileUtil.getInFiles(file.getAbsolutePath(), validation, sort);
+		File [] files = FileUtils.getInFiles(file.getAbsolutePath(), validation, sort);
 
 		if(files.length == 0){
 			return new String[0];
@@ -300,7 +301,7 @@ public class FileUtil {
 		}
 		List<String> list = new ArrayList<>();
 
-		File [] files = FileUtil.getInFiles(file.getAbsolutePath(), validation, sort);
+		File [] files = FileUtils.getInFiles(file.getAbsolutePath(), validation, sort);
 
 		if(files.length == 0){
 			return new String[0];
@@ -482,9 +483,11 @@ public class FileUtil {
 			out.getFD().sync();
 		}catch(IOException e){
 			//io, nio 패키지를 같이쓰면 잘 써지고도 에러나는 경우가 있으므로 예외처리
-			log.error(ExceptionUtil.getStackTrace(e));
+			log.error(ExceptionUtils.getStackTrace(e));
 		}
 	}
+
+
 
 	/**
 	 * 경로 전체 복사
@@ -533,7 +536,7 @@ public class FileUtil {
 	}
 
 
-
+    public static final long FILE_COPY_MAX_BYTE = Config.getLong("file.copy.max.byte", 2L * 1024 * 1024 * 1024 - 1) ;
     /**
 	 * 파일을 복사한다.
 	 * @param inFilePath String 복사대상
@@ -542,30 +545,50 @@ public class FileUtil {
 	 */
 	@SuppressWarnings("WeakerAccess")
 	public static boolean fileCopy(String inFilePath, String outFilePath) {
-		try {
-			if(!FileUtil.isFile(inFilePath)){
-				return false;
-			}
 
-			FileInputStream fis = new FileInputStream(inFilePath);
-			FileOutputStream fos = new FileOutputStream(outFilePath);
+		if(!FileUtils.isFile(inFilePath)){
+			return false;
+		}
+        FileInputStream fis = null;
+        FileOutputStream fos= null;
+        FileChannel fcin= null;
+        FileChannel fcout= null;
+        try {
+			fis = new FileInputStream(inFilePath);
+            fos = new FileOutputStream(outFilePath);
 
-			FileChannel fcin =  fis.getChannel();
-			FileChannel fcout = fos.getChannel();
+            fcin = fis.getChannel();
+            fcout = fos.getChannel();
 
-			long size = fcin.size();
-			fcin.transferTo(0, size, fcout);
+            long size = fcin.size();
+            long position = 0;
+            long transferred;
 
-			fcin.close();
-			fcout.close();
 
-			fis.close();
-			fos.close();
+            // transferTo는 한번에 2GB 이상을 복사할 수 없기 때문에 반복
+            while (position < size) {
+                // 한 번에 최대 2GB (2,147,483,647 bytes)
+                long chunk = Math.min(size - position, FILE_COPY_MAX_BYTE);
+                transferred = fcin.transferTo(position, chunk, fcout);
+                if (transferred <= 0) {
+                    break; // 더 이상 복사할 데이터가 없으면 종료
+                }
+                position += transferred;
+            }
+
+//            fcin.transferTo(0, size, fcout);
+
+
 			return true;
 		} catch (IOException e) {
 			//io, nio 패키지를 같이쓰면 잘 되도 에러나는 경우가 있으므로 로그처리
 			throw new IORuntimeException(e);
-		}
+		}finally {
+            try{if(fcin!= null )fcin.close();}catch (Exception ignore){}
+            try{if(fos!= null )fos.close();}catch (Exception ignore){}
+            try{if(fis!= null )fis.close();}catch (Exception ignore){}
+            try{if(fos!= null )fos.close();}catch (Exception ignore){}
+        }
 	}
 
 	/**
@@ -623,7 +646,7 @@ public class FileUtil {
 		}catch(Exception e){
 			//io, nio 패키지를 같이쓰면 잘 되도 에러나는 경우가 있으므로 로그처리
 
-			log.error(ExceptionUtil.getStackTrace(e));
+			log.error(ExceptionUtils.getStackTrace(e));
 			return false;
 		}
 	}
@@ -638,7 +661,7 @@ public class FileUtil {
 		String parentPath = absolutePath.substring(0, absolutePath.lastIndexOf(fileSeparator));
 
 
-		String extension = FileUtil.getExtension(file.getName());
+		String extension = FileUtils.getExtension(file.getName());
 		String fileName = file.getName();
 		if(!extension.isEmpty()){
 			fileName = fileName.substring(0, fileName.lastIndexOf("."+extension));
@@ -646,8 +669,8 @@ public class FileUtil {
 
 		String reName = parentPath + fileSeparator + fileName +"-"+ Times.ymdhm(System.currentTimeMillis(), ZoneId.of("Asia/Seoul")).replace(" ","") +"."+ extension;
 
-		if(FileUtil.isFile(reName)){
-			reName = FileUtil.makeName(reName);
+		if(FileUtils.isFile(reName)){
+			reName = FileUtils.makeName(reName);
 		}
 
 		return reName;
@@ -1437,11 +1460,7 @@ public class FileUtil {
 
 
     public static void main(String[] args) {
-		File file = new File("temp/text.txt");
-
-		System.out.println(file.getParentFile().getAbsolutePath());
-		System.out.println(file.getParentFile().isDirectory());
-		System.out.println(removeExtension(file.getName()));
+        copy("D:\\stt\\data\\stt-models\\whisper-large-v3","D:\\stt\\data\\stt-models\\M_2");
 
 	}
 }

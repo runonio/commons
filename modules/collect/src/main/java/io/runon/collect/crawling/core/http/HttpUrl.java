@@ -5,7 +5,7 @@ import io.runon.commons.config.Config;
 import io.runon.commons.exception.ConnectRuntimeException;
 import io.runon.commons.exception.IORuntimeException;
 import io.runon.commons.exception.SocketTimeoutRuntimeException;
-import io.runon.commons.utils.ExceptionUtil;
+import io.runon.commons.utils.ExceptionUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -138,7 +138,7 @@ public class HttpUrl {
 
 			} catch (IOException e) {
 				if(isErrorLog) {
-					log.error(ExceptionUtil.getStackTrace(e));
+					log.error(ExceptionUtils.getStackTrace(e));
 				}
 			}
 			HttpMessage httpMessage = new HttpMessage();
@@ -151,7 +151,7 @@ public class HttpUrl {
 					charSet = optionData.getString(HttpOptionDataKey.CHARACTER_SET);
 				} catch (JSONException e) {
 					if(isErrorLog) {
-						log.error(ExceptionUtil.getStackTrace(e));
+						log.error(ExceptionUtils.getStackTrace(e));
 					}
 				}
 			}
@@ -382,7 +382,7 @@ public class HttpUrl {
 				try {
 					readTimeout = optionData.getInt(HttpOptionDataKey.READ_TIME_OUT);
 				} catch (JSONException e) {
-					log.error(ExceptionUtil.getStackTrace(e));
+					log.error(ExceptionUtils.getStackTrace(e));
 				}
 			}
 			conn.setReadTimeout(readTimeout);
@@ -391,7 +391,7 @@ public class HttpUrl {
 				try {
 					connectTimeout = optionData.getInt(HttpOptionDataKey.CONNECT_TIME_OUT);
 				} catch (JSONException e) {
-					log.error(ExceptionUtil.getStackTrace(e));
+					log.error(ExceptionUtils.getStackTrace(e));
 				}
 			}
 			conn.setConnectTimeout(connectTimeout);
@@ -401,7 +401,7 @@ public class HttpUrl {
 				try {
 					charSet = optionData.getString(HttpOptionDataKey.CHARACTER_SET);
 				} catch (JSONException e) {
-					log.error(ExceptionUtil.getStackTrace(e));
+					log.error(ExceptionUtils.getStackTrace(e));
 				}
 			}
 
@@ -451,7 +451,7 @@ public class HttpUrl {
                 HttpsURLConnection 
                                 .setDefaultSSLSocketFactory(sc.getSocketFactory()); 
         } catch (Exception e) {
-				log.error(ExceptionUtil.getStackTrace(e));
+				log.error(ExceptionUtils.getStackTrace(e));
         }
 		isTrustAllHosts = true;
     }

@@ -2,7 +2,7 @@ package io.runon.commons.service.memory;
 
 import io.runon.commons.config.Config;
 import io.runon.commons.service.Service;
-import io.runon.commons.utils.ExceptionUtil;
+import io.runon.commons.utils.ExceptionUtils;
 import io.runon.commons.utils.time.Times;
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,12 +33,12 @@ public class MemorySaveTimeOutClearService extends Service {
                         log.debug("memory clean: " + manager.getClass().getSimpleName() +", " + save.getId());
 
                         manager.remove(save.getId());
-                        try{save.clear();}catch(Exception e){if(isErrorLog)log.error(ExceptionUtil.getStackTrace(e));}
+                        try{save.clear();}catch(Exception e){if(isErrorLog)log.error(ExceptionUtils.getStackTrace(e));}
                     }
                 }
             }catch(Exception e){
                 if(isErrorLog)
-                    log.error(ExceptionUtil.getStackTrace(e));
+                    log.error(ExceptionUtils.getStackTrace(e));
             }
         }
     }

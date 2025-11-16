@@ -1,6 +1,8 @@
 package io.runon.commons.crypto;
 
 
+import io.runon.commons.config.Config;
+
 /**
  *
  * 로그인 정보 암복호화
@@ -13,7 +15,7 @@ public class LoginCrypto {
 
 	public static String [] encryption(String id, String password){
 
-		return encryption(id, password, 16, null);
+		return encryption(id, password, Config.getInteger("crypto.default.key.size", 32), null);
 	}
 
 	/**
@@ -25,25 +27,19 @@ public class LoginCrypto {
 	public static String [] encryption(String id, String password, int keySize ,CharMap charMap){
 
 		try{
-			//아이디를 이용하여 패스워드 키생성
-			String encPasswordKey = HashConfusionString.get("MD5",id, keySize);
+            String hash =Config.getConfig("crypto.default.key.hash", "MD5");
 
-			if(charMap != null){
-				encPasswordKey = charMap.change(encPasswordKey);
-			}
+			//아이디를 이용하여 패스워드 키생성
+			String encPasswordKey = HashConfusionString.get(Config.getConfig(hash, "MD5"),id, keySize);
 
 			//패스워드암호화
-			String encPassword = StringCrypto.enc(encPasswordKey, password, keySize);
+			String encPassword = HashConfusionCryptos.encStr(encPasswordKey, password, keySize,charMap);
 
 			//암호화된 패스워드를 이용하여 아이디 키생성
-			String idKey = HashConfusionString.get("MD5", encPassword, keySize);
-
-			if(charMap != null){
-				idKey = charMap.change(idKey);
-			}
+			String idKey = HashConfusionString.get(Config.getConfig(hash, "MD5"), encPassword, keySize);
 
 			//아이디 암호화
-			String encId = StringCrypto.enc(idKey, id, keySize);
+			String encId = HashConfusionCryptos.encStr(idKey, id, keySize, charMap);
 
 			return new String[] {encId, encPassword};
 		}catch(Exception e){
@@ -52,7 +48,7 @@ public class LoginCrypto {
 	}
 
 	public static  String [] decryption(String encryptionId, String encryptionPassword){
-		return decryption(encryptionId, encryptionPassword, 16,null);
+		return decryption(encryptionId, encryptionPassword, Config.getInteger("crypto.default.key.size", 32),null);
 	}
 
 	/***
@@ -64,33 +60,25 @@ public class LoginCrypto {
 	public static  String [] decryption(String encryptionId, String encryptionPassword, int keySize, CharMap charMap){
 
 		try{
-			//암호화된 패스워드를 이용해서 아이디 복호화키생성
-			String decIdKey = HashConfusionString.get("MD5",encryptionPassword, keySize);
+            String hash =Config.getConfig("crypto.default.key.hash", "MD5");
 
-			if(charMap != null){
-				decIdKey = charMap.change(decIdKey);
-			}
+			//암호화된 패스워드를 이용해서 아이디 복호화키생성
+			String decIdKey = HashConfusionString.get(hash,encryptionPassword, keySize);
+
 			//아이디복호화
-			String id = StringCrypto.dec(decIdKey, encryptionId, keySize);
+			String id = HashConfusionCryptos.decStr(decIdKey, encryptionId, keySize,charMap);
 
 			//패스워드 복호화 키생성
-			String decPasswordKey = HashConfusionString.get("MD5", id, keySize);
+			String decPasswordKey = HashConfusionString.get(hash, id, keySize);
 
-			if(charMap != null){
-				decPasswordKey = charMap.change(decPasswordKey);
-			}
 
 			//패스워드 복호화
-			String password = StringCrypto.dec(decPasswordKey, encryptionPassword, keySize);
+			String password = HashConfusionCryptos.decStr(decPasswordKey, encryptionPassword, keySize,charMap);
 
 			return new String[] {id, password};
 		}catch(Exception e){
 
 			throw new RuntimeException(e);
 		}
-
-
 	}
-
-
 }

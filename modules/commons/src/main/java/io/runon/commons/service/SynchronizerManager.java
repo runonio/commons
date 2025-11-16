@@ -3,11 +3,11 @@
 package io.runon.commons.service;
 
 import io.runon.commons.config.Config;
-import io.runon.commons.utils.ExceptionUtil;
-import io.runon.commons.utils.PriorityUtil;
+import io.runon.commons.utils.ExceptionUtils;
+import io.runon.commons.utils.PriorityUtils;
 import io.runon.commons.utils.packages.classes.ClassSearch;
 import io.runon.commons.utils.time.RunningTime;
-import io.runon.commons.utils.time.TimeUtil;
+import io.runon.commons.utils.time.TimeUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
@@ -77,7 +77,7 @@ public class SynchronizerManager {
 
             changeArray();
         }catch(Exception e){
-            log.error(ExceptionUtil.getStackTrace(e));
+            log.error(ExceptionUtils.getStackTrace(e));
         }
     }
 
@@ -88,7 +88,7 @@ public class SynchronizerManager {
 
         Synchronizer[] SyncArray = syncSet.toArray( new Synchronizer[0]);
 
-        Arrays.sort(SyncArray, PriorityUtil.PRIORITY_SORT);
+        Arrays.sort(SyncArray, PriorityUtils.PRIORITY_SORT);
 
         this.syncArray = SyncArray;
     }
@@ -152,10 +152,10 @@ public class SynchronizerManager {
                     log.debug("sync : " + sync.getClass().getName());
                     sync.sync();
 
-                    log.debug(TimeUtil.getTimeValue(runningTime.getRunningTime()));
+                    log.debug(TimeUtils.getTimeValue(runningTime.getRunningTime()));
 
                 } catch (Exception e) {
-                    log.error(ExceptionUtil.getStackTrace(e));
+                    log.error(ExceptionUtils.getStackTrace(e));
                 }
             }
             isIng = false;

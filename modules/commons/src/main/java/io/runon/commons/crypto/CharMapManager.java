@@ -46,10 +46,7 @@ public class CharMapManager {
             list.add(charMap);
         }
     }
-
-
-
-
+    
     public CharMap getCharMap(String id){
         return map.get(id);
     }

@@ -8,12 +8,12 @@ import java.util.Comparator;
  * 우선 순위 관련 유틸
  * @author macle
  */
-public class PriorityUtil {
+public class PriorityUtils {
 
 
     public static final Comparator<Object> PRIORITY_SORT = (o1, o2) -> {
-        int seq1 = PriorityUtil.getSeq(o1.getClass());
-        int seq2 = PriorityUtil.getSeq(o2.getClass());
+        int seq1 = PriorityUtils.getSeq(o1.getClass());
+        int seq2 = PriorityUtils.getSeq(o2.getClass());
         return Integer.compare(seq1, seq2);
     };
 

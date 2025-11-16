@@ -3,8 +3,8 @@ package io.runon.collect.crawling.proxy;
 
 import io.runon.commons.apis.socket.ApiRequests;
 import io.runon.commons.apis.socket.communication.HostAddrPort;
-import io.runon.commons.utils.ExceptionUtil;
-import io.runon.commons.utils.FileUtil;
+import io.runon.commons.utils.ExceptionUtils;
+import io.runon.commons.utils.FileUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -28,7 +28,7 @@ public class CrawlingProxyStarter extends Thread{
     public void run(){
 
 
-        String fileContents = FileUtil.getFileContents(new File("config/proxy_config"), "UTF-8");
+        String fileContents = FileUtils.getFileContents(new File("config/proxy_config"), "UTF-8");
         JSONObject jsonObject = new JSONObject(fileContents);
         int communicationCount = jsonObject.getInt("communication_count");
 
@@ -96,7 +96,7 @@ public class CrawlingProxyStarter extends Thread{
                    crawlingProxy.disConnect();
                    crawlingProxy = null;
                }catch(Exception e){
-                   log.error(ExceptionUtil.getStackTrace(e));
+                   log.error(ExceptionUtils.getStackTrace(e));
                }
                
                try {
@@ -104,11 +104,11 @@ public class CrawlingProxyStarter extends Thread{
                    //noinspection BusyWait
                    Thread.sleep(2000L);
                }catch(Exception e){
-                   log.error(ExceptionUtil.getStackTrace(e));
+                   log.error(ExceptionUtils.getStackTrace(e));
                }
 
             } catch (Exception e) {
-                log.error(ExceptionUtil.getStackTrace(e));
+                log.error(ExceptionUtils.getStackTrace(e));
                 try{ //noinspection BusyWait
                     Thread.sleep(sleepTime); }catch (Exception ignore){}
             }

@@ -4,8 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import io.runon.commons.utils.ExceptionUtil;
-import io.runon.commons.utils.FileUtil;
+import io.runon.commons.utils.ExceptionUtils;
+import io.runon.commons.utils.FileUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
@@ -33,12 +33,12 @@ public class JsonFileProperties {
         File file = new File(filePath);
         JsonObject jsonObj;
         if(file.isFile()){
-            String fileValue = FileUtil.getFileContents(file, "UTF-8");
+            String fileValue = FileUtils.getFileContents(file, "UTF-8");
             try{
                 jsonObj = gson.fromJson(fileValue, JsonObject.class);
             }catch(Exception e){
                 jsonObj = new JsonObject();
-                log.error(ExceptionUtil.getStackTrace(e));
+                log.error(ExceptionUtils.getStackTrace(e));
             }
         }else{
             jsonObj = new JsonObject();
@@ -50,7 +50,7 @@ public class JsonFileProperties {
         synchronized (lock) {
             jsonObject.add(key, value);
             String jsonValue = gson.toJson(jsonObject);
-            FileUtil.fileOutput(jsonValue, filePath, false);
+            FileUtils.fileOutput(jsonValue, filePath, false);
         }
     }
 
@@ -58,7 +58,7 @@ public class JsonFileProperties {
         synchronized (lock) {
             jsonObject.add(key, value);
             String jsonValue = gson.toJson(jsonObject);
-            FileUtil.fileOutput(jsonValue, filePath, false);
+            FileUtils.fileOutput(jsonValue, filePath, false);
         }
     }
 
@@ -66,7 +66,7 @@ public class JsonFileProperties {
         synchronized (lock) {
             jsonObject.addProperty(key, value);
             String jsonValue = gson.toJson(jsonObject);
-            FileUtil.fileOutput(jsonValue, filePath, false);
+            FileUtils.fileOutput(jsonValue, filePath, false);
         }
     }
 
@@ -76,7 +76,7 @@ public class JsonFileProperties {
             jsonObject.addProperty(key, value);
 
             String jsonValue = gson.toJson(jsonObject);
-            FileUtil.fileOutput(jsonValue, filePath, false);
+            FileUtils.fileOutput(jsonValue, filePath, false);
         }
     }
 
@@ -85,7 +85,7 @@ public class JsonFileProperties {
             jsonObject.addProperty(key, value);
 
             String jsonValue = gson.toJson(jsonObject);
-            FileUtil.fileOutput(jsonValue, filePath, false);
+            FileUtils.fileOutput(jsonValue, filePath, false);
         }
     }
 
@@ -93,7 +93,7 @@ public class JsonFileProperties {
         synchronized (lock) {
             jsonObject.addProperty(key, value);
             String jsonValue = gson.toJson(jsonObject);
-            FileUtil.fileOutput(jsonValue, filePath, false);
+            FileUtils.fileOutput(jsonValue, filePath, false);
         }
     }
 
@@ -101,7 +101,7 @@ public class JsonFileProperties {
         synchronized (lock) {
             jsonObject.addProperty(key, value);
             String jsonValue = gson.toJson(jsonObject);
-            FileUtil.fileOutput(jsonValue, filePath, false);
+            FileUtils.fileOutput(jsonValue, filePath, false);
         }
     }
 
@@ -109,7 +109,7 @@ public class JsonFileProperties {
         synchronized (lock) {
             jsonObject.addProperty(key, value);
             String jsonValue = gson.toJson(jsonObject);
-            FileUtil.fileOutput(jsonValue, filePath, false);
+            FileUtils.fileOutput(jsonValue, filePath, false);
         }
     }
 
@@ -124,7 +124,7 @@ public class JsonFileProperties {
             jsonObject.add(key, jsonArray);
 
             String jsonValue = gson.toJson(jsonObject);
-            FileUtil.fileOutput(jsonValue, filePath, false);
+            FileUtils.fileOutput(jsonValue, filePath, false);
         }
     }
 
@@ -139,7 +139,7 @@ public class JsonFileProperties {
             jsonObject.add(key, jsonArray);
 
             String jsonValue = gson.toJson(jsonObject);
-            FileUtil.fileOutput(jsonValue, filePath, false);
+            FileUtils.fileOutput(jsonValue, filePath, false);
         }
     }
 
@@ -155,7 +155,7 @@ public class JsonFileProperties {
             jsonObject.add(key, jsonArray);
 
             String jsonValue = gson.toJson(jsonObject);
-            FileUtil.fileOutput(jsonValue, filePath, false);
+            FileUtils.fileOutput(jsonValue, filePath, false);
         }
     }
 
@@ -170,7 +170,7 @@ public class JsonFileProperties {
             jsonObject.add(key, jsonArray);
 
             String jsonValue = gson.toJson(jsonObject);
-            FileUtil.fileOutput(jsonValue, filePath, false);
+            FileUtils.fileOutput(jsonValue, filePath, false);
         }
     }
 
@@ -186,7 +186,7 @@ public class JsonFileProperties {
             jsonObject.add(key, jsonArray);
 
             String jsonValue = gson.toJson(jsonObject);
-            FileUtil.fileOutput(jsonValue, filePath, false);
+            FileUtils.fileOutput(jsonValue, filePath, false);
         }
     }
 
@@ -199,7 +199,7 @@ public class JsonFileProperties {
 
             jsonObject.remove(key);
             String jsonValue = gson.toJson(jsonObject);
-            FileUtil.fileOutput(jsonValue, filePath, false);
+            FileUtils.fileOutput(jsonValue, filePath, false);
         }
     }
 

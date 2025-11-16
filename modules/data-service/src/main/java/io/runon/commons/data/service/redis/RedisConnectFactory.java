@@ -1,7 +1,7 @@
 package io.runon.commons.data.service.redis;
 
-import io.runon.commons.utils.ExceptionUtil;
 import io.runon.commons.data.service.DataServiceYml;
+import io.runon.commons.utils.ExceptionUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
@@ -29,7 +29,7 @@ public class RedisConnectFactory {
                 return new RedisConnectClient(redisMap);
             }
         }catch(Exception e){
-            log.error(ExceptionUtil.getStackTrace(e));
+            log.error(ExceptionUtils.getStackTrace(e));
             return new RedisConnectClient(redisMap);
         }
 

@@ -1,6 +1,6 @@
 package io.runon.jdbc.example.admin;
 
-import io.runon.commons.utils.time.YmdUtil;
+import io.runon.commons.utils.time.YmdUtils;
 import io.runon.jdbc.JdbcQuery;
 import io.runon.jdbc.connection.ConnectionFactory;
 
@@ -19,7 +19,7 @@ public class RowDeleteYmd {
 
             Connection conn = ConnectionFactory.newConnection("maria", url, user,passwd);
 
-            List<String> ymdList = YmdUtil.getYmdList("20180101","20201231");
+            List<String> ymdList = YmdUtils.getYmdList("20180101","20201231");
 
             for(String ymd : ymdList){
                 System.out.println(ymd);

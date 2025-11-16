@@ -315,21 +315,21 @@ public class Times {
     }
 
     public static long getStartTime(int startYmd, ZoneId zoneId){
-        return YmdUtil.getTime(startYmd, zoneId);
+        return YmdUtils.getTime(startYmd, zoneId);
     }
 
     public static long getStartTime(String startYmd, ZoneId zoneId){
-        return YmdUtil.getTime(startYmd, zoneId);
+        return YmdUtils.getTime(startYmd, zoneId);
     }
 
 
     public static long getEndTime(String endYmd, ZoneId zoneId){
-        return  YmdUtil.getTime(endYmd, zoneId) + Times.DAY_1 ;
+        return  YmdUtils.getTime(endYmd, zoneId) + Times.DAY_1 ;
     }
 
     public static long getEndTime(int endYmd, ZoneId zoneId){
 
-        return  YmdUtil.getTime(endYmd, zoneId) + Times.DAY_1 ;
+        return  YmdUtils.getTime(endYmd, zoneId) + Times.DAY_1 ;
     }
 
 

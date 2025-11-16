@@ -1,11 +1,11 @@
 package io.runon.commons.service;
 
 import io.runon.commons.config.Config;
-import io.runon.commons.utils.ExceptionUtil;
-import io.runon.commons.utils.PriorityUtil;
+import io.runon.commons.utils.ExceptionUtils;
+import io.runon.commons.utils.PriorityUtils;
 import io.runon.commons.utils.packages.classes.ClassSearch;
 import io.runon.commons.utils.time.RunningTime;
-import io.runon.commons.utils.time.TimeUtil;
+import io.runon.commons.utils.time.TimeUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
@@ -45,18 +45,18 @@ public class Initializers {
                 initializerList.add(initializer);
 
             } catch (Exception e) {
-                log.error(ExceptionUtil.getStackTrace(e));
+                log.error(ExceptionUtils.getStackTrace(e));
             }
         }
 
         log.debug("initializer size: " + initializerList.size());
         if (initializerList.isEmpty()) {
-            log.debug("init empty: " + TimeUtil.getTimeValue(time.getRunningTime()));
+            log.debug("init empty: " + TimeUtils.getTimeValue(time.getRunningTime()));
             return;
         }
         Comparator<Initializer> initializerSort = (i1, i2) -> {
-            int seq1 = PriorityUtil.getSeq(i1.getClass());
-            int seq2 = PriorityUtil.getSeq(i2.getClass());
+            int seq1 = PriorityUtils.getSeq(i1.getClass());
+            int seq2 = PriorityUtils.getSeq(i2.getClass());
             return Integer.compare(seq1, seq2);
         };
         Initializer[] array  = initializerList.toArray(new Initializer[0]);
@@ -67,11 +67,11 @@ public class Initializers {
                 log.debug("initializer: " + initializer.getClass().getName());
                 initializer.init();
             }catch(Exception e){
-                log.error(ExceptionUtil.getStackTrace(e));
+                log.error(ExceptionUtils.getStackTrace(e));
             }
         }
 
-        log.debug("Initializer all init complete: " + TimeUtil.getTimeValue(time.getRunningTime()));
+        log.debug("Initializer all init complete: " + TimeUtils.getTimeValue(time.getRunningTime()));
     }
 
 }

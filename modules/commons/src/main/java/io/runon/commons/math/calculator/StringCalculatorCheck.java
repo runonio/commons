@@ -2,7 +2,7 @@
 
 package io.runon.commons.math.calculator;
 
-import io.runon.commons.utils.ExceptionUtil;
+import io.runon.commons.utils.ExceptionUtils;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -32,7 +32,7 @@ public class StringCalculatorCheck {
 			
 		}catch(Exception e){
 			
-			log.debug(ExceptionUtil.getStackTrace(e));
+			log.debug(ExceptionUtils.getStackTrace(e));
 			return false;
 		}
 		

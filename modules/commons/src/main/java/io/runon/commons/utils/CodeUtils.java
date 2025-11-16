@@ -4,7 +4,7 @@ package io.runon.commons.utils;
  * 코드체계 관련 유틸
  * @author macle
  */
-public class CodeUtil {
+public class CodeUtils {
 	
 	/**
 	 * 자리수만큼 00문자열을 생성해서 돌려줌

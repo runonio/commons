@@ -3,7 +3,7 @@ package io.runon.commons.crypto;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import io.runon.commons.config.Config;
-import io.runon.commons.utils.FileUtil;
+import io.runon.commons.utils.FileUtils;
 import io.runon.commons.utils.string.Check;
 
 import java.io.File;
@@ -36,11 +36,11 @@ public class CharMapDataManagement {
     public void loadData(){
         String filePath = Config.getConfig("crypto.charmap.path","config/charmaps");
 
-        if(!FileUtil.isFile(filePath)){
+        if(!FileUtils.isFile(filePath)){
             return ;
         }
 
-        String fileStr = FileUtil.getFileContents(new File(filePath), "utf-8");
+        String fileStr = FileUtils.getFileContents(new File(filePath), "utf-8");
         loadData(fileStr);
 
         lastData = fileStr;
@@ -84,7 +84,7 @@ public class CharMapDataManagement {
             }
 
             String str = outStr();
-            FileUtil.fileOutput(str, filePath, false);
+            FileUtils.fileOutput(str, filePath, false);
 
             lastData = str;
         }
@@ -97,7 +97,7 @@ public class CharMapDataManagement {
         synchronized (lock) {
             charMapManager.put(id, charMap);
             String str = outStr();
-            FileUtil.fileOutput(str, filePath, false);
+            FileUtils.fileOutput(str, filePath, false);
 
             lastData = str;
         }

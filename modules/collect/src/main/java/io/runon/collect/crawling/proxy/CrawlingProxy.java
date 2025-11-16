@@ -3,7 +3,7 @@
 package io.runon.collect.crawling.proxy;
 
 import io.runon.commons.apis.socket.ApiCommunication;
-import io.runon.commons.utils.ExceptionUtil;
+import io.runon.commons.utils.ExceptionUtils;
 import io.runon.commons.utils.time.Times;
 import lombok.extern.slf4j.Slf4j;
 
@@ -79,7 +79,7 @@ public class CrawlingProxy {
 				}
 
 			}catch(Exception e){
-				log.error(ExceptionUtil.getStackTrace(e));
+				log.error(ExceptionUtils.getStackTrace(e));
 				return false;
 			}
 		}
@@ -98,7 +98,7 @@ public class CrawlingProxy {
 			try {
 				communication.disConnect();
 			}catch(Exception e){
-				log.error(ExceptionUtil.getStackTrace(e));
+				log.error(ExceptionUtils.getStackTrace(e));
 			}
 		}
 		apiCommunicationArray = null;

@@ -60,7 +60,7 @@ public class FileSearch {
 
 
     public List<File> search(String path, String[] inTextArray){
-        List<File> allFiles = FileUtil.getFileList(path);
+        List<File> allFiles = FileUtils.getFileList(path);
 
         List<File> searchList = new ArrayList<>();
 
@@ -74,7 +74,7 @@ public class FileSearch {
                 continue;
             }
 
-            String fileText = FileUtil.getFileContents(file, charset);
+            String fileText = FileUtils.getFileContents(file, charset);
 
             if(outTextSet != null){
                 for(String outText: outTextSet) {

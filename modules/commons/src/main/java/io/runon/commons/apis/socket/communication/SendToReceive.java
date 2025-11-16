@@ -3,7 +3,7 @@ package io.runon.commons.apis.socket.communication;
 
 import io.runon.commons.config.Config;
 import io.runon.commons.handler.ExceptionHandler;
-import io.runon.commons.utils.ExceptionUtil;
+import io.runon.commons.utils.ExceptionUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -128,7 +128,7 @@ public class SendToReceive {
 			}catch(Exception e){
 				if(isConnectErrorLog){
 					log.error(host +", " + port + " : connect fail");
-					ExceptionUtil.exception(e, log, exceptionHandler);
+					ExceptionUtils.exception(e, log, exceptionHandler);
 				}
 				disConnect();
 				return false;

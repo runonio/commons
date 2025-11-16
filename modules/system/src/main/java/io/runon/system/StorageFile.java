@@ -3,7 +3,7 @@ package io.runon.system;
 
 import io.runon.commons.crypto.CryptoType;
 import io.runon.commons.crypto.Cryptos;
-import io.runon.commons.utils.ExceptionUtil;
+import io.runon.commons.utils.ExceptionUtils;
 import io.runon.jdbc.annotation.*;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -66,7 +66,7 @@ public class StorageFile {
         try {
             sha256 = Cryptos.getHashText(fileBytes, "SHA-256");
         }catch (Exception e){
-            log.error(ExceptionUtil.getStackTrace(e));
+            log.error(ExceptionUtils.getStackTrace(e));
         }
     }
 }

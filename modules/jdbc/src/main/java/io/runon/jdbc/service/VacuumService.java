@@ -1,7 +1,7 @@
 package io.runon.jdbc.service;
 
 import io.runon.commons.service.Service;
-import io.runon.commons.utils.ExceptionUtil;
+import io.runon.commons.utils.ExceptionUtils;
 import io.runon.commons.utils.time.Times;
 import io.runon.jdbc.JdbcQuery;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +35,7 @@ public class VacuumService extends Service {
             try{
                 JdbcQuery.execute("vacuum " + tableName);
             }catch(Exception e){
-                log.error(ExceptionUtil.getStackTrace(e));
+                log.error(ExceptionUtils.getStackTrace(e));
             }
         }
     }

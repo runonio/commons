@@ -4,11 +4,10 @@ package io.runon.jdbc.connection;
 
 import io.runon.commons.config.Config;
 import io.runon.commons.exception.ReflectiveOperationRuntimeException;
-import io.runon.commons.utils.ExceptionUtil;
 import io.runon.commons.crypto.CharMap;
 import io.runon.commons.crypto.CharMapManager;
 import io.runon.commons.crypto.LoginCrypto;
-import io.runon.jdbc.Database;
+import io.runon.commons.utils.ExceptionUtils;
 import io.runon.jdbc.exception.SQLRuntimeException;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -53,7 +52,7 @@ public class ApplicationConnectionPool {
         try{
             setConfigConnectionInfo();
         }catch(Exception e){
-            log.error(ExceptionUtil.getStackTrace(e));
+            log.error(ExceptionUtils.getStackTrace(e));
         }
         return this;
     }
@@ -190,7 +189,7 @@ public class ApplicationConnectionPool {
             setDataSource();
         }catch(Exception e ){
             //섬세 설정을 사용하지않을경우 에러를 처리하지않기위한 초기 변수
-            log.error(ExceptionUtil.getStackTrace(e));
+            log.error(ExceptionUtils.getStackTrace(e));
         }
     }
 
@@ -244,14 +243,14 @@ public class ApplicationConnectionPool {
                         return conn;
                     }
                 }catch(SQLException e){
-                    log.trace(ExceptionUtil.getStackTrace(e));
+                    log.trace(ExceptionUtils.getStackTrace(e));
                 }
 
                 try {
                     //noinspection BusyWait
                     Thread.sleep(connectionWaitTryTime);
                 } catch (InterruptedException e) {
-                    log.error(ExceptionUtil.getStackTrace(e));
+                    log.error(ExceptionUtils.getStackTrace(e));
                 }
             }
         }else{

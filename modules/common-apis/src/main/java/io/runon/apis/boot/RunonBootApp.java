@@ -3,7 +3,7 @@ package io.runon.apis.boot;
 import io.runon.commons.config.Config;
 import io.runon.commons.config.ConfigSet;
 import io.runon.commons.crypto.CharMapDataManagement;
-import io.runon.commons.utils.FileUtil;
+import io.runon.commons.utils.FileUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.boot.SpringApplication;
@@ -46,7 +46,7 @@ public class RunonBootApp {
         if(Config.getBoolean("crypto.service.flag", false)){
             CharMapDataManagement charMapDataManagement = CharMapDataManagement.getInstance();
             String filePath = Config.getConfig("crypto.charmap.path",ConfigSet.CONFIG_DIR_PATH+"/charmaps");
-            if(!FileUtil.isFile(filePath)){
+            if(!FileUtils.isFile(filePath)){
                 charMapDataManagement.addRandomCharMap(0, (Config.getInteger("crypto.charmap.length", 10) -1));
             }
         }

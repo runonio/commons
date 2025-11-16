@@ -1,7 +1,7 @@
 package io.runon.commons.example.crypto;
 
 import io.runon.commons.crypto.CharMap;
-import io.runon.commons.crypto.HashConfusionCrypto;
+import io.runon.commons.crypto.HashConfusionCryptos;
 
 /**
  * @author macle
@@ -14,11 +14,11 @@ public class HashConfusionCryptoExample {
 
         CharMap charMap = new CharMap(CharMap.makeRandomMap());
 
-        String encText = HashConfusionCrypto.encStr(key, text, 32, charMap);
+        String encText = HashConfusionCryptos.encStr(key, text, 32, charMap);
         System.out.println(encText);
 
 
-        String dec = HashConfusionCrypto.decStr(key, encText, 32, charMap);
+        String dec = HashConfusionCryptos.decStr(key, encText, 32, charMap);
         System.out.println(dec);
 
         //파일암호화

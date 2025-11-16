@@ -2,7 +2,7 @@
 package io.runon.commons.apis.socket.communication;
 
 import io.runon.commons.handler.ExceptionHandler;
-import io.runon.commons.utils.ExceptionUtil;
+import io.runon.commons.utils.ExceptionUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -68,7 +68,7 @@ public class StringPush {
 				socket = new Socket(hostAddress, port);
 				send =  new OutputStreamWriter(socket.getOutputStream(), CommunicationDefault.CHAR_SET);
 			}catch(Exception e){
-				ExceptionUtil.exception(e, log, exceptionHandler);
+				ExceptionUtils.exception(e, log, exceptionHandler);
 				return false;
 			}		
 		}
@@ -87,7 +87,7 @@ public class StringPush {
 				send.close();	
 			}
 		}catch(Exception e){
-			ExceptionUtil.exception(e, log, exceptionHandler);
+			ExceptionUtils.exception(e, log, exceptionHandler);
 		}
 		send = null;
 		try{
@@ -96,7 +96,7 @@ public class StringPush {
 			
 			}
 		}catch(Exception e){
-			ExceptionUtil.exception(e, log, exceptionHandler);
+			ExceptionUtils.exception(e, log, exceptionHandler);
 		}
 		socket = null;
 	}
@@ -113,7 +113,7 @@ public class StringPush {
 		
 			return true;
 		}catch(Exception e){
-			ExceptionUtil.exception(e, log, exceptionHandler);
+			ExceptionUtils.exception(e, log, exceptionHandler);
 			return false;
 		}
 	}

@@ -12,7 +12,7 @@ import io.runon.commons.handler.ExceptionHandler;
  * 예외처리 관련 유틸
  * @author macle
  */
-public class ExceptionUtil {
+public class ExceptionUtils {
 	/**
 	 *  Exception.printStackTrace 내용을 String 으로 가져오기
 	 * @param e Exception e

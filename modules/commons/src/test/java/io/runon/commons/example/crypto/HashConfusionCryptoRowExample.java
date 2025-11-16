@@ -2,7 +2,7 @@ package io.runon.commons.example.crypto;
 
 import io.runon.commons.crypto.CharMap;
 import io.runon.commons.crypto.CharMapManager;
-import io.runon.commons.crypto.HashConfusionCrypto;
+import io.runon.commons.crypto.HashConfusionCryptos;
 
 /**
  * @author macle
@@ -22,11 +22,11 @@ public class HashConfusionCryptoRowExample {
         String text =" test Text";
 
         //암호화
-        String enc = HashConfusionCrypto.encStr(rowId, text, 32, charMap);
+        String enc = HashConfusionCryptos.encStr(rowId, text, 32, charMap);
         System.out.println(enc);
 
 
-        String dec =  HashConfusionCrypto.decStr(rowId, enc, 32, charMap);
+        String dec =  HashConfusionCryptos.decStr(rowId, enc, 32, charMap);
         System.out.println(dec);
 
     }

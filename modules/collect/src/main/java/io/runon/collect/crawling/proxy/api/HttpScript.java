@@ -2,10 +2,10 @@
 package io.runon.collect.crawling.proxy.api;
 
 import io.runon.commons.apis.socket.Messages;
+import io.runon.commons.utils.ExceptionUtils;
 import org.json.JSONObject;
 
 import io.runon.commons.apis.socket.ApiMessage;
-import io.runon.commons.utils.ExceptionUtil;
 import io.runon.collect.crawling.core.http.HttpUrl;
 
 /**
@@ -29,7 +29,7 @@ public class HttpScript extends ApiMessage{
 			}
 			sendMessage(Messages.SUCCESS+HttpUrl.getScript(messageObj.getString("url"), optionData));
 		}catch(Exception e) {
-			sendMessage(Messages.FAIL + ExceptionUtil.getStackTrace(e));
+			sendMessage(Messages.FAIL + ExceptionUtils.getStackTrace(e));
 		}
 	}
 

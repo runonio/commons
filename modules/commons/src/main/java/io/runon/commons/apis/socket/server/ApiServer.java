@@ -4,7 +4,7 @@ package io.runon.commons.apis.socket.server;
 import io.runon.commons.apis.socket.ApiCommunication;
 import io.runon.commons.callback.ObjCallback;
 import io.runon.commons.handler.ExceptionHandler;
-import io.runon.commons.utils.ExceptionUtil;
+import io.runon.commons.utils.ExceptionUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.net.InetAddress;
@@ -101,9 +101,9 @@ public class ApiServer extends Thread {
 				apiCommunication.start();		
 			}
 		}catch(java.net.BindException e){
-			ExceptionUtil.exception(e, log, exceptionHandler);
+			ExceptionUtils.exception(e, log, exceptionHandler);
 		}catch(Exception e){
-			ExceptionUtil.exception(e, log, exceptionHandler);
+			ExceptionUtils.exception(e, log, exceptionHandler);
 		}
 		
 		log.debug("api server stop port: " + port);

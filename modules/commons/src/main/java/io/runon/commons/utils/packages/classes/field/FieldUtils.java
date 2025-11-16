@@ -17,7 +17,7 @@
 
 package io.runon.commons.utils.packages.classes.field;
 
-import io.runon.commons.utils.ExceptionUtil;
+import io.runon.commons.utils.ExceptionUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Field;
@@ -28,7 +28,7 @@ import java.lang.reflect.Field;
  * @author macle
  */
 @Slf4j
-public class FieldUtil {
+public class FieldUtils {
 
 	/**
 	 * 상속한 모든부모의 필드까지 얻기 (상속에 상속에 상속 구조)
@@ -128,7 +128,7 @@ public class FieldUtil {
 					try {
 						copyField.set(copyObject, objectField.get(originalObject));
 					} catch (IllegalArgumentException | IllegalAccessException e) {
-						log.error(ExceptionUtil.getStackTrace(e));
+						log.error(ExceptionUtils.getStackTrace(e));
 					}
 
 				}

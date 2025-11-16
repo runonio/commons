@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.runon.commons.config.Config;
 import io.runon.commons.service.Service;
-import io.runon.commons.utils.ExceptionUtil;
+import io.runon.commons.utils.ExceptionUtils;
 import io.runon.commons.utils.time.Times;
 import io.runon.commons.data.service.exception.ServerNotRegException;
 import io.runon.commons.data.service.notify.NotifyCase;
@@ -79,7 +79,7 @@ public class ServersOffNotifyConnectTimeService extends Service {
                 }
             }
         }catch (Exception e){
-            log.error(ExceptionUtil.getStackTrace(e));
+            log.error(ExceptionUtils.getStackTrace(e));
         }
     }
 
@@ -168,7 +168,7 @@ public class ServersOffNotifyConnectTimeService extends Service {
             }
 
         }catch (Exception e){
-            log.error(ExceptionUtil.getStackTrace(e));
+            log.error(ExceptionUtils.getStackTrace(e));
         }
     }
 

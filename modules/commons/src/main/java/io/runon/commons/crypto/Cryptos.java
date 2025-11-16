@@ -2,14 +2,13 @@ package io.runon.commons.crypto;
 
 import io.runon.commons.config.Config;
 import io.runon.commons.exception.IORuntimeException;
-import io.runon.commons.utils.FileUtil;
+import io.runon.commons.utils.FileUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
@@ -52,10 +51,10 @@ public class Cryptos {
         String key = keyObj.toString();
 
         if(cryptoType == CryptoType.Y){
-            return HashConfusionCrypto.enc(key, bytes, keySize, null);
+            return HashConfusionCryptos.enc(key, bytes, keySize, null);
         }else if(cryptoType == CryptoType.SCM){
             CharMap charMap = CharMapManager.getInstance().getRowIdMap(keyObj);
-            return HashConfusionCrypto.enc(key, bytes, keySize, charMap);
+            return HashConfusionCryptos.enc(key, bytes, keySize, charMap);
         }
 
         return bytes;
@@ -71,10 +70,10 @@ public class Cryptos {
         String key = keyObj.toString();
 
         if(cryptoType == CryptoType.Y){
-            return HashConfusionCrypto.encStr(key, str, keySize, null);
+            return HashConfusionCryptos.encStr(key, str, keySize, null);
         }else if(cryptoType == CryptoType.SCM){
             CharMap charMap = CharMapManager.getInstance().getRowIdMap(keyObj);
-            return HashConfusionCrypto.encStr(key, str, keySize, charMap);
+            return HashConfusionCryptos.encStr(key, str, keySize, charMap);
         }
         return str;
     }
@@ -88,10 +87,10 @@ public class Cryptos {
     public static byte[] decByte(byte [] bytes, CryptoType cryptoType, Object keyObj,  int keySize){
         String key = keyObj.toString();
         if(cryptoType == io.runon.commons.crypto.CryptoType.Y){
-            return HashConfusionCrypto.dec(key, bytes, keySize, null);
+            return HashConfusionCryptos.dec(key, bytes, keySize, null);
         }else if(cryptoType == io.runon.commons.crypto.CryptoType.SCM){
             CharMap charMap = CharMapManager.getInstance().getRowIdMap(keyObj);
-            return HashConfusionCrypto.dec(key, bytes, keySize, charMap);
+            return HashConfusionCryptos.dec(key, bytes, keySize, charMap);
         }
 
         return bytes;
@@ -107,10 +106,10 @@ public class Cryptos {
         String key = keyObj.toString();
 
         if(cryptoType == CryptoType.Y){
-            return HashConfusionCrypto.decStr(key, str, keySize, null);
+            return HashConfusionCryptos.decStr(key, str, keySize, null);
         }else if(cryptoType == CryptoType.SCM){
             CharMap charMap = CharMapManager.getInstance().getRowIdMap(keyObj);
-            return HashConfusionCrypto.decStr(key, str, keySize, charMap);
+            return HashConfusionCryptos.decStr(key, str, keySize, charMap);
         }
         return str;
     }
@@ -127,9 +126,9 @@ public class Cryptos {
         String filePath = file.getAbsolutePath();
 
         if(file.isDirectory()){
-            FileUtil.mkdirs(outPath);
+            FileUtils.mkdirs(outPath);
             //하위까지 전체복사
-            List<File> fileList = FileUtil.getFileList(inPath);
+            List<File> fileList = FileUtils.getFileList(inPath);
             for(File subFile : fileList){
                 String subPath = subFile.getAbsolutePath();
                 String newPath = subPath.substring(filePath.length());
@@ -159,11 +158,11 @@ public class Cryptos {
 
     public static boolean copyFileDec(String inFilePath, String outFilePath, CryptoType cryptoType, Object keyObject, int keySize){
 
-       if(!FileUtil.isFile(inFilePath))
+       if(!FileUtils.isFile(inFilePath))
             return false;
         try {
             if(cryptoType == CryptoType.N){
-                FileUtil.fileCopy(inFilePath, outFilePath);
+                FileUtils.fileCopy(inFilePath, outFilePath);
                 return true;
             }
 

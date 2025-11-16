@@ -3,8 +3,8 @@ package io.runon.jdbc.objects;
 
 import io.runon.commons.callback.GenericCallBack;
 import io.runon.commons.exception.ReflectiveOperationRuntimeException;
-import io.runon.commons.utils.ExceptionUtil;
-import io.runon.commons.utils.packages.classes.field.FieldUtil;
+import io.runon.commons.utils.ExceptionUtils;
+import io.runon.commons.utils.packages.classes.field.FieldUtils;
 import io.runon.jdbc.Database;
 import io.runon.jdbc.JdbcQuery;
 import io.runon.jdbc.PrepareStatementData;
@@ -372,7 +372,7 @@ public class JdbcObjects {
      * @return Map
      */
     private static <T>  Map<String, Field> makeColumnFieldMap(Class<T> objClass){
-        Field[] fields = FieldUtil.getFieldArrayToParents(objClass);
+        Field[] fields = FieldUtils.getFieldArrayToParents(objClass);
         Map<String, Field> columnFieldMap = new HashMap<>();
         for(Field field: fields){
             Column column = field.getAnnotation(Column.class);
@@ -911,7 +911,7 @@ public class JdbcObjects {
         Class<?> objClass = obj.getClass();
         String tableName = TableSql.getTableName(objClass.getAnnotation(Table.class), objClass.getName());
 
-        Field[] fields = FieldUtil.getFieldArrayToParents(objClass);
+        Field[] fields = FieldUtils.getFieldArrayToParents(objClass);
         int firstSeq = Integer.MAX_VALUE;
         String firstPk = null;
         for (Field field : fields) {
@@ -1137,7 +1137,7 @@ public class JdbcObjects {
                         continue;
                     }
                 }catch(Exception e){
-                    log.error(ExceptionUtil.getStackTrace(e));
+                    log.error(ExceptionUtils.getStackTrace(e));
                 }
             }
 
@@ -1418,7 +1418,7 @@ public class JdbcObjects {
 
         Class<?> objClass = obj.getClass();
 
-        Field[] fields = FieldUtil.getFieldArrayToParents(objClass);
+        Field[] fields = FieldUtils.getFieldArrayToParents(objClass);
 
         boolean isUpdate = false;
 

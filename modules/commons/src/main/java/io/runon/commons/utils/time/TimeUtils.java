@@ -6,7 +6,7 @@ package io.runon.commons.utils.time;
  * 시간 관련 유틸성 내용
  * @author macle
  */
-public class TimeUtil {
+public class TimeUtils {
 	
 	//일분 밀리세컨드 값
 	private static final long minuteTime = 60000L;

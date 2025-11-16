@@ -1,7 +1,7 @@
 
 package io.runon.jdbc;
 
-import io.runon.commons.utils.ExceptionUtil;
+import io.runon.commons.utils.ExceptionUtils;
 import io.runon.jdbc.common.JdbcClose;
 import io.runon.jdbc.connection.ApplicationConnectionPool;
 import io.runon.jdbc.exception.JdbcServerTimeException;
@@ -157,7 +157,7 @@ public class Database {
 		try(Connection conn =  ApplicationConnectionPool.getInstance().getCommitConnection()){
 			return getDateTime(conn, sql);
 		}catch(Exception e){
-			log.error(ExceptionUtil.getStackTrace(e));
+			log.error(ExceptionUtils.getStackTrace(e));
 			return System.currentTimeMillis();
 		}
 
@@ -253,7 +253,7 @@ public class Database {
 		try(Connection conn =  ApplicationConnectionPool.getInstance().getCommitConnection()) {
 			return getPrimaryKeyColumnsForTable(conn, tableName);
 		}catch(SQLException e){
-			log.error(ExceptionUtil.getStackTrace(e));
+			log.error(ExceptionUtils.getStackTrace(e));
 			throw new SQLRuntimeException(e);
 		}
 	}

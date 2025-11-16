@@ -1,7 +1,7 @@
 package io.runon.commons.utils.string;
 
 
-import io.runon.commons.utils.FileUtil;
+import io.runon.commons.utils.FileUtils;
 
 import java.io.File;
 import java.util.List;
@@ -30,10 +30,10 @@ public class StringLines {
 
         if(file.isFile() && file.length() > 0){
             //이미 기록된 파일이 있고 그내용이 비어있지 않으면
-            FileUtil.fileOutput("\n" + sumText, charset, file.getAbsolutePath() , true);
+            FileUtils.fileOutput("\n" + sumText, charset, file.getAbsolutePath() , true);
         }else{
             //기록된 파일이 없으면
-            FileUtil.fileOutput(sumText, charset, file.getAbsolutePath(),  false);
+            FileUtils.fileOutput(sumText, charset, file.getAbsolutePath(),  false);
         }
     }
 

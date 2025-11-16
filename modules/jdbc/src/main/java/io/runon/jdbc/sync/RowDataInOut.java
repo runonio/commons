@@ -5,8 +5,8 @@ package io.runon.jdbc.sync;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import io.runon.commons.exception.IORuntimeException;
-import io.runon.commons.utils.ExceptionUtil;
-import io.runon.commons.utils.FileUtil;
+import io.runon.commons.utils.ExceptionUtils;
+import io.runon.commons.utils.FileUtils;
 import io.runon.jdbc.Database;
 import io.runon.jdbc.JdbcQuery;
 import io.runon.jdbc.PrepareStatementData;
@@ -118,7 +118,7 @@ public class RowDataInOut {
 			log.info("out table: " + tableName);
             final String fileName = fileHome + tableName;
             //파일생성
-            FileUtil.fileOutput("", charSet, fileName, false);
+            FileUtils.fileOutput("", charSet, fileName, false);
 
 			//noinspection Convert2Lambda
 			JdbcMapDataHandler handler = new JdbcMapDataHandler() {
@@ -128,7 +128,7 @@ public class RowDataInOut {
 					outBuilder.append(gson.toJson(data)).append("\n");
 					if(dataCount >= maxDataCount){
 						dataCount = 0;
-						FileUtil.fileOutput(outBuilder.toString(), charSet, fileName, true);
+						FileUtils.fileOutput(outBuilder.toString(), charSet, fileName, true);
 						outBuilder.setLength(0);
 					}
 
@@ -137,7 +137,7 @@ public class RowDataInOut {
 
             JdbcNamingMap.receiveData(conn, tableName, null, null, handler);
 			if(dataCount >0){
-				FileUtil.fileOutput(outBuilder.toString(), charSet, fileName, true);
+				FileUtils.fileOutput(outBuilder.toString(), charSet, fileName, true);
 				outBuilder.setLength(0);
 			}
 
@@ -275,7 +275,7 @@ public class RowDataInOut {
 				tableCopy(selectConn, insertConn, table);
 
 			}catch(Exception e){
-				log.error(ExceptionUtil.getStackTrace(e));
+				log.error(ExceptionUtils.getStackTrace(e));
 			}
 		}
 	}
@@ -295,7 +295,7 @@ public class RowDataInOut {
 				tableCopy(selectConn, insertConn, table);
 
 			}catch(Exception e){
-				log.error(ExceptionUtil.getStackTrace(e));
+				log.error(ExceptionUtils.getStackTrace(e));
 			}
 		}
 
@@ -314,7 +314,7 @@ public class RowDataInOut {
 				log.info(table);
 				tableCopy(selectConn, insertConn, table);
 			}catch(Exception e){
-				log.error(ExceptionUtil.getStackTrace(e));
+				log.error(ExceptionUtils.getStackTrace(e));
 			}
 		}
 	}

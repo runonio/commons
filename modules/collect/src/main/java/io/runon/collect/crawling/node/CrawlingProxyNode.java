@@ -3,9 +3,9 @@
 package io.runon.collect.crawling.node;
 
 import io.runon.commons.apis.socket.ApiRequest;
-import io.runon.commons.utils.ExceptionUtil;
 import io.runon.collect.crawling.core.http.HttpMessage;
 import io.runon.collect.crawling.exception.NodeEndException;
+import io.runon.commons.utils.ExceptionUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 
@@ -48,7 +48,7 @@ public class CrawlingProxyNode extends CrawlingNode {
 				try {
 					request.disConnect();
 				}catch(Exception e) {
-					ExceptionUtil.exception(e, log, exceptionHandler);
+					ExceptionUtils.exception(e, log, exceptionHandler);
 				}
 			}
 			

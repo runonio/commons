@@ -1,7 +1,9 @@
 package io.runon.commons.math;
 
 import java.util.Arrays;
-
+/**
+ * @author macle
+ */
 public class MathAdds {
     public static double logB(double x, double base) {
         return Math.log(x) / Math.log(base);

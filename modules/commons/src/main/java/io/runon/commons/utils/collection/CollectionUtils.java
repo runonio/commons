@@ -16,7 +16,6 @@
 package io.runon.commons.utils.collection;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,7 +24,7 @@ import java.util.Set;
  *
  * @author macle
  */
-public class CollectionUtil {
+public class CollectionUtils {
 	/**
 	 * 동등비교 null 인식
 	 * @param obj Collection

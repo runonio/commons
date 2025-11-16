@@ -4,11 +4,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import io.runon.commons.utils.ExceptionUtil;
-import io.runon.commons.utils.FileUtil;
-import io.runon.commons.utils.time.YmdUtil;
+import io.runon.commons.utils.ExceptionUtils;
+import io.runon.commons.utils.FileUtils;
+import io.runon.commons.utils.time.YmdUtils;
 
-import io.runon.commons.crypto.HashConfusionCrypto;
+import io.runon.commons.crypto.HashConfusionCryptos;
 import io.runon.commons.license.LicenseUtils;
 import io.runon.commons.license.LicenseVerify;
 import lombok.extern.slf4j.Slf4j;
@@ -28,13 +28,13 @@ public class LocalLicenseVerify {
 
 
     public static LicenseVerify verifyToPath(String FilePath, String key, Map<String,String > addDataMap){
-        String encMessage = FileUtil.getFileContents(new File(FilePath),"UTF-8");
+        String encMessage = FileUtils.getFileContents(new File(FilePath),"UTF-8");
         return verify(encMessage, key, addDataMap);
     }
 
     public static LicenseVerify verify(String encMessage, String key, Map<String,String > addDataMap){
         try {
-            String jsonText = HashConfusionCrypto.decStr(key, encMessage);
+            String jsonText = HashConfusionCryptos.decStr(key, encMessage);
             return verify(jsonText, addDataMap);
         }catch (Exception e){
             return LicenseVerify.DECRYPTION_ERROR;
@@ -86,9 +86,9 @@ public class LocalLicenseVerify {
             int validDays = jsonObject.get("valid_days").getAsInt();
 
             if(validDays > -1){
-                int nowYmd = Integer.parseInt(YmdUtil.now());
-                String createYmd = YmdUtil.getYmd(time);
-                int lastYmd = Integer.parseInt(YmdUtil.getYmd(createYmd, validDays));
+                int nowYmd = Integer.parseInt(YmdUtils.now());
+                String createYmd = YmdUtils.getYmd(time);
+                int lastYmd = Integer.parseInt(YmdUtils.getYmd(createYmd, validDays));
 
                 if(nowYmd > lastYmd){
                     return LicenseVerify.EXPIRED_ERROR;
@@ -148,7 +148,7 @@ public class LocalLicenseVerify {
             }
 
         }catch (Exception e){
-            log.error(ExceptionUtil.getStackTrace(e));
+            log.error(ExceptionUtils.getStackTrace(e));
             return LicenseVerify.EXCEPTION;
 
         }

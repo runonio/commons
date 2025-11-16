@@ -4,7 +4,7 @@ package io.runon.commons.apis.socket;
 import io.runon.commons.apis.socket.communication.SendToReceive;
 import io.runon.commons.callback.ObjCallback;
 import io.runon.commons.handler.ExceptionHandler;
-import io.runon.commons.utils.ExceptionUtil;
+import io.runon.commons.utils.ExceptionUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -100,14 +100,14 @@ public class ApiCommunication extends Thread{
 				
 			}
 		}catch(Exception e) {
-			ExceptionUtil.exception(e, log, exceptionHandler);
+			ExceptionUtils.exception(e, log, exceptionHandler);
 		}
 		try{
 			if(endCallback != null){
 				endCallback.callback(this);
 			}
 		}catch(Exception e){
-			ExceptionUtil.exception(e, log, exceptionHandler);
+			ExceptionUtils.exception(e, log, exceptionHandler);
 		}
 		
 	}
@@ -156,8 +156,8 @@ public class ApiCommunication extends Thread{
 			apiMessage.setCommunication(this);
 			apiMessage.receive(message);
 		} catch (Exception e1) {
-			sendMessage(ExceptionUtil.getStackTrace(e1));
-			ExceptionUtil.exception(e1, log, exceptionHandler);
+			sendMessage(ExceptionUtils.getStackTrace(e1));
+			ExceptionUtils.exception(e1, log, exceptionHandler);
 
 		}
 

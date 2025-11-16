@@ -2,8 +2,8 @@
 package io.runon.jdbc.naming;
 
 import io.runon.commons.exception.ReflectiveOperationRuntimeException;
-import io.runon.commons.utils.ExceptionUtil;
-import io.runon.commons.utils.packages.classes.field.FieldUtil;
+import io.runon.commons.utils.ExceptionUtils;
+import io.runon.commons.utils.packages.classes.field.FieldUtils;
 import io.runon.jdbc.Database;
 import io.runon.jdbc.PrepareStatementData;
 import io.runon.jdbc.annotation.PrimaryKey;
@@ -557,7 +557,7 @@ public class JdbcNaming {
 	 */
 	public static <T> T getObj(Connection conn, Class<T> objClass, String sql, String whereValue, String orderByValue, Map<Integer, PrepareStatementData> prepareStatementDataMap) throws IllegalAccessException, SQLException, InstantiationException {
 
-		Field [] fields = FieldUtil.getFieldArrayToParents(objClass);
+		Field [] fields = FieldUtils.getFieldArrayToParents(objClass);
 
 		String makeSql;
 		if(sql == null) {
@@ -957,7 +957,7 @@ public class JdbcNaming {
 						continue;
 					}
 				}catch(Exception e){
-					log.error(ExceptionUtil.getStackTrace(e));
+					log.error(ExceptionUtils.getStackTrace(e));
 				}
 			}
 	
@@ -1268,7 +1268,7 @@ public class JdbcNaming {
 	 * @return Field []
 	 */
 	public static Field [] getFields(Class<?> objClass){
-		Field [] fields = FieldUtil.getFieldArrayToParents(objClass);
+		Field [] fields = FieldUtils.getFieldArrayToParents(objClass);
 		if(fields == null || fields.length ==0){
 			throw new FieldNullException(objClass.getName());
 		}

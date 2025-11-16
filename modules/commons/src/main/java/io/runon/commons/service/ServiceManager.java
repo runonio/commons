@@ -16,7 +16,7 @@
 package io.runon.commons.service;
 
 import io.runon.commons.exception.OverlapException;
-import io.runon.commons.utils.ExceptionUtil;
+import io.runon.commons.utils.ExceptionUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
@@ -97,7 +97,7 @@ public class ServiceManager {
             try {
                 service.killService();
             }catch(Exception e){
-                log.error(ExceptionUtil.getStackTrace(e));
+                log.error(ExceptionUtils.getStackTrace(e));
             }
             return service;
         }
@@ -110,7 +110,7 @@ public class ServiceManager {
                 try{
                     service.killService();
                 }catch(Exception e){
-                    log.error(ExceptionUtil.getStackTrace(e));
+                    log.error(ExceptionUtils.getStackTrace(e));
                 }
             }
         }

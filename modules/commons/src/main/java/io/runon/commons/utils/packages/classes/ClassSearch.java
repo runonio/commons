@@ -4,7 +4,7 @@
 package io.runon.commons.utils.packages.classes;
 
 import io.runon.commons.exception.IORuntimeException;
-import io.runon.commons.utils.FileUtil;
+import io.runon.commons.utils.FileUtils;
 import lombok.Setter;
 
 import java.io.File;
@@ -54,7 +54,7 @@ public class ClassSearch {
 			File file = new File(path);
 			if(file.isDirectory()){
 				String dirPath = file.getAbsolutePath();
-				List<File> files = FileUtil.getFileList(file,fileExtension);
+				List<File> files = FileUtils.getFileList(file,fileExtension);
 				for(File classFile : files){
 					String className = classFile.getAbsolutePath().substring(dirPath.length()+1);
 					className = className.replace("/",".").replace("\\",".");

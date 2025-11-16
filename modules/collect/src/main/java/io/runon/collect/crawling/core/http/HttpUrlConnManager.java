@@ -1,11 +1,11 @@
 
 package io.runon.collect.crawling.core.http;
 
-import io.runon.commons.utils.ExceptionUtil;
 import io.runon.collect.crawling.CrawlingServer;
 import io.runon.collect.crawling.exception.NodeEndException;
 import io.runon.collect.crawling.node.CrawlingNode;
 import io.runon.collect.crawling.node.CrawlingNodeMessage;
+import io.runon.commons.utils.ExceptionUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 
@@ -144,7 +144,7 @@ public class HttpUrlConnManager {
 						try {
 							Thread.sleep(connLimitTime - gap);
 						}catch(Exception e) {
-							log.error(ExceptionUtil.getStackTrace(e));
+							log.error(ExceptionUtils.getStackTrace(e));
 						}
 					}
 				}

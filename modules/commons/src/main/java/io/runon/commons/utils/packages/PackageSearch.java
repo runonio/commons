@@ -15,7 +15,7 @@
  */
 package io.runon.commons.utils.packages;
 
-import io.runon.commons.utils.FileUtil;
+import io.runon.commons.utils.FileUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -86,7 +86,7 @@ public class PackageSearch {
 	public List<String> getPackageList(String text, Option option){
 		List<String> packageList = new ArrayList<>();
 		
-		List<File> fileList = FileUtil.getFileList(targetPath + startPackage.replace(".", "/"));
+		List<File> fileList = FileUtils.getFileList(targetPath + startPackage.replace(".", "/"));
 		
 		File pathFile = new File(targetPath);
 		

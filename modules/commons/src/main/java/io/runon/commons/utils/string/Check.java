@@ -12,6 +12,8 @@ import java.util.regex.Pattern;
  */
 public class Check {
 
+    public static String SP = "[^\uAC00-\uD7A3xfe0-9a-zA-Z\\s]";
+
 	/**
 	 * 이메일 유효성 체크 
 	 * @param str String 체크할 문자열
@@ -305,10 +307,9 @@ public class Check {
 		str =str.replaceAll(match, "");
 
 		return str.length() == 0;
-
-
 	}
-	
+
+
 	
 	/**
 	 * 문자열에 숫자가 없는지체크

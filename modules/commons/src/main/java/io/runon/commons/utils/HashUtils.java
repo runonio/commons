@@ -7,7 +7,7 @@ import java.security.NoSuchAlgorithmException;
  * Hash 관련 유틸
  * @author macle
  */
-public class HashUtil {
+public class HashUtils {
 	
 
 	/**

@@ -209,6 +209,15 @@ public class Strings {
         return sum;
     }
 
+    public static int getStringInteger(String str, int min, int max){
+        long num = sumCharNumbers(str);
+
+        int divideNum = max - min;
+
+        int remainder  = (int) (num % divideNum);
+        return remainder + min;
+    }
+
     public static String sumText(Object [] array, String split){
         if(array == null || array.length == 0){
             return "";
@@ -235,4 +244,9 @@ public class Strings {
         return sb.toString();
     }
 
+    public static void main(String[] args) {
+        int a = getStringInteger("datf",1 ,10);
+
+        System.out.println(a);
+    }
 }

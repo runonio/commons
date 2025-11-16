@@ -82,7 +82,7 @@ public class RunningTime {
 	 * @return long 작업시간(초)
 	 */
 	public long getRunningSecond(){
-		return (long)TimeUtil.getSecond(getRunningTime());
+		return (long) TimeUtils.getSecond(getRunningTime());
 	}
 	
 	/**
@@ -90,7 +90,7 @@ public class RunningTime {
 	 * @return double 작업시간(분)
 	 */
 	public double getRunningMinute(){
-		return TimeUtil.getMinute(getRunningTime());
+		return TimeUtils.getMinute(getRunningTime());
 	}
 
 	/**
@@ -98,7 +98,7 @@ public class RunningTime {
 	 * @return double 작업시간(시간)
 	 */
 	public double getRunningHour(){
-		return TimeUtil.getHour(getRunningTime());
+		return TimeUtils.getHour(getRunningTime());
 	}
 	
 	

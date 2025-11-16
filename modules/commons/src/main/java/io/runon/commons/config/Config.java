@@ -4,7 +4,7 @@ package io.runon.commons.config;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.joran.JoranConfigurator;
 import io.runon.commons.handler.ExceptionHandler;
-import io.runon.commons.utils.ExceptionUtil;
+import io.runon.commons.utils.ExceptionUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.LoggerFactory;
 
@@ -88,7 +88,7 @@ public class Config {
 		try{
 			return Long.parseLong(resultValue);
 		}catch(Exception e){
-			ExceptionUtil.exception(e, log, instance.exceptionHandler);
+			ExceptionUtils.exception(e, log, instance.exceptionHandler);
 		}
 
 		return defaultValue;
@@ -119,7 +119,7 @@ public class Config {
 		try{
 			return Integer.parseInt(resultValue);
 		}catch(Exception e){
-			ExceptionUtil.exception(e, log, instance.exceptionHandler);
+			ExceptionUtils.exception(e, log, instance.exceptionHandler);
 		}
 
 		return defaultValue;
@@ -150,7 +150,7 @@ public class Config {
 		try{
 			return Double.parseDouble(resultValue);
 		}catch(Exception e){
-			ExceptionUtil.exception(e, log, instance.exceptionHandler);
+			ExceptionUtils.exception(e, log, instance.exceptionHandler);
 		}
 
 		return defaultValue;
@@ -294,7 +294,7 @@ public class Config {
 				fileConfigData = new XmlFileConfigData(file);
 				configDataList.add(fileConfigData);
 			} catch (Exception e) {
-				log.error(ExceptionUtil.getStackTrace(e));
+				log.error(ExceptionUtils.getStackTrace(e));
 
 			}
 		}

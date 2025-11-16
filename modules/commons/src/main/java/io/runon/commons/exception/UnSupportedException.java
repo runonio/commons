@@ -4,6 +4,11 @@ package io.runon.commons.exception;
  */
 public class UnSupportedException extends RuntimeException{
 
+    public UnSupportedException(Exception e){
+        super(e);
+    }
+
+
     public UnSupportedException(){
         super();
     }

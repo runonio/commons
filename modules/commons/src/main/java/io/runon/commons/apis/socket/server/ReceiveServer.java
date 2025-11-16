@@ -2,7 +2,7 @@
 package io.runon.commons.apis.socket.server;
 
 import io.runon.commons.handler.ExceptionHandler;
-import io.runon.commons.utils.ExceptionUtil;
+import io.runon.commons.utils.ExceptionUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.net.InetAddress;
@@ -96,12 +96,12 @@ public class ReceiveServer extends Thread{
 					receiveCommunication.setExceptionHandler(exceptionHandler);
 					receiveCommunication.start();
 				}catch(Exception e){
-					ExceptionUtil.exception(e, log, exceptionHandler);
+					ExceptionUtils.exception(e, log, exceptionHandler);
 				}
 			}
 			
 		}catch(Exception e){
-			ExceptionUtil.exception(e, log, exceptionHandler);
+			ExceptionUtils.exception(e, log, exceptionHandler);
 		}
 		
 		isEnd = true;

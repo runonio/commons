@@ -1,8 +1,8 @@
 package io.runon.commons.data.service.collect;
 
 import io.runon.commons.service.Service;
-import io.runon.commons.utils.ExceptionUtil;
 import io.runon.commons.data.service.redis.Redis;
+import io.runon.commons.utils.ExceptionUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
@@ -40,7 +40,7 @@ public class CollectErrorMonitoringService extends Service {
                 }
             }
         }catch(Exception e){
-            log.error(ExceptionUtil.getStackTrace(e));
+            log.error(ExceptionUtils.getStackTrace(e));
         }
 
     }

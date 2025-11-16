@@ -2,8 +2,8 @@
 
 package io.runon.commons.example;
 
-import io.runon.commons.utils.FileUtil;
-import io.runon.commons.utils.time.TimeUtil;
+import io.runon.commons.utils.FileUtils;
+import io.runon.commons.utils.time.TimeUtils;
 
 /**
  * 인메모리 검색 분석 엔진에서 
@@ -18,33 +18,33 @@ public class FileReadLineNumberSpeedTest {
         //200 라인의 파일을 사용
 		for (int i = 0; i <200 ; i++) {
             //일치여부 테스트
-			if(!FileUtil.getLineNio(testFilePath, i).equals(FileUtil.getLine(testFilePath, i))){
+			if(!FileUtils.getLineNio(testFilePath, i).equals(FileUtils.getLine(testFilePath, i))){
 				System.out.println(i);
 			}
 		}
 
         long startTime = System.currentTimeMillis();
 		for (int i = 0; i <500 ; i++) {
-            FileUtil.getLineNio(testFilePath, 50);
+            FileUtils.getLineNio(testFilePath, 50);
 		}
-        System.out.println("line value Nio 속도: " + TimeUtil.getSecond(System.currentTimeMillis()-startTime));
+        System.out.println("line value Nio 속도: " + TimeUtils.getSecond(System.currentTimeMillis()-startTime));
         startTime = System.currentTimeMillis();
         for (int i = 0; i <500 ; i++) {
-            FileUtil.getLine(testFilePath, 50);
+            FileUtils.getLine(testFilePath, 50);
         }
-        System.out.println("line value core 기술 구현체 속도: " + TimeUtil.getSecond(System.currentTimeMillis()-startTime));
+        System.out.println("line value core 기술 구현체 속도: " + TimeUtils.getSecond(System.currentTimeMillis()-startTime));
 
         startTime = System.currentTimeMillis();
         for (int i = 0; i <500 ; i++) {
-            FileUtil.getLineCountNio(testFilePath);
+            FileUtils.getLineCountNio(testFilePath);
         }
-        System.out.println("line count  Nio 속도: " + TimeUtil.getSecond(System.currentTimeMillis()-startTime) + " " + FileUtil.getLineCountNio(testFilePath));
+        System.out.println("line count  Nio 속도: " + TimeUtils.getSecond(System.currentTimeMillis()-startTime) + " " + FileUtils.getLineCountNio(testFilePath));
 
         startTime = System.currentTimeMillis();
         for (int i = 0; i <500 ; i++) {
-            FileUtil.getLineCount(testFilePath);
+            FileUtils.getLineCount(testFilePath);
 		}
-        System.out.println("line count core 기술 구현체 속도: " + TimeUtil.getSecond(System.currentTimeMillis()-startTime) +" " + FileUtil.getLineCount(testFilePath));
+        System.out.println("line count core 기술 구현체 속도: " + TimeUtils.getSecond(System.currentTimeMillis()-startTime) +" " + FileUtils.getLineCount(testFilePath));
 
     }
 }

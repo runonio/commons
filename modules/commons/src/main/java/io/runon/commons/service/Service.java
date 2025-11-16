@@ -2,8 +2,7 @@
 package io.runon.commons.service;
 
 import io.runon.commons.callback.ObjCallback;
-import io.runon.commons.service.ServiceManager;
-import io.runon.commons.utils.ExceptionUtil;
+import io.runon.commons.utils.ExceptionUtils;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -142,7 +141,7 @@ public abstract class Service extends Thread {
             try{
                 work();
             }catch(Exception e){
-                log.error(ExceptionUtil.getStackTrace(e));
+                log.error(ExceptionUtils.getStackTrace(e));
                 serviceStop();
                 return;
             }
@@ -162,7 +161,7 @@ public abstract class Service extends Thread {
                 }
             }catch(Exception e){
 
-                log.error(ExceptionUtil.getStackTrace(e));
+                log.error(ExceptionUtils.getStackTrace(e));
                 serviceStop();
                 return;
             }

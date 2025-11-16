@@ -17,7 +17,7 @@ package io.runon.commons.utils.time;
 
 
 import io.runon.commons.exception.ParseRuntimeException;
-import io.runon.commons.utils.ExceptionUtil;
+import io.runon.commons.utils.ExceptionUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.text.ParseException;
@@ -159,7 +159,7 @@ public class DateUtil {
 				date = null;
 			}
 		} catch (ParseException e) {
-			log.error(ExceptionUtil.getStackTrace(e));
+			log.error(ExceptionUtils.getStackTrace(e));
 		}
 		return date != null;
 	}

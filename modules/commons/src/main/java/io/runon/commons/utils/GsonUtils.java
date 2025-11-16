@@ -2,7 +2,7 @@ package io.runon.commons.utils;
 
 import com.google.gson.*;
 import io.runon.commons.exception.ReflectiveOperationRuntimeException;
-import io.runon.commons.utils.packages.classes.field.FieldUtil;
+import io.runon.commons.utils.packages.classes.field.FieldUtils;
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
@@ -178,7 +178,7 @@ public class GsonUtils {
 
     public static void mergeJsonField(String fieldName, Object source, Object target) {
         try {
-            Field[] fields = FieldUtil.getFieldArrayToAllParents(source.getClass());
+            Field[] fields = FieldUtils.getFieldArrayToAllParents(source.getClass());
             for (Field field : fields) {
                 if (!field.getName().equals(fieldName)) {
                     continue;

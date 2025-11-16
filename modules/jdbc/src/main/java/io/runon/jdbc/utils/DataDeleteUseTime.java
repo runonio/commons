@@ -1,6 +1,6 @@
 package io.runon.jdbc.utils;
 
-import io.runon.commons.utils.ExceptionUtil;
+import io.runon.commons.utils.ExceptionUtils;
 import io.runon.commons.utils.time.Times;
 import io.runon.jdbc.JdbcQuery;
 import io.runon.jdbc.PrepareStatementData;
@@ -57,7 +57,7 @@ public class DataDeleteUseTime {
                     continue;
                 }
                 errorTableSet.add(table);
-                log.error(ExceptionUtil.getStackTrace(e));
+                log.error(ExceptionUtils.getStackTrace(e));
             }
         }
     }

@@ -3,7 +3,7 @@ package io.runon.apis.http;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import io.runon.commons.crypto.*;
-import io.runon.commons.utils.ExceptionUtil;
+import io.runon.commons.utils.ExceptionUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +24,7 @@ public class CryptoController {
             CharMapDataManagement charMapDataManagement = CharMapDataManagement.getInstance();
             return charMapDataManagement.getLastData();
         }catch (Exception e){
-            log.error(ExceptionUtil.getStackTrace(e));
+            log.error(ExceptionUtils.getStackTrace(e));
             return "";
         }
     }
@@ -47,7 +47,7 @@ public class CryptoController {
             String str = CharMap.outMap(charMap.getMap());
             return StringCrypto.DEFAULT_256.enc(str);
         }catch (Exception e){
-            log.error(ExceptionUtil.getStackTrace(e));
+            log.error(ExceptionUtils.getStackTrace(e));
             return "";
         }
     }

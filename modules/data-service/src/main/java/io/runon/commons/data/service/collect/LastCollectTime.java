@@ -1,6 +1,6 @@
 package io.runon.commons.data.service.collect;
 
-import io.runon.commons.utils.ExceptionUtil;
+import io.runon.commons.utils.ExceptionUtils;
 import io.runon.commons.utils.time.Times;
 import io.runon.commons.data.service.redis.Redis;
 import lombok.Data;
@@ -51,7 +51,7 @@ public class LastCollectTime {
             );
 
         }catch(Exception e){
-            log.error(ExceptionUtil.getStackTrace(e));
+            log.error(ExceptionUtils.getStackTrace(e));
         }
     }
 
@@ -92,7 +92,7 @@ public class LastCollectTime {
             Redis.hsetAsync("collect_last_time",map);
 
         }catch(Exception e){
-            log.error(ExceptionUtil.getStackTrace(e));
+            log.error(ExceptionUtils.getStackTrace(e));
         }
     }
 }

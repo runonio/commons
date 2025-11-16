@@ -2,7 +2,7 @@ package io.runon.commons.data.service.health;
 
 import io.runon.commons.config.Config;
 import io.runon.commons.service.Service;
-import io.runon.commons.utils.ExceptionUtil;
+import io.runon.commons.utils.ExceptionUtils;
 import io.runon.commons.utils.time.Times;
 import io.runon.commons.data.service.redis.Redis;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +28,7 @@ public class ServerConnectTimeRecordService extends Service {
         try{
             Redis.hsetAsync(ServerHealthCommons.CONNECT_TIME_REDIS_KEY, serverId, Long.toString(System.currentTimeMillis()));
         }catch (Exception e){
-            log.error(ExceptionUtil.getStackTrace(e));
+            log.error(ExceptionUtils.getStackTrace(e));
         }
     }
 

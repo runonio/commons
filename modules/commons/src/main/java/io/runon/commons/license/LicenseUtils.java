@@ -1,7 +1,7 @@
 package io.runon.commons.license;
 
 import io.runon.commons.exception.SocketRuntimeException;
-import io.runon.commons.utils.NetworkUtil;
+import io.runon.commons.utils.NetworkUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -47,7 +47,7 @@ public class LicenseUtils {
 
                     if (!inetAddress.isLoopbackAddress() && !inetAddress.isLinkLocalAddress() && inetAddress.isSiteLocalAddress()) {
                         if(macBytes != null){
-                            set.add(NetworkUtil.getMacAddress(networkInterface.getHardwareAddress()));
+                            set.add(NetworkUtils.getMacAddress(networkInterface.getHardwareAddress()));
                         }
                     }
                 }

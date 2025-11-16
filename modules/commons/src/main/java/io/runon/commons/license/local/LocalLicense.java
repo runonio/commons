@@ -4,12 +4,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import io.runon.commons.utils.ExceptionUtil;
-import io.runon.commons.utils.FileUtil;
-import io.runon.commons.crypto.HashConfusionCrypto;
+import io.runon.commons.crypto.HashConfusionCryptos;
 import io.runon.commons.crypto.HashConfusionString;
 
 import io.runon.commons.license.LicenseUtils;
+import io.runon.commons.utils.ExceptionUtils;
+import io.runon.commons.utils.FileUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.security.NoSuchAlgorithmException;
@@ -95,7 +95,7 @@ public class LocalLicense {
 
 
             }catch (Exception e){
-                log.error(ExceptionUtil.getStackTrace(e));
+                log.error(ExceptionUtils.getStackTrace(e));
             }
         }
 
@@ -144,8 +144,8 @@ public class LocalLicense {
     public void out(String passwd){
 
         String licenceStr = newLicenceStr();
-        String enc = HashConfusionCrypto.encStr(passwd, licenceStr);
-        FileUtil.fileOutput(enc, licenseFilePath, false);
+        String enc = HashConfusionCryptos.encStr(passwd, licenceStr);
+        FileUtils.fileOutput(enc, licenseFilePath, false);
     }
 
 

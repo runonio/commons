@@ -7,16 +7,14 @@ import io.runon.commons.crypto.Cryptos;
 import io.runon.commons.exception.EmptyException;
 import io.runon.commons.exception.IORuntimeException;
 import io.runon.commons.exception.MismatchException;
-import io.runon.commons.utils.FileUtil;
+import io.runon.commons.utils.FileUtils;
 import io.runon.commons.utils.GsonUtils;
 import io.runon.jdbc.Database;
 import io.runon.jdbc.JdbcQuery;
 import io.runon.jdbc.objects.JdbcObjects;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.Map;
 
 /**
@@ -48,7 +46,7 @@ public class StorageFiles {
             storageFile.setFileBytes(Cryptos.encByte(storageFile.getFileBytes(), storageFile.getEncryptType(), storageFile.getFileId(), Config.getInteger("crypto.default.key.size", 32)));
 
             String filePath = storageFile.getFilePath();
-            FileUtil.mkdirsParent(filePath);
+            FileUtils.mkdirsParent(filePath);
             try (FileOutputStream fos = new FileOutputStream(filePath)) {
                 fos.write(storageFile.getFileBytes());
                 fos.flush();
@@ -74,7 +72,7 @@ public class StorageFiles {
 
     public static void saveDirNoTCrypto(StorageFile storageFile, String copyDir){
         storageFile.setEncryptType(CryptoType.N);
-        FileUtil.copy(copyDir, storageFile.getFilePath());
+        FileUtils.copy(copyDir, storageFile.getFilePath());
         JdbcObjects.insertOrUpdate(storageFile);
     }
 
@@ -171,7 +169,7 @@ public class StorageFiles {
             }
 
             String originalName = storageFile.getFileName();
-            String extension = FileUtil.getExtension(originalName);
+            String extension = FileUtils.getExtension(originalName);
             path = path + "." + extension;
         } catch (Exception ignore) {}
         return path;
@@ -237,7 +235,7 @@ public class StorageFiles {
 
     public static void main(String[] args) {
 
-        FileUtil.copy("D:\\stt\\data\\stt-models\\whisper-large-v3", "D:\\stt\\data\\stt-models\\M_1");
+        FileUtils.copy("D:\\stt\\data\\stt-models\\whisper-large-v3", "D:\\stt\\data\\stt-models\\M_1");
 
     }
 

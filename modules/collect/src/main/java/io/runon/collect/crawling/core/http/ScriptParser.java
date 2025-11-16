@@ -1,7 +1,7 @@
 
 package io.runon.collect.crawling.core.http;
 
-import io.runon.commons.utils.ExceptionUtil;
+import io.runon.commons.utils.ExceptionUtils;
 import io.runon.commons.utils.string.Remove;
 import lombok.extern.slf4j.Slf4j;
 
@@ -63,7 +63,7 @@ public class ScriptParser {
         try {
             value = parseString(contents , prefix , '*');
         } catch (Exception e) {
-            log.error(ExceptionUtil.getStackTrace(e));
+            log.error(ExceptionUtils.getStackTrace(e));
         }
         return value;
     }
@@ -245,7 +245,7 @@ public class ScriptParser {
         try {
             value = parseInt(contents , prefix , '*' , true, false);
         } catch (Exception e) {
-            log.error(ExceptionUtil.getStackTrace(e));
+            log.error(ExceptionUtils.getStackTrace(e));
         }
         return value;
     }
@@ -317,7 +317,7 @@ public class ScriptParser {
         try{
             result = Integer.parseInt(parse);
         } catch ( NumberFormatException e ) {
-            log.error(ExceptionUtil.getStackTrace(e));
+            log.error(ExceptionUtils.getStackTrace(e));
         }
         return result;
     }
