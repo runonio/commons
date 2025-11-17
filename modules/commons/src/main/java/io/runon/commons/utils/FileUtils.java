@@ -1430,22 +1430,41 @@ public class FileUtils {
 	}
 
 
-	public static boolean outLines(Object [] array, String outPath){
-
-		if(array == null || array.length == 0){
-			return false;
-		}
-
-		StringBuilder sb = new StringBuilder();
-		sb.append(array[0].toString());
-
-		for (int i = 1; i < array.length; i++) {
-			sb.append("\n").append(array[i].toString());
-		}
-		fileOutput(sb.toString(), outPath, false);
-
-		return true;
-	}
+//    public static boolean outLines(List list, String outPath){
+//
+//        if(list == null || list.isEmpty()){
+//            return false;
+//        }
+//
+//
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(list.get(0).toString());
+//
+//        for (int i = 1; i < list.size(); i++) {
+//            sb.append("\n").append(list.get(i).toString());
+//        }
+//        fileOutput(sb.toString(), outPath, false);
+//
+//        return true;
+//    }
+//
+//
+//	public static boolean outLines(Object [] array, String outPath){
+//
+//		if(array == null || array.length == 0){
+//			return false;
+//		}
+//
+//		StringBuilder sb = new StringBuilder();
+//		sb.append(array[0].toString());
+//
+//		for (int i = 1; i < array.length; i++) {
+//			sb.append("\n").append(array[i].toString());
+//		}
+//		fileOutput(sb.toString(), outPath, false);
+//
+//		return true;
+//	}
 
 
     public static void removeFiles(String ...paths){

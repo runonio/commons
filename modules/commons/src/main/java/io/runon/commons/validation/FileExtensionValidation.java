@@ -10,18 +10,24 @@ import java.io.File;
  */
 public class FileExtensionValidation implements FileValidation{
 
-    private final String extension;
-    public FileExtensionValidation(String extension){
-        this.extension =extension;
+    private final String[] extensions;
+    public FileExtensionValidation(String ... extensions){
+        this.extensions = extensions;
     }
+
 
     @Override
     public boolean isValid(File file) {
-        if(extension.equals(FileUtils.getExtension(file))){
-            return true;
-        }else{
-            return false;
+
+        String fileExtension = FileUtils.getExtension(file);
+
+        for(String extension : extensions){
+            if(extension.equals(fileExtension)){
+                return true;
+            }
         }
+
+        return false;
 
     }
 }

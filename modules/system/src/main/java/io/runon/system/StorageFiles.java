@@ -232,11 +232,4 @@ public class StorageFiles {
 
         return data.get("file_path");
     }
-
-    public static void main(String[] args) {
-
-        FileUtils.copy("D:\\stt\\data\\stt-models\\whisper-large-v3", "D:\\stt\\data\\stt-models\\M_1");
-
-    }
-
 }

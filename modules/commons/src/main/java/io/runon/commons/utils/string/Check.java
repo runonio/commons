@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
  */
 public class Check {
 
-    public static String SP = "[^\uAC00-\uD7A3xfe0-9a-zA-Z\\s]";
+
 
 	/**
 	 * 이메일 유효성 체크 
@@ -286,14 +286,25 @@ public class Check {
 		
 		String check = Character.toString(ch);
 		
-		String match = "[^\uAC00-\uD7A3xfe0-9a-zA-Z\\s]";
+		String match = RegexUtils.SPECIAL;
 
 		check =check.replaceAll(match, "");
 
 		return check.length() == 0;
-
-
 	}
+
+    public static boolean isSpecialIn(String str){
+        String match = RegexUtils.SPECIAL;
+
+        int length = str.length();
+
+        String check =str.replaceAll(match, "");
+
+        int checkLength = check.length();
+
+        return length != checkLength;
+    }
+
 	
 	/**
 	 * 특수문자여부
@@ -302,7 +313,7 @@ public class Check {
 	 */
 	public static boolean isAllSpecialCharacter(String str){
 		
-		String match = "[^\uAC00-\uD7A3xfe0-9a-zA-Z\\s]";
+		String match = RegexUtils.SPECIAL;
 
 		str =str.replaceAll(match, "");
 
@@ -335,6 +346,9 @@ public class Check {
 
 
 	public static void main(String[] args) {
-		System.out.println(isEmailPattern("ysys86a@gmail.com"));
+		System.out.println(isSpecialIn("ysys86agmailcom"));
+
+
+
 	}
 }

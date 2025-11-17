@@ -4,6 +4,7 @@ package io.runon.commons.utils.string;
 import io.runon.commons.utils.FileUtils;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +18,12 @@ public class StringLines {
         String sumText = sumText(list);
         out(sumText, new File(outPath),  "UTF-8");
     }
+
+    public static void out(Object [] array, String outPath){
+        String sumText = sumText(array);
+        out(sumText, new File(outPath),  "UTF-8");
+    }
+
 
     public static void out(String sumText, File file, String charset){
 
@@ -44,6 +51,19 @@ public class StringLines {
     public static String sumText(Object [] array){
        return Strings.sumText(array,"\n");
     }
+
+
+    public static String [] getFileLines(String path){
+
+        String text = FileUtils.getFileContents(path);
+        return text.split("\n");
+    }
+    public static String [] getFileLines(File file){
+
+        String text = FileUtils.getFileContents(file);
+        return text.split("\n");
+    }
+
 
     public static String [] getLines(List list){
 
