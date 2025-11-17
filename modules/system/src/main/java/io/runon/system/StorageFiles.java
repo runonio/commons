@@ -232,4 +232,41 @@ public class StorageFiles {
 
         return data.get("file_path");
     }
+
+    public static void remove(String fileId){
+
+        StorageFile storageFile = JdbcObjects.getObj(StorageFile.class, "file_id='" + fileId +"'");
+
+        if(storageFile == null){
+            return;
+        }
+
+        if(storageFile.getFilePathType() == FilePathType.DB){
+
+            if(storageFile.getSplitType().startsWith("split")){
+                if(storageFile.getSplitType().equals("split_s")){
+                    //마스터 파일 정보로 가져오기
+                    storageFile = JdbcObjects.getObj(StorageFile.class, "file_id='" + storageFile.getSplitInfo() +"'");
+                }
+
+                JsonArray jsonArray = GsonUtils.fromJsonArray(storageFile.splitInfo);
+
+                for (int i = 0; i <jsonArray.size() ; i++) {
+                    //split sub 파일 삭제
+                    String subId = jsonArray.get(i).getAsString();
+                    JdbcQuery.execute("delete from file where file_id='" +subId +"'");
+                }
+                //마스터 파일삭제
+                JdbcQuery.execute("delete from file where file_id='" + storageFile.getFileId() +"'");
+
+            }else{
+                JdbcQuery.execute("delete from file where file_id='" + fileId +"'");
+            }
+
+        }else{
+            FileUtils.delete(storageFile.getFilePath());
+        }
+
+    }
+
 }
