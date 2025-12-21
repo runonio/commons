@@ -262,9 +262,11 @@ public class HttpApi {
         }
 
     }
-
-
     public File downloadFile(String urlAddress, String downloadPath){
+        return downloadFile(urlAddress, downloadPath,null);
+    }
+
+    public File downloadFile(String urlAddress, String downloadPath, String outStreamParam){
         InputStream in = null;
         FileOutputStream fos = null ;
         HttpURLConnection conn = null ;
@@ -285,7 +287,8 @@ public class HttpApi {
             File file = null;
             URL url = new URL(defaultAddress+urlAddress);
             conn = (HttpsURLConnection) url.openConnection();
-
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
             if(fileReadTimeOut != null){
                 conn.setReadTimeout(fileReadTimeOut);
             }else{
@@ -305,6 +308,15 @@ public class HttpApi {
                     conn.setRequestProperty(key, defaultRequestProperty.get(key));
                 }
             }
+
+            if (outStreamParam != null) {
+                byte[] contents = outStreamParam.getBytes(defaultCharSet);
+                OutputStream outSteam = conn.getOutputStream();
+                outSteam.write(contents);
+                outSteam.flush();
+                outSteam.close();
+            }
+
 
             if (conn != null && conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
 

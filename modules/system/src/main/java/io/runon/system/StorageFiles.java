@@ -265,6 +265,7 @@ public class StorageFiles {
 
         }else{
             FileUtils.delete(storageFile.getFilePath());
+            JdbcQuery.execute("delete from file where file_id='" + fileId +"'");
         }
 
     }
