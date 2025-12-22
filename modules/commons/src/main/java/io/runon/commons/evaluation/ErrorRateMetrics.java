@@ -9,6 +9,10 @@ import java.math.RoundingMode;
 /**
  * 오류율 계산
  * wer, cer 등에 활용
+ * s 대체오류
+ * d 삭제
+ * i 삽입오류
+ * c 정답
  * @author macle
  */
 @Getter
