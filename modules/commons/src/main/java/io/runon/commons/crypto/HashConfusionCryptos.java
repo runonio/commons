@@ -2,6 +2,9 @@ package io.runon.commons.crypto;
 
 import io.runon.commons.config.Config;
 
+import javax.crypto.Cipher;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
@@ -72,6 +75,23 @@ public class HashConfusionCryptos {
             Base64.Decoder decoder = Base64.getDecoder();
             byte[] encByte = decoder.decode(encStr);
 
+//            byte[] keyBytes = Cryptos.makeKeyByte(key, keySize);
+//            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+//            SecretKeySpec keySpec = new SecretKeySpec(keyBytes, "AES");
+//            IvParameterSpec ivSpec;
+//            if (keySize == 16) {
+//                ivSpec = new IvParameterSpec(keyBytes);
+//            } else {
+//                ivSpec = new IvParameterSpec(Cryptos.makeKeyByte(key, 16));
+//            }
+//
+//            cipher.init(Cipher.DECRYPT_MODE, keySpec, ivSpec);
+//
+//            byte[] results = cipher.doFinal(encByte);
+//            return new String(results, StandardCharsets.UTF_8);
+
+
+//
             byte [] data = dec(key, encByte, keySize, charMap);
             return new String(data, StandardCharsets.UTF_8);
         }catch (Exception e){

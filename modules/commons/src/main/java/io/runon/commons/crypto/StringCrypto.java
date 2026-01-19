@@ -3,6 +3,10 @@ package io.runon.commons.crypto;
 
 import io.runon.commons.config.Config;
 
+import javax.crypto.Cipher;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 /**
@@ -62,7 +66,7 @@ public class StringCrypto {
         this.keySize = keySize;
     }
 
-    private String hash = Config.getConfig("crypto.default.key.hash", "MD5");;
+    private String hash = Config.getConfig("crypto.default.key.hash", "MD5");
 
     public void setHash(String hash) {
         this.hash = hash;
@@ -161,8 +165,8 @@ public class StringCrypto {
             char [] lengthCharArray = charsMap.get(keyLength);
             result.append(lengthCharArray[random.nextInt(lengthCharArray.length)]);
             result.append(keyBuilder);
-            String key = HashConfusionString.get(hash, keyBuilder.toString());
-            result.append(HashConfusionCryptos.encStr(key, str, keySize, charMap));
+
+            result.append(HashConfusionCryptos.encStr( keyBuilder.toString(), str, keySize, charMap));
             return result.toString();
         }catch(Exception e){
             throw new CryptoException(e);
@@ -177,19 +181,42 @@ public class StringCrypto {
      */
     public String dec(String str){
         try {
+
             char lengthChar = str.charAt(0);
             int length = lengthMap.get(lengthChar);
             int next = length +1;
             String keyData = str.substring(1, next);
-            String key = HashConfusionString.get(hash, keyData);
             String encData = str.substring(next);
-            return HashConfusionCryptos.decStr(key, encData, keySize, charMap);
+            return HashConfusionCryptos.decStr(keyData, encData, keySize, charMap);
+
+//            return dec(key, encData, keySize);
         }catch(Exception e){
             throw new CryptoException(e);
         }
     }
 
+    public static String dec(String key, String enc, int keySize) {
+        try {
 
+            byte[] keyBytes = Cryptos.makeKeyByte(key, keySize);
+            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+            SecretKeySpec keySpec = new SecretKeySpec(keyBytes, "AES");
+            IvParameterSpec ivSpec;
+            if (keySize == 16) {
+                ivSpec = new IvParameterSpec(keyBytes);
+            } else {
+                ivSpec = new IvParameterSpec(Cryptos.makeKeyByte(key, 16));
+            }
+
+            cipher.init(Cipher.DECRYPT_MODE, keySpec, ivSpec);
+            Base64.Decoder decoder = Base64.getDecoder();
+            byte[] encByte = decoder.decode(enc);
+            byte[] results = cipher.doFinal(encByte);
+            return new String(results, StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            throw new CryptoException(e);
+        }
+    }
 
 
 
@@ -216,5 +243,8 @@ public class StringCrypto {
 
         return sortChars;
     }
+
+
+
 
 }

@@ -15,7 +15,7 @@ public class HashConfusionCryptoCbc implements HashConfusionCrypto {
     public byte [] enc(String key, String hash, byte [] data, int keySize, CharMap charMap) {
 
         try {
-            String hKey = HashConfusionString.get(hash, key, keySize);
+            String hKey = HashConfusionString.get(hash, key);
 
             if(charMap != null){
                 hKey = charMap.change(hKey);
@@ -42,7 +42,7 @@ public class HashConfusionCryptoCbc implements HashConfusionCrypto {
     @Override
     public byte [] dec(String key, String hash, byte [] data, int keySize, CharMap charMap){
         try {
-            String hKey = HashConfusionString.get(hash, key, keySize);
+            String hKey = HashConfusionString.get(hash, key);
 
             if(charMap != null){
                 hKey = charMap.change(hKey);
