@@ -31,6 +31,13 @@ import java.util.TimeZone;
  */
 public class Times {
 
+    public static final ZoneId USA_ZONE_ID = ZoneId.of("America/New_York");
+    public static final ZoneId KOR_ZONE_ID = ZoneId.of("Asia/Seoul");
+    public static final ZoneId UTC_ZONE_ID = ZoneId.of("UTC");
+
+    public static final ZoneId SGP_ZONE_ID = ZoneId.of("Asia/Singapore");
+
+    public static final ZoneId INR_ZONE_ID = ZoneId.of("Asia/Kolkata");
 
     //초정리
     public static final long SECOND_1 = 1000L;
