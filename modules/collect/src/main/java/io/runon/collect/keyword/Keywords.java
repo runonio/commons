@@ -4,6 +4,8 @@ import io.runon.jdbc.JdbcQuery;
 import io.runon.jdbc.objects.JdbcObjects;
 
 import java.security.MessageDigest;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -61,6 +63,31 @@ public class Keywords {
         keyword.checksum = checkSum;
         keyword.time = System.currentTimeMillis();
         JdbcObjects.insert(keyword);
+
+        return keyword;
+    }
+
+
+    public static Keyword save(Connection connection,String keywordText, String dataValue) throws SQLException, IllegalAccessException, InstantiationException {
+        String checkSum = checksum(keywordText, dataValue);
+        List<Keyword> keywordList = JdbcObjects.getObjList(connection, Keyword.class, "checksum='" + checkSum + "'");
+
+
+        if(keywordList.size() > 0){
+            for(Keyword keyword : keywordList){
+                if(keyword.equals(keywordText, dataValue)){
+                    return keyword;
+                }
+            }
+
+        }
+
+        Keyword keyword = new Keyword();
+        keyword.keyword = keywordText;
+        keyword.dataValue = dataValue;
+        keyword.checksum = checkSum;
+        keyword.time = System.currentTimeMillis();
+        JdbcObjects.insert(connection, keyword);
 
         return keyword;
     }
