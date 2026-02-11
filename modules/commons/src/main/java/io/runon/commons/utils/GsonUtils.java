@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -54,6 +55,19 @@ public class GsonUtils {
         }
         return jsonArray;
     }
+
+    public static JsonArray getArray(List<String> list){
+
+        if(list == null){
+            return null;
+        }
+        JsonArray jsonArray = new JsonArray();
+        for(String value : list){
+            jsonArray.add(value);
+        }
+        return jsonArray;
+    }
+
 
 
     public static JsonArray getArray(int [] array){

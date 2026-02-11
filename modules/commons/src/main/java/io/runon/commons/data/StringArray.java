@@ -28,5 +28,15 @@ public class StringArray extends DataArray<String>{
         return true;
     }
 
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(array[0]);
 
+        for (int i = 1; i < array.length; i++) {
+            sb.append(' ').append(array[i]);
+        }
+
+        return sb.toString();
+    }
 }
