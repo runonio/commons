@@ -33,17 +33,23 @@ public class CollectInfo {
     long time;
 
     public static void update(String collectId, String dataKey, String info){
-        update(collectId, dataKey, info, true);
+        update(collectId, dataKey, info, true, true);
     }
 
-    public static void update(String collectId, String dataKey, String info, boolean isNullUpdate){
+
+
+    public static void update(String collectId, String dataKey, String info, boolean isNullUpdate, boolean isInsertIOrUpdate){
         CollectInfo collectInfo = new CollectInfo();
         collectInfo.setCollectId(collectId);
         collectInfo.setDataKey(dataKey);
         collectInfo.setCollectInfo(info);
         collectInfo.setTime(System.currentTimeMillis());
+        if(isInsertIOrUpdate){
+            JdbcObjects.insertOrUpdate(collectInfo, isNullUpdate);
+        }else{
+            JdbcObjects.update(collectInfo, isNullUpdate);
+        }
 
-        JdbcObjects.insertOrUpdate(collectInfo, isNullUpdate);
     }
 
     public static String getInfo(String collectId, String dataKey){
