@@ -9,6 +9,7 @@ import io.runon.jdbc.connection.ApplicationConnectionPool;
 import io.runon.jdbc.exception.SQLRuntimeException;
 import lombok.extern.slf4j.Slf4j;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -489,7 +490,125 @@ public class JdbcQuery {
 		}
 
 		return resultLong;
+
 	}
+
+
+    //----
+
+    public static BigDecimal getResultBigDecimal(String sql, BigDecimal defaultValue) {
+        try(Connection conn = ApplicationConnectionPool.getInstance().getCommitConnection()){
+            BigDecimal result = getResultBigDecimal(conn, sql);
+            if (result == null) {
+                return defaultValue;
+            }
+
+            return result;
+        }catch(SQLException e){
+            log.error(ExceptionUtils.getStackTrace(e));
+            return defaultValue;
+        }
+    }
+
+
+    public static BigDecimal getResultBigDecimal(String sql, Map<Integer, PrepareStatementData> prepareStatementDataMap, BigDecimal defaultValue) {
+        try(Connection conn = ApplicationConnectionPool.getInstance().getCommitConnection()){
+            BigDecimal result = getResultBigDecimal(conn, sql, prepareStatementDataMap);
+            if (result == null) {
+                return defaultValue;
+            }
+
+            return result;
+        }catch(SQLException e){
+            log.error(ExceptionUtils.getStackTrace(e));
+            return defaultValue;
+        }
+    }
+
+
+    /**
+     * 단일결과를 Long 형태로 얻기
+     * @param sql String sql
+     * @return Long
+     */
+    public static BigDecimal getResultBigDecimal(String sql) {
+        try(Connection conn = ApplicationConnectionPool.getInstance().getCommitConnection()){
+            return getResultBigDecimal(conn, sql);
+        }catch(SQLException e){
+            throw new SQLRuntimeException(e);
+        }
+    }
+
+    /**
+     * 단일결과를 Long 형태로 얻기
+     * @param conn Connection
+     * @param sql String sql
+     * @return Long
+     * @throws SQLException SQLException
+     */
+    public static BigDecimal getResultBigDecimal(Connection conn, String sql) throws SQLException {
+        BigDecimal resultNumber = null;
+
+        Statement stmt = null;
+        ResultSet result = null;
+        //noinspection CaughtExceptionImmediatelyRethrown
+        try{
+            stmt = conn.createStatement();
+            result = stmt.executeQuery(sql);
+            ResultSetMetaData metaData = result.getMetaData();
+            int count = metaData.getColumnCount(); //number of column
+            if(count > 0 ){
+                String columnName = metaData.getColumnLabel(1);
+                if(result.next()){
+
+                    resultNumber = result.getBigDecimal(columnName);
+                }
+            }
+        }catch(SQLException e){
+            throw e;
+        }finally{
+            JdbcClose.statementResultSet(stmt, result);
+        }
+
+        return resultNumber;
+    }
+
+    public static BigDecimal getResultBigDecimal(String sql, Map<Integer, PrepareStatementData> prepareStatementDataMap) {
+        try(Connection conn = ApplicationConnectionPool.getInstance().getCommitConnection()){
+            return getResultBigDecimal(conn, sql, prepareStatementDataMap);
+        }catch(SQLException e){
+            throw new SQLRuntimeException(e);
+        }
+    }
+
+    public static BigDecimal getResultBigDecimal(Connection conn, String sql, Map<Integer, PrepareStatementData> prepareStatementDataMap) throws SQLException {
+        BigDecimal resultNumber = null;
+
+        Statement stmt = null;
+        ResultSet result = null;
+        //noinspection CaughtExceptionImmediatelyRethrown
+        try{
+            StmtResultSet stmtResultSet = JdbcCommon.makeStmtResultSet(conn, sql, prepareStatementDataMap, 0);
+            stmt = stmtResultSet.getStmt();
+            result = stmtResultSet.getResultSet();
+            ResultSetMetaData metaData = result.getMetaData();
+            int count = metaData.getColumnCount(); //number of column
+            if(count > 0 ){
+                String columnName = metaData.getColumnLabel(1);
+                if(result.next()){
+
+                    resultNumber = result.getBigDecimal(columnName);
+                }
+            }
+        }catch(SQLException e){
+            throw e;
+        }finally{
+            JdbcClose.statementResultSet(stmt, result);
+        }
+
+        return resultNumber;
+    }
+
 
 	/**
 	 * 단일 결과 얻기 String
