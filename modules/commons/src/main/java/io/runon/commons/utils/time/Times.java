@@ -23,6 +23,7 @@ import java.time.DayOfWeek;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Locale;
 import java.util.TimeZone;
 
 /**
@@ -263,8 +264,19 @@ public class Times {
         return zonedDateTime.getYear();
     }
 
-    public static long getTime(String format, String timeText, ZoneId zoneId){
-        SimpleDateFormat dateFormat = new SimpleDateFormat(format);
+    public static long getTime(String format, String timeText , ZoneId zoneId){
+        return getTime(format, null, timeText, zoneId);
+    }
+
+    public static long getTime(String format,  Locale locale, String timeText,  ZoneId zoneId){
+
+        SimpleDateFormat dateFormat;
+        if(locale == null){
+            dateFormat = new SimpleDateFormat(format);
+        }else{
+            dateFormat = new SimpleDateFormat(format, locale);
+        }
+
         dateFormat.setTimeZone(TimeZone.getTimeZone(zoneId));
         try {
             return dateFormat.parse(timeText).getTime();

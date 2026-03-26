@@ -163,6 +163,9 @@ public class Remove {
 
         //&amp = &, &#39 = '.   //&#숫자 = 아스키 코드넘버
 //		http://www.w3schools.com/html/html_entities.asp   엔트리표
+
+        str = str.replace("\u200E", "");
+
         str =str.trim();
         return str;
     }

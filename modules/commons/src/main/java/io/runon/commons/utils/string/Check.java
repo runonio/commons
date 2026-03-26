@@ -257,7 +257,7 @@ public class Check {
 	 * @param b String
 	 * @return boolean equals check
 	 */
-	public static boolean equals(String a, String b){
+	public static boolean equals(Object a, Object b){
 		if(a == null && b == null){
 			return true;
 		}
@@ -273,8 +273,9 @@ public class Check {
 		return a.equals(b);		
 		
 	}
-	
-	
+
+
+
 //	private static char [] specials = {'!','@','#','$','%','^','&','*','(',')','-','=','_','+','`','~','[',']','{','}','|','"','<','>',',','?','/','¨'
 //		,'！','＇'};
 	/**
