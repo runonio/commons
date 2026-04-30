@@ -34,17 +34,19 @@ public class ConfigRelativePath {
     public void change(){
 
         File relativeConfigFile = new File(relativeConfigPath);
+        System.out.println(relativeConfigPath);
+
         if(!relativeConfigFile.isFile()){
             return;
         }
         Properties relative = new Properties();
         try( InputStream configInputStream = new FileInputStream(relativeConfigPath)){
             relative.loadFromXML(configInputStream);
-            Set<Object> keys = relative.keySet();
-            for(Object objKey : keys){
-                String key = (String) objKey;
-
-            }
+//            Set<Object> keys = relative.keySet();
+//            for(Object objKey : keys){
+//                String key = (String) objKey;
+//                System.out.println(key+":"+relative.getProperty(key));
+//            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
