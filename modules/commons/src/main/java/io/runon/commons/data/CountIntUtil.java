@@ -3,7 +3,9 @@ package io.runon.commons.data;
 import java.util.Map;
 import java.util.Set;
 
-
+/**
+ * @author macle
+ */
 public class CountIntUtil {
 
     public static void sumCountMap(Map<String, CountInt> countMap, Map<String, CountInt> sumMap){

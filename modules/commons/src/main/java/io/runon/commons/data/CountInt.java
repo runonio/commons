@@ -1,7 +1,9 @@
 package io.runon.commons.data;
 
 import java.util.Comparator;
-
+/**
+ * @author macle
+ */
 public class CountInt  implements java.io.Serializable{
 
     public final static Comparator<CountInt> SORT_DESC = (c1, c2) -> Integer.compare(c2.count, c1.count);
