@@ -7,7 +7,8 @@ import io.runon.commons.utils.time.Times;
 /**
  * @author macle
  */
-public class ParallelJob<T> {
+public abstract class ParallelJob<T> {
+
 
     protected final Object lock = new Object();
 
@@ -16,12 +17,14 @@ public class ParallelJob<T> {
     protected Callback callback = null;
     protected int threadCount = getDefaultThreadCount();
 
-    protected final ParallelWork<T> work;
+
 
     protected final ParallelNext<T> next;
 
-    public ParallelJob(ParallelWork<T> work, ParallelNext<T> next){
-        this.work = work;
+    protected ParallelWorker [] parallelWorker;
+
+
+    public ParallelJob( ParallelNext<T> next){
         this.next = next;
 
     }
@@ -35,8 +38,14 @@ public class ParallelJob<T> {
             threadCount = 1;
         }
 
+        int defaultThreadCount = getDefaultThreadCount();
+        if(threadCount > defaultThreadCount){
+            threadCount = defaultThreadCount;
+        }
+
         this.threadCount = threadCount;
     }
+
 
     T next(){
         synchronized (lock) {
@@ -44,10 +53,8 @@ public class ParallelJob<T> {
         }
     }
 
-    private ParallelWorker<T>[] workers;
 
-    private Thread currentThread = null;
-
+    protected Thread currentThread = null;
 
     //동기실행
     public void runSync(){
@@ -66,46 +73,20 @@ public class ParallelJob<T> {
 
     }
 
-    public void runAsync(){
-        //noinspection unchecked
-        workers = new ParallelWorker[threadCount];
-        for (int i = 0; i <workers.length ; i++) {
-            workers[i] = new ParallelWorker<>(this);
-            new Thread(workers[i]).start();
-        }
-    }
+    abstract public void runAsync();
 
-    private int endCount = 0;
 
-    boolean isEnd = false;
 
-    void endJob(){
-        synchronized (endLock){
-            endCount ++;
-            if(endCount >= workers.length){
+    protected boolean isEnd = false;
 
-                isEnd = true;
-
-                if(currentThread != null){
-                    try {
-                        currentThread.interrupt();
-                    }catch (Exception ignore){}
-                }
-
-                if(callback != null){
-                    callback.callback();
-                }
-            }
-        }
-    }
 
     public void stop(){
-        if(workers == null){
+        if(parallelWorker == null){
             return;
         }
 
-        for(ParallelWorker<T> worker : workers){
-            worker.stop();
+        for(ParallelWorker worker : parallelWorker){
+            worker.stopWork();
         }
 
     }
@@ -117,4 +98,5 @@ public class ParallelJob<T> {
         }
         return defaultThreadCount;
     }
+
 }
