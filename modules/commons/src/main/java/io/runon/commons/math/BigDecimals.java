@@ -32,6 +32,9 @@ public class BigDecimals {
     public static final BigDecimal DECIMAL_9 = new BigDecimal(9);
 
     public static final BigDecimal DECIMAL_10 = new BigDecimal(10);
+
+
+    public static final BigDecimal DECIMAL_15 = new BigDecimal(15);
     public static final BigDecimal DECIMAL_20 = new BigDecimal(20);
     public static final BigDecimal DECIMAL_30 = new BigDecimal(30);
     public static final BigDecimal DECIMAL_40 = new BigDecimal(40);
