@@ -63,7 +63,7 @@ public class HttpUrl {
 	 * @return chrome user agent
 	 */
 	public static String getChromeUserAgent(){
-		return Config.getConfig("chrome.user.agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36");
+		return Config.getConfig("chrome.user.agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36");
 	}
 
 	public static String getScript(String url, String jsonValue) {
@@ -238,7 +238,7 @@ public class HttpUrl {
 					}
 				}catch (Exception ignore){
 				}
-
+				try {
 				if(message.length() == 0){
 					br = new BufferedReader(new InputStreamReader(conn.getErrorStream(), charSet));
 					for (;;) {
@@ -246,6 +246,8 @@ public class HttpUrl {
 						if (line == null) break;
 						message.append(line).append('\n');
 					}
+				}
+				}catch (Exception ignore){
 				}
 
 				if(message.length()>0){

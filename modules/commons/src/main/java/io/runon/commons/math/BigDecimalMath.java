@@ -308,10 +308,12 @@ public class BigDecimalMath {
 
     }
 
+
+
     public static void main(String[] args) {
 //        System.out.println(Math.log(1+ 0.005));
 
-        System.out.println(recoveryPercent(new BigDecimal("0.5")).toPlainString());
+        System.out.println(recoveryPercent(new BigDecimal("99")).toPlainString());
     }
 
 

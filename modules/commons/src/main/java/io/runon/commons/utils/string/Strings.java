@@ -244,6 +244,40 @@ public class Strings {
         return sb.toString();
     }
 
+    public static boolean equals(List<String> list, List<String> compareList){
+
+
+        if(list.size() != compareList.size()){
+            return false;
+        }
+
+        for (int i = 0; i <list.size() ; i++) {
+            if(!list.get(i).equals(compareList.get(i))){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static boolean equals(List<String> list, List<String> compareList, StringConverter strConverter){
+
+
+        if(list.size() != compareList.size()){
+            return false;
+        }
+
+        for (int i = 0; i <list.size() ; i++) {
+            if(!strConverter.converter(list.get(i)).equals(strConverter.converter(compareList.get(i)))){
+                return false;
+            }
+        }
+
+        return true;
+
+    }
+
+
     public static void main(String[] args) {
         int a = getStringInteger("datf",1 ,10);
 
