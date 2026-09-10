@@ -66,6 +66,14 @@ public class YmdUtils {
 		return dayList;
 	}
 
+	public static int getYmd(int ymd, int day) {
+		if (day == 0) {
+			return ymd;
+		}
+
+		return Integer.parseInt(getYmd(Integer.toString(ymd), day, null));
+	}
+
 
 	public static String getYmd(String ymd, int day) {
 		if (day == 0) {
